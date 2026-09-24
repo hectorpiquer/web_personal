@@ -65,6 +65,14 @@
 }<span class="p2">;</span></pre>
 </div>
 </div>
+<div class="quiz-cta" role="region" aria-labelledby="quiz-cta-t">
+  <div class="qc-txt">
+    <p class="qc-kicker">// no sabes por dónde tirar</p>
+    <h3 id="quiz-cta-t">Encuentra tu informática perfecta</h3>
+    <p>Un test de unas cuantas preguntas que te dice qué parte del mundo tech encaja contigo, por qué, y por dónde empezar. Sin registro, sin correo, sin que nada salga de tu navegador.</p>
+  </div>
+  <button class="btn p qc-btn" id="startQuiz" type="button">empezar ▶</button>
+</div>
 <div class="view-nav"><a class="btn g" href="#sobre">siguiente →</a></div>
 </section>
 
@@ -195,7 +203,13 @@
 
 <button class="top" type="button" aria-label="Volver arriba" hidden><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
 <footer class="ft"><div class="container"><p>© <span id="y"></span> Héctor Piquer Belda · IES Simarro</p><p>hecho a mano · html · css · js</p></div></footer>
-
+<div class="quiz" id="quiz" role="dialog" aria-modal="true" aria-labelledby="quiz-title" hidden>
+  <div class="quiz-shell">
+    <div class="pbar"><i></i><i></i><i></i><b>brujula.sh</b><button class="quiz-close" id="quizClose" type="button" aria-label="Cerrar test">✕</button></div>
+    <div class="quiz-top"><span class="quiz-step" id="quizStep">1</span><div class="quiz-bar"><i id="quizProg"></i></div></div>
+    <div class="quiz-body" id="quizBody"></div>
+  </div>
+</div>
 <script src="script.js"></script>
 </body>
 </html>
