@@ -294,3 +294,7 @@ blockquote{margin:1.2rem 0 0;padding:.9rem 1.1rem;border-left:3px solid var(--ac
 :root[data-theme="light"] .ring-bg{stroke:rgba(101,109,118,.25)}
 :root[data-theme="light"] .msg.bot{background:#f6f8fa}
 :root[data-theme="light"] .chat-bar,.chat-chips,.pl-in,.pl-bar{background:#fff}
+/* ===== FIX: franja de chips del chat (quitar el fondo blanco) ===== */
+.chat-chips{background:transparent!important;padding:.2rem 1rem .7rem}
+.chat-chips button{background:var(--bg);color:var(--mut);border:1px solid var(--line)}
+:root[data-theme="light"] .chat-chips button{background:#fff;color:var(--mut);border-color:var(--line)}
