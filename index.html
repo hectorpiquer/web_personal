@@ -68,11 +68,11 @@
   <div class="qc-txt">
     <p class="qc-kicker">// no sabes por dónde tirar</p>
     <h3 id="quiz-cta-t">Encuentra tu informática perfecta</h3>
-    <p>Un test de unas cuantas preguntas que te dice qué parte del mundo tech encaja contigo, por qué, y por dónde empezar. Sin registro, sin correo, sin que nada salga de tu navegador.</p>
+    <p>Prueba con estas 3 preguntas y te digo si esto es lo tuyo. Si te pica, el test completo te da tu radar y por dónde empezar.</p>
   </div>
-  <button class="btn p qc-btn" id="startQuiz" type="button">empezar ▶</button>
+  <div class="teaser" id="teaser" aria-live="polite"></div>
+  <div class="qc-foot"><button class="btn p qc-btn" id="qcGo" type="button">empezar test completo ▶</button></div>
 </div>
-<div class="view-nav"><a class="btn g" href="#sobre">siguiente →</a></div>
 </section>
 
 <section id="sobre" class="view" hidden><div class="container">
@@ -224,12 +224,14 @@
     <div class="pl-gen" id="plGen"></div>
     <ul class="pl-list" id="plList"></ul>
     <div class="pl-bar">
-      <button id="plPrev" type="button" aria-label="Anterior">⏮</button>
-      <button id="plPlay" type="button" aria-label="Play/Pausa">▶</button>
-      <button id="plNext" type="button" aria-label="Siguiente">⏭</button>
-      <div class="pl-prog"><i id="plProg"></i></div>
-      <span class="pl-now" id="plNow">—</span>
-    </div>
+  <button id="plPrev" type="button" aria-label="Anterior">⏮</button>
+  <button id="plPlay" type="button" aria-label="Play/Pausa">▶</button>
+  <button id="plNext" type="button" aria-label="Siguiente">⏭</button>
+  <div class="pl-prog"><i id="plProg"></i></div>
+  <button id="plMute" class="pl-mute" type="button" aria-label="Silenciar">🔊</button>
+  <input id="plVol" class="pl-vol" type="range" min="0" max="100" value="70" aria-label="Volumen">
+  <span class="pl-now" id="plNow">—</span>
+</div>
   </div>
   <audio id="aud" preload="none"></audio>
 </div>
@@ -249,6 +251,20 @@
     <div class="quiz-top"><span class="quiz-step" id="quizStep">1</span><div class="quiz-bar"><i id="quizProg"></i></div></div>
     <div class="quiz-body" id="quizBody"></div>
   </div>
+</div>
+<div class="robot" id="robot" aria-hidden="true">
+  <div class="robot-bubble" id="robotBubble"></div>
+  <svg class="robot-svg" viewBox="0 0 64 64" width="58" height="58">
+    <line x1="32" y1="6" x2="32" y2="14" stroke="#34d399" stroke-width="2"/>
+    <circle class="ant" cx="32" cy="6" r="3" fill="#fbbf24"/>
+    <rect x="12" y="14" width="40" height="34" rx="9" fill="#111c30" stroke="#34d399" stroke-width="2"/>
+    <rect x="18" y="22" width="28" height="16" rx="5" fill="#060b14"/>
+    <circle class="eye" cx="26" cy="30" r="3" fill="#34d399"/>
+    <circle class="eye" cx="38" cy="30" r="3" fill="#34d399"/>
+    <path d="M26 35q6 4 12 0" stroke="#34d399" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <rect x="22" y="48" width="6" height="8" rx="2" fill="#1e2d47"/>
+    <rect x="36" y="48" width="6" height="8" rx="2" fill="#1e2d47"/>
+  </svg>
 </div>
 
 <script src="script.js?v=2"></script>

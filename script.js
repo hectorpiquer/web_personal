@@ -143,23 +143,28 @@ play.addEventListener("click",start);addEventListener("keydown",key);cv.addEvent
   send.addEventListener("click",sendMsg);inp.addEventListener("keydown",function(e){if(e.key==="Enter"){e.preventDefault();sendMsg();}});
 })();
 
-/* ===== REPRODUCTOR (iTunes Search, sin clave, CORS-ok) ===== */
+/* ===== REPRODUCTOR (iTunes Search, sin clave, CORS-ok) + volumen ===== */
 (function(){
   var fab=document.getElementById("plFab"),pl=document.getElementById("pl"),x=document.getElementById("plX"),
       q=document.getElementById("plQ"),gen=document.getElementById("plGen"),list=document.getElementById("plList"),
       play=document.getElementById("plPlay"),prev=document.getElementById("plPrev"),next=document.getElementById("plNext"),
-      prog=document.getElementById("plProg"),now=document.getElementById("plNow"),aud=document.getElementById("aud");
-  if(!fab)return;var tracks=[],idx=-1,playing=false;
+      prog=document.getElementById("plProg"),now=document.getElementById("plNow"),aud=document.getElementById("aud"),
+      vol=document.getElementById("plVol"),mute=document.getElementById("plMute");
+  if(!fab)return;var tracks=[],idx=-1,playing=false,VK="hp-vol";
   var GEN=["lofi","rock","electrónica","chill","jazz","hip-hop","metal","clásica","reggaetón","indie"];
   GEN.forEach(function(g){var b=document.createElement("button");b.textContent=g;b.type="button";b.onclick=function(){q.value=g;search(g);gen.querySelectorAll("button").forEach(function(o){o.classList.remove("on");});b.classList.add("on");};gen.appendChild(b);});
   function esc(s){return (s||"").replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c];});}
-  function search(term){
-    list.innerHTML='<li class="pl-empty">buscando…</li>';
+  function icon(){var v=+vol.value/100;if(aud.muted||v===0){mute.textContent="🔇";return;}mute.textContent=v<0.5?"🔈":"🔊";}
+  function setVol(v,save){v=Math.max(0,Math.min(1,v));aud.volume=v;aud.muted=false;vol.value=Math.round(v*100);if(save){try{localStorage.setItem(VK,String(v));}catch(e){}}icon();}
+  var saved=0.7;try{var s=parseFloat(localStorage.getItem(VK));if(!isNaN(s))saved=s;}catch(e){}
+  setVol(saved,false);
+  vol.addEventListener("input",function(){setVol(+vol.value/100,true);});
+  mute.addEventListener("click",function(){aud.muted=!aud.muted;if(!aud.muted&&+vol.value===0)setVol(0.5,true);icon();});
+  function search(term){list.innerHTML='<li class="pl-empty">buscando…</li>';
     fetch("https://itunes.apple.com/search?term="+encodeURIComponent(term)+"&media=music&entity=song&limit=8")
     .then(function(r){if(!r.ok)throw new Error("http "+r.status);return r.json();})
     .then(function(d){tracks=(d.results||[]).filter(function(t){return t.previewUrl;});render();})
-    .catch(function(){list.innerHTML='<li class="pl-empty">sin resultados (¿red?)</li>';});
-  }
+    .catch(function(){list.innerHTML='<li class="pl-empty">sin resultados (¿red?)</li>';});}
   function render(){list.innerHTML="";if(!tracks.length){list.innerHTML='<li class="pl-empty">nada por aquí…</li>';return;}
     tracks.forEach(function(t,i){var li=document.createElement("li");li.className=i===idx?"cur":"";
       li.innerHTML='<img src="'+esc(t.artworkUrl100)+'" alt="" loading="lazy"><div style="min-width:0"><div class="ti">'+esc(t.trackName)+'</div><div class="ar">'+esc(t.artistName)+'</div></div><span class="go">▶</span>';
@@ -255,10 +260,87 @@ function renderResult(){var s=AX.slice().sort(function(a,b){return sum[b.k]-sum[
   qBody.innerHTML=html;drawRadar();
   document.getElementById("resAgain").addEventListener("click",function(){initQuiz();});
   document.getElementById("resContact").addEventListener("click",function(){closeQuiz();});}
-document.getElementById("startQuiz").addEventListener("click",initQuiz);
+var _sq=document.getElementById("startQuiz"); if(_sq) _sq.addEventListener("click",initQuiz);
 document.getElementById("quizClose").addEventListener("click",closeQuiz);
 quiz.addEventListener("click",function(e){if(e.target===quiz)closeQuiz();});
 document.addEventListener("keydown",function(e){if(!quizOpen)return;if(e.key==="Escape")closeQuiz();});
+/* ===== BLOQUE B: ROBOT DE LOGROS + TEASER ===== */
+(function(){
+  var robot=document.getElementById("robot"),bubble=document.getElementById("robotBubble");
+  if(!robot)return;
+  var GKEY="hp-logros",SEEN={};
+  function getG(){try{return JSON.parse(localStorage.getItem(GKEY))||[];}catch(e){return[];}}
+  function setG(a){try{localStorage.setItem(GKEY,JSON.stringify(a));}catch(e){}}
+  var timer=null;
+  function toast(html){bubble.innerHTML=html;robot.classList.add("show");clearTimeout(timer);timer=setTimeout(function(){robot.classList.remove("show");},4600);}
+  function logro(id,tit,txt){var a=getG();if(a.indexOf(id)>-1)return; a.push(id);setG(a);toast("<b>"+tit+"</b> "+txt);}
+
+  /* saludo al entrar */
+  setTimeout(function(){toast("<b>¡hola!</b> soy tu guía. Explora y te aviso de lo que logres.");},1200);
+
+  /* logros por vista */
+  function track(id){SEEN[id]=1;var n=Object.keys(SEEN).length;
+    if(n===3)logro("explorador","🧭 Explorador","has visto 3 secciones, vas cogiendo el tranquillo.");
+    if(n===8)logro("completo","🏆 Web completa","has recorrido todas las páginas. Eres de los que miran hasta el pie de página.");
+  }
+  function curView(){var h=(location.hash||"#inicio").slice(1);track(h||"inicio");}
+  addEventListener("hashchange",curView);curView();
+
+  /* formulario */
+  var f=document.getElementById("form");if(f)f.addEventListener("submit",function(){logro("mensajero","✉️ Mensajero","acabas de enviar un mensaje. Ya falta menos para esa FCT.");});
+
+  /* tema */
+  var th=document.querySelector(".th");if(th)th.addEventListener("click",function(){logro("tematico","🎨 Cambiate","ya has probado los dos temas. El editor y la terminal, ambos tuyos.");});
+
+  /* arcade: observo el score */
+  var sc=document.getElementById("score");
+  if(sc&&window.MutationObserver){new MutationObserver(function(){if(+sc.textContent>0)logro("jugon","🕹️ Jugón","has puntuado en el arcade. Coordinación la tienes.");}).observe(sc,{childList:true,characterData:true,subtree:true});}
+
+  /* test: observo si aparece resultado */
+  var qb=document.getElementById("quizBody");
+  if(qb&&window.MutationObserver){new MutationObserver(function(m){m.forEach(function(r){[].forEach.call(r.addedNodes,function(n){if(n.nodeType===1&&n.querySelector&&n.querySelector(".res"))logro("orientado","🧠 Orientado","has completado el test. Ya sabes por dónde tirar.");});});}).observe(qb,{childList:true,subtree:true});}
+
+  /* ===== TEASER ===== */
+  var teaser=document.getElementById("teaser"),go=document.getElementById("qcGo");
+  if(!teaser)return;
+  var T=[
+    {q:"¿De dónde vienes?",o:["Del hardware","Otros estudios","Autodidacta","Ya trabajo"]},
+    {q:"¿Qué te da más placer?",o:["Ver algo funcionar","Que tenga sentido","Que la gente lo entienda","Descubrir algo nuevo"]},
+    {q:"Prefieres…",o:["Hacer que algo exista","Entender por qué es como es"]}
+  ];
+  var ansT=[null,null,null];
+  function mini(){
+    var e={constructor:0,analista:0,comunicador:0,disenador:0,arquitecto:0,explorador:0};
+    if(ansT[0]===0){e.constructor+=1;e.arquitecto+=1;} if(ansT[0]===2){e.explorador+=1;e.constructor+=1;}
+    if(ansT[1]===0)e.constructor+=2; if(ansT[1]===1){e.analista+=2;e.arquitecto+=1;} if(ansT[1]===2){e.comunicador+=2;e.disenador+=1;} if(ansT[1]===3){e.explorador+=2;e.analista+=1;}
+    if(ansT[2]===0)e.constructor+=2; if(ansT[2]===1){e.analista+=2;e.disenador+=1;}
+    var best="constructor",bv=-1;for(var k in e){if(e[k]>bv){bv=e[k];best=k;}}
+    var map={constructor:"Frontend / Backend",analista:"Datos / QA",comunicador:"Consultoría / Producto",disenador:"UX / UI",arquitecto:"DevOps / Sistemas",explorador:"Seguridad / I+D"};
+    return map[best]||"Frontend";
+  }
+  function render(){
+    teaser.innerHTML="";
+    T.forEach(function(item,i){
+      var w=document.createElement("div");
+      var q=document.createElement("div");q.className="tz-q";q.textContent=(i+1)+". "+item.q;w.appendChild(q);
+      var opts=document.createElement("div");opts.className="tz-opts";
+      item.o.forEach(function(op,idx){var b=document.createElement("button");b.type="button";b.textContent=op;b.className=ansT[i]===idx?"on":"";b.onclick=function(){ansT[i]=idx;render();};opts.appendChild(b);});
+      w.appendChild(opts);teaser.appendChild(w);
+    });
+    var done=ansT[0]!==null&&ansT[1]!==null&&ansT[2]!==null;
+    if(done){var r=document.createElement("div");r.className="tz-result";r.innerHTML="Pinta a <b>"+mini()+"</b>. Haz el test completo para tu radar y tu ruta.";teaser.appendChild(r);go.textContent="ver mi perfil completo ▶";}
+  }
+  render();
+  go.addEventListener("click",function(){
+    if(ansT[0]===null||ansT[1]===null||ansT[2]===null){initQuiz();return;}
+    ans={origen:ansT[0],placer:ansT[1],ab:ansT[2]};
+    quizOpen=true;order=[];sum={};AX.forEach(function(x){sum[x.k]=0;});
+    quiz.hidden=false;requestAnimationFrame(function(){quiz.classList.add("open");});
+    buildOrder();
+    qi=order.findIndex(function(q){return ans[q.id]===undefined;});if(qi<0)qi=0;
+    renderQ(order[qi]);
+  });
+})();
 
 show(location.hash.slice(1)||"inicio");onScroll();
 })();
