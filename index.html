@@ -7,15 +7,43 @@
 <meta name="description" content="Web personal de Héctor Piquer Belda. Estudiante de 1º DAM (IES Simarro, Xàtiva). Vengo del hardware, me voy al código. Busco FCT.">
 <meta name="author" content="Héctor Piquer Belda">
 <meta name="theme-color" content="#0a0f1c">
+<link rel="canonical" href="https://github.com/hectorpiquer/web_personal">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230a0f1c'/%3E%3Crect x='4' y='4' width='56' height='56' rx='10' fill='none' stroke='%2334d399' stroke-width='2' opacity='0.45'/%3E%3Ctext x='30' y='41' font-family='monospace' font-size='20' font-weight='bold' fill='%2334d399' text-anchor='middle'%3Ehpb%3C/text%3E%3Crect x='47' y='28' width='3' height='13' fill='%23fbbf24'/%3E%3C/svg%3E">
-<link rel="manifest" href="data:application/json,%7B%22name%22%3A%22H%C3%A9ctor%20Piquer%22%2C%22short_name%22%3A%22hpb%22%2C%22background_color%22%3A%22%230a0f1c%22%2C%22theme_color%22%3A%22%2334d399%22%2C%22display%22%3A%22standalone%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22data%3Aimage%2Fsvg%2Bxml%2C%253Csvg%2520xmlns%253D%2527http%253A%252F%252Fwww.w3.org%252F2000%252Fsvg%2527%2520viewBox%253D%25270%25200%2520512%2520512%2527%253E%253Crect%2520width%253D%2527512%2527%2520height%253D%2527512%2527%2520rx%253D%2527112%2527%2520fill%253D%2527%25230a0f1c%2527%252F%253E%253Ctext%2520x%253D%2527256%2527%2520y%253D%2527320%2527%2520font-family%253Dmonospace%2520font-size%253D220%2520font-weight%253Dbold%2520fill%253D%2527%252334d399%2527%2520text-anchor%253Dmiddle%253Ehpb%253C%252Ftext%253E%253Crect%2520x%253D380%2520y%253D220%2520width%253D30%2520height%253D130%2520fill%253D%2527%2523fbbf24%2527%252F%253E%253C%252Fsvg%253E%22%2C%22sizes%22%3A%22512x512%22%2C%22type%22%3A%22image%2Fsvg%2Bxml%22%7D%5D%7D">
+<link rel="manifest" href="manifest.webmanifest">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Héctor Piquer · Desarrollo en formación">
 <meta property="og:description" content="Vengo del hardware, me voy al código. Estudiante de 1º DAM.">
-<meta name="twitter:card" content="summary">
-<link rel="stylesheet" href="styles.css?v=2">
+<meta property="og:url" content="https://hectorpiquer.github.io/web_personal/banner.png">
+<!-- og:image usa la ruta cruda para que las redes puedan cargar el PNG.
+     Si activas GitHub Pages, cámbiala por: https://hectorpiquer.github.io/web_personal/banner.png -->
+<meta property="og:image" content="https://raw.githubusercontent.com/hectorpiquer/web_personal/main/banner.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/hectorpiquer/web_personal/main/banner.png">
+<link rel="preconnect" href="https://api.github.com" crossorigin>
+<link rel="preconnect" href="https://itunes.apple.com" crossorigin>
+<link rel="preconnect" href="https://www.google.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="styles.css?v=4">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Héctor Piquer Belda",
+  "jobTitle": "Estudiante de Desarrollo de Aplicaciones Multiplataforma",
+  "url": "https://github.com/hectorpiquer/web_personal",
+  "sameAs": ["https://github.com/hectorpiquer"],
+  "email": "mailto:hecpiqbel@alu.edu.gva.es",
+  "knowsAbout": ["HTML","CSS","JavaScript","Java","SQL","Soporte informático","Redes","Linux"]
+}
+</script>
 </head>
 <body>
+<noscript>
+  <style>.loader{display:none!important}.view{animation:none!important}</style>
+  <p style="padding:1rem;background:#0a0f1c;color:#e6edf6;font-family:monospace;text-align:center">
+    Esta web necesita JavaScript para el test, el arcade, el chat y el reproductor.
+  </p>
+</noscript>
 <div class="loader" id="loader" aria-hidden="true"><span class="loader-text">&gt;_</span></div>
 <div class="prog" aria-hidden="true"><span id="bar"></span></div>
 <a class="skip-link" href="#contenido">Saltar al contenido</a>
@@ -26,14 +54,14 @@
 <nav class="nav" id="nav" aria-label="Navegación"><ul>
 <li><a href="#inicio">inicio</a></li><li><a href="#sobre">sobre</a></li><li><a href="#formacion">formación</a></li><li><a href="#servicios">servicios</a></li><li><a href="#proyectos">proyectos</a></li><li><a href="#gusta">me gusta</a></li><li><a href="#arcade">arcade</a></li><li><a href="#contacto">contacto</a></li>
 </ul><span class="nav-ink" aria-hidden="true"></span></nav>
-<button class="th" type="button" aria-label="Cambiar tema"><svg class="s" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><svg class="m" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><span class="lbl"></span></button>
+<button class="th" type="button" aria-label="Cambiar de tema" data-tip="Modo oscuro"><svg class="s" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><svg class="m" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
 </div></div></header>
 
 <main id="contenido">
-<section id="inicio" class="view"><div class="container hero">
+<section id="inicio" class="view" aria-labelledby="inicio-title"><div class="container hero">
 <div>
-<span class="badge"><i class="dot"></i> buscando FCT · ciclo hasta jun 2028</span>
-<h1>Héctor Piquer</h1>
+<span class="badge"><i class="dot" aria-hidden="true"></i> buscando FCT · ciclo hasta jun 2028</span>
+<h1 id="inicio-title">Héctor Piquer</h1>
 <p class="type" id="type"></p>
 <p class="tag">Vengo del hardware. <em>Me voy al código.</em></p>
 <p class="desc">Estudio 1º de DAM en el IES Simarro (Xàtiva). Antes montaba y reparaba PCs en SMR; ahora quiero construir software. Busco un sitio donde aprender de verdad y aportar desde el primer día.</p>
@@ -75,8 +103,8 @@
 </div>
 </section>
 
-<section id="sobre" class="view" hidden><div class="container">
-<h2>Sobre mí</h2>
+<section id="sobre" class="view" hidden aria-labelledby="sobre-title"><div class="container">
+<h2 id="sobre-title">Sobre mí</h2>
 <div class="split"><div>
 <p>Soy <strong>Héctor Piquer Belda</strong>, de Xàtiva, y estudio <strong>1º de DAM</strong> en el <strong>IES Simarro</strong>. Antes pasé por un Grado Medio de <strong>SMR</strong>, donde aprendí a montar, mantener y diagnosticar equipos.</p>
 <p>Lo del hardware me gustaba, pero lo que de verdad me enganchó fue entender cómo funciona todo por dentro. Por eso di el salto al desarrollo: quería dejar de solo arreglar máquinas y empezar a <strong>construir cosas</strong>.</p>
@@ -86,14 +114,14 @@
 <div class="view-nav"><a class="btn g" href="#inicio">← anterior</a><a class="btn g" href="#formacion">siguiente →</a></div>
 </div></section>
 
-<section id="formacion" class="view" hidden><div class="container">
-<h2>Formación</h2>
+<section id="formacion" class="view" hidden aria-labelledby="formacion-title"><div class="container">
+<h2 id="formacion-title">Formación</h2>
 <p class="lead">De la máquina al código.</p>
 <ol class="tl">
 <li><span class="d"></span><p class="w">en curso</p><h3>Grado Superior · DAM</h3><p class="wh">IES Simarro · Desarrollo de Aplicaciones Multiplataforma</p><p>Programación orientada a objetos, bases de datos, entornos de desarrollo y buenas prácticas. El salto natural desde SMR.</p><ul class="chips"><li>Java</li><li>SQL</li><li>HTML</li><li>CSS</li><li>JavaScript</li><li>Git</li><li>Linux</li></ul></li>
 <li><span class="d"></span><p class="w">terminado</p><h3>Grado Medio · SMR</h3><p class="wh">Sistemas Microinformáticos y Redes</p><p>Ensamblaje, mantenimiento, instalación de sistemas y redes. La base técnica que me dio curiosidad por el software.</p><ul class="chips"><li>Montaje</li><li>Mantenimiento</li><li>Windows</li><li>Linux</li><li>Redes</li></ul></li>
 </ol>
-<h2 style="font-size:1.2rem">Nivel (autoevaluación)</h2>
+<h3 class="h3-like">Nivel (autoevaluación)</h3>
 <div class="skills">
 <div class="sk"><div class="sk-top"><span>HTML / CSS</span><b>Sólido</b></div><div class="bar"><i data-w="82"></i></div></div>
 <div class="sk"><div class="sk-top"><span>JavaScript</span><b>En marcha</b></div><div class="bar"><i data-w="55"></i></div></div>
@@ -105,8 +133,8 @@
 <div class="view-nav"><a class="btn g" href="#sobre">← anterior</a><a class="btn g" href="#servicios">siguiente →</a></div>
 </div></section>
 
-<section id="servicios" class="view" hidden><div class="container">
-<h2>En qué puedo echarte una mano</h2>
+<section id="servicios" class="view" hidden aria-labelledby="servicios-title"><div class="container">
+<h2 id="servicios-title">En qué puedo echarte una mano</h2>
 <p class="lead">Estoy empezando, así que no te prometo una solución integral. Esto es lo que sé hacer ya, y bien:</p>
 <div class="cards">
 <article class="card"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="2" y="4" width="20" height="14" rx="2"/><path d="M2 9h20M8 21h8"/></svg></div><h3>Maquetar una web</h3><p>Páginas en HTML y CSS, ordenadas y que se vean bien en el móvil.</p><ul class="chips"><li>HTML</li><li>CSS</li><li>Responsive</li></ul></article>
@@ -120,8 +148,8 @@
 <div class="view-nav"><a class="btn g" href="#formacion">← anterior</a><a class="btn g" href="#proyectos">siguiente →</a></div>
 </div></section>
 
-<section id="proyectos" class="view" hidden><div class="container">
-<h2>Proyectos</h2>
+<section id="proyectos" class="view" hidden aria-labelledby="proyectos-title"><div class="container">
+<h2 id="proyectos-title">Proyectos</h2>
 <p class="lead">Lo que he tocado de verdad. De momento poco, pero real.</p>
 <div class="cards">
 <article class="proj"><div class="hd"><h3>Esta web personal</h3><span class="tag2 ok">terminada</span></div><p>HTML, CSS y JS puros, sin librerías. Tema terminal, modo claro (editor), accesible, responsive, con mini-juego en canvas.</p><ul class="chips"><li>HTML</li><li>CSS</li><li>JavaScript</li></ul><a class="btn g" style="margin-top:.8rem" href="https://github.com/hectorpiquer/web_personal" target="_blank" rel="noopener">ver código →</a></article>
@@ -157,22 +185,22 @@
 <div class="view-nav"><a class="btn g" href="#servicios">← anterior</a><a class="btn g" href="#gusta">siguiente →</a></div>
 </div></section>
 
-<section id="gusta" class="view" hidden><div class="container">
-<h2>Me gusta</h2>
+<section id="gusta" class="view" hidden aria-labelledby="gusta-title"><div class="container">
+<h2 id="gusta-title">Me gusta</h2>
 <p class="lead">Lo que hago cuando cierro el editor.</p>
 <ul class="likes">
-<li><span class="e">📺</span><div><h3>Breaking Bad</h3><p>La vi entera, dos veces. Guion, tensión y personajes redondos.</p></div></li>
-<li><span class="e">⚽</span><div><h3>Fútbol</h3><p>He jugado y ahora lo veo. Táctica, debate y un poco de sufrimiento.</p></div></li>
-<li><span class="e">🎮</span><div><h3>FIFA</h3><p>Ligas con colegas donde se pierde la dignidad y el orgullo.</p></div></li>
-<li><span class="e">🏎️</span><div><h3>Juegos de coches</h3><p>Velocidad y precisión. La misma manía que en la moto, pero sentado.</p></div></li>
-<li><span class="e">🏍️</span><div><h3>Ir en moto</h3><p>Ruta, concentración y desconexión.</p></div></li>
-<li><span class="e">🍽️</span><div><h3>Comer bien</h3><p>Buscar un buen sitio sin mirar tanto el precio.</p></div></li>
+<li><span class="e" aria-hidden="true">📺</span><div><h3>Breaking Bad</h3><p>La vi entera, dos veces. Guion, tensión y personajes redondos.</p></div></li>
+<li><span class="e" aria-hidden="true">⚽</span><div><h3>Fútbol</h3><p>He jugado y ahora lo veo. Táctica, debate y un poco de sufrimiento.</p></div></li>
+<li><span class="e" aria-hidden="true">🎮</span><div><h3>FIFA</h3><p>Ligas con colegas donde se pierde la dignidad y el orgullo.</p></div></li>
+<li><span class="e" aria-hidden="true">🏎️</span><div><h3>Juegos de coches</h3><p>Velocidad y precisión. La misma manía que en la moto, pero sentado.</p></div></li>
+<li><span class="e" aria-hidden="true">🏍️</span><div><h3>Ir en moto</h3><p>Ruta, concentración y desconexión.</p></div></li>
+<li><span class="e" aria-hidden="true">🍽️</span><div><h3>Comer bien</h3><p>Buscar un buen sitio sin mirar tanto el precio.</p></div></li>
 </ul>
 <div class="view-nav"><a class="btn g" href="#proyectos">← anterior</a><a class="btn g" href="#arcade">siguiente →</a></div>
 </div></section>
 
-<section id="arcade" class="view" hidden><div class="container">
-<h2>Arcade</h2>
+<section id="arcade" class="view" hidden aria-labelledby="arcade-title"><div class="container">
+<h2 id="arcade-title">Arcade</h2>
 <p class="lead">Un extra hecho a mano: esquiva los <b>tokens de error</b> (rojos) y coge los <b>tokens de código</b> (verdes). Puro canvas, sin librerías.</p>
 <div class="panel">
 <div class="pbar"><i></i><i></i><i></i><b>arcade.sh</b></div>
@@ -184,12 +212,12 @@
 <div class="view-nav"><a class="btn g" href="#gusta">← anterior</a><a class="btn g" href="#contacto">siguiente →</a></div>
 </div></section>
 
-<section id="contacto" class="view" hidden><div class="container">
-<h2>Contacto</h2>
+<section id="contacto" class="view" hidden aria-labelledby="contacto-title"><div class="container">
+<h2 id="contacto-title">Contacto</h2>
 <div class="contact">
 <p>¿Prácticas, una idea o solo saludar? Escríbeme y te contesto en cuanto pueda.</p>
 <address><a class="mail" href="mailto:hecpiqbel@alu.edu.gva.es"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>hecpiqbel@alu.edu.gva.es</a></address>
-<div class="social"><a class="btn g" href="https://github.com/hectorpiquer/web_personal" target="_blank" rel="noopener">github</a><a class="btn g" href="mailto:hecpiqbel@alu.edu.gva.es">email</a></div>
+<div class="social"><a class="btn g" href="https://github.com/hectorpiquer" target="_blank" rel="noopener">github</a><a class="btn g" href="mailto:hecpiqbel@alu.edu.gva.es">email</a><a class="btn g" href="cv-hector-piquer.pdf" download>CV ↓</a></div>
 </div>
 <form class="form" id="form"><fieldset><legend>enviar_mensaje.py</legend><div class="grid">
 <div class="fld"><label for="n">nombre <span class="req">*</span></label><input id="n" required></div>
@@ -197,7 +225,7 @@
 <div class="fld"><label for="c">tu correo <span class="req">*</span></label><input id="c" type="email" required></div>
 <div class="fld"><label for="t">concepto <span class="req">*</span></label><select id="t" required><option value="" disabled selected>elige</option><option>Prácticas / FCT</option><option>Colaboración</option><option>Consulta</option><option>Otro</option></select></div>
 <div class="fld full"><label for="m">mensaje <span class="req">*</span></label><textarea id="m" rows="4" required></textarea></div>
-<div class="fld full"><button class="btn p" type="submit">enviar ▶</button></div>
+<div class="fld full"><button class="btn p" type="submit">enviar ▶</button><p id="formMsg" class="form-msg" role="status" aria-live="polite"></p></div>
 </div></fieldset></form>
 <iframe class="map" src="https://www.google.com/maps?q=IES%20Simarro%2C%20X%C3%A0tiva%2C%20Val%C3%A8ncia&output=embed" title="Mapa IES Simarro" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
 <div class="view-nav"><a class="btn g" href="#arcade">← anterior</a></div>
@@ -206,17 +234,18 @@
 
 <footer class="ft"><div class="container"><p>© <span id="y"></span> Héctor Piquer Belda · IES Simarro</p><p>hecho a mano · html · css · js</p></div></footer>
 
-<!-- ===== DOCK: chat + subir (con anillo) ===== -->
+<!-- ===== DOCK: mute logros + chat + subir (con anillo) ===== -->
 <div class="dock">
-  <button class="chat-fab" id="chatFab" type="button" aria-label="Abrir asistente" aria-expanded="false"><span class="cf-face">>_</span><span class="cf-badge">1</span></button>
-  <button class="top" id="topBtn" type="button" aria-label="Volver arriba">
+  <button class="dock-btn" id="robotMute" type="button" aria-label="Silenciar al robot guía" aria-pressed="false" data-tip="Silenciar al robot guía">🔔</button>
+  <button class="chat-fab" id="chatFab" type="button" aria-label="Abrir asistente" aria-expanded="false" data-tip="Asistente"><span class="cf-face">>_</span><span class="cf-badge" aria-hidden="true">1</span></button>
+  <button class="top" id="topBtn" type="button" aria-label="Volver arriba" data-tip="Volver arriba">
     <svg class="ring" viewBox="0 0 48 48" aria-hidden="true"><circle class="ring-bg" cx="24" cy="24" r="20"/><circle class="ring-fg" id="ringFg" cx="24" cy="24" r="20"/></svg>
     <svg class="arr" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
   </button>
 </div>
 
-<!-- ===== REPRODUCTOR (Deezer) ===== -->
-<button class="pl-fab" id="plFab" type="button" aria-label="Abrir reproductor" aria-expanded="false"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></button>
+<!-- ===== REPRODUCTOR (iTunes previews) ===== -->
+<button class="pl-fab" id="plFab" type="button" aria-label="Abrir reproductor" aria-expanded="false" data-tip="Reproductor"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></button>
 <div class="pl" id="pl" role="dialog" aria-label="Reproductor" hidden>
   <div class="pbar"><i></i><i></i><i></i><b>reproductor.sh</b><button class="pl-x" id="plX" type="button" aria-label="Cerrar">✕</button></div>
   <div class="pl-in">
@@ -247,11 +276,12 @@
 <!-- ===== TEST / BRÚJULA (overlay) ===== -->
 <div class="quiz" id="quiz" role="dialog" aria-modal="true" aria-labelledby="quiz-title" hidden>
   <div class="quiz-shell">
-    <div class="pbar"><i></i><i></i><i></i><b>brujula.sh</b><button class="quiz-close" id="quizClose" type="button" aria-label="Cerrar test">✕</button></div>
+    <div class="pbar"><i></i><i></i><i></i><b id="quiz-title">brujula.sh</b><button class="quiz-close" id="quizClose" type="button" aria-label="Cerrar test">✕</button></div>
     <div class="quiz-top"><span class="quiz-step" id="quizStep">1</span><div class="quiz-bar"><i id="quizProg"></i></div></div>
     <div class="quiz-body" id="quizBody"></div>
   </div>
 </div>
+<div id="toast" class="sr-only" role="status" aria-live="polite"></div>
 <div class="robot" id="robot" aria-hidden="true">
   <div class="robot-bubble" id="robotBubble"></div>
   <svg class="robot-svg" viewBox="0 0 64 64" width="58" height="58">
@@ -267,6 +297,6 @@
   </svg>
 </div>
 
-<script src="script.js?v=2"></script>
+<script src="script.js?v=4"></script>
 </body>
 </html>
