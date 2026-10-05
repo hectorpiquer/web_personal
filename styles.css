@@ -294,6 +294,7 @@ blockquote{margin:1.2rem 0 0;padding:.9rem 1.1rem;border-left:3px solid var(--ac
 :root[data-theme="light"] .ring-bg{stroke:rgba(101,109,118,.25)}
 :root[data-theme="light"] .msg.bot{background:#f6f8fa}
 :root[data-theme="light"] .chat-bar,.chat-chips,.pl-in,.pl-bar{background:#fff}
+HEAD
 /* ===== ROBOT DE LOGROS ===== */
 .robot{position:fixed;left:50%;bottom:1.2rem;z-index:70;display:flex;align-items:flex-end;gap:.5rem;transform:translate(-50%,140%);opacity:0;transition:transform .5s cubic-bezier(.2,.7,.2,1),opacity .4s;pointer-events:none}
 .robot.show{transform:translate(-50%,0);opacity:1}
@@ -319,11 +320,14 @@ blockquote{margin:1.2rem 0 0;padding:.9rem 1.1rem;border-left:3px solid var(--ac
 .qc-foot{grid-column:1/-1;margin-top:.4rem}
 @media (max-width:680px){.teaser{grid-column:1/-1}}
 @media (prefers-reduced-motion:reduce){.robot{transition:none}.robot-svg,.robot-svg .ant,.robot-svg .eye{animation:none}}
-/* ===== FIX: franja de chips del chat (quitar el fondo blanco) ===== */
+
+ 7b8c98245592df83acf6543b1fc92e3666727149
+/*  FIX: franja de chips del chat (quitar el fondo blanco) */
 .chat-chips{background:transparent!important;padding:.2rem 1rem .7rem}
 .chat-chips button{background:var(--bg);color:var(--mut);border:1px solid var(--line)}
 :root[data-theme="light"] .chat-chips button{background:#fff;color:var(--mut);border-color:var(--line)}
-/* ===== TEASER PROTAGONISTA (tamaño + posición, no color) ===== */
+HEAD
+/*  TEASER PROTAGONISTA (tamaño + posición, no color) */
 .quiz-cta{display:block;max-width:760px;margin:-48px auto 2rem;padding:2.4rem 2.2rem;border-width:2px;box-shadow:0 24px 60px rgba(0,0,0,.35);animation:qcIn .7s cubic-bezier(.2,.7,.2,1) backwards}
 @keyframes qcIn{from{opacity:0;transform:translateY(28px) scale(.97)}to{opacity:1;transform:none}}
 .qc-txt{text-align:center;margin-bottom:1.6rem}
@@ -361,3 +365,5 @@ blockquote{margin:1.2rem 0 0;padding:.9rem 1.1rem;border-left:3px solid var(--ac
 .pl-vol::-moz-range-track{height:6px;border-radius:999px;background:var(--bg)}
 .pl-vol:focus-visible{border-color:var(--acc)}
 @media (max-width:560px){.pl-vol{width:58px}}
+=======
+ 7b8c98245592df83acf6543b1fc92e3666727149
