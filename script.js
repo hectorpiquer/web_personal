@@ -10,6 +10,58 @@ function hideLoader(){if(!loader)return;loader.classList.add("hidden");setTimeou
 if(reduce){hideLoader();}else{addEventListener("load",function(){setTimeout(hideLoader,450);});setTimeout(hideLoader,2500);}
 window.addEventListener("error",hideLoader);
 
+/* ===== FONDO ANIMADO (nodos conectados) ===== */
+(function(){
+  var cv=document.getElementById("bgfx"); if(!cv) return;
+  var ctx=cv.getContext("2d");
+  var dpr=Math.min(window.devicePixelRatio||1,2);
+  var W,H,nodes=[],running=true;
+  function themeColors(){
+    var light=document.documentElement.getAttribute("data-theme")==="light";
+    return light?"26,127,55":"52,211,153";
+  }
+  function build(){
+    var count=Math.round((W*H)/26000);
+    count=Math.max(28,Math.min(70,count));
+    nodes=[];
+    for(var i=0;i<count;i++){
+      nodes.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.25,vy:(Math.random()-.5)*.25,r:Math.random()*1.6+.6});
+    }
+  }
+  function resize(){
+    W=window.innerWidth;H=window.innerHeight;
+    cv.width=W*dpr;cv.height=H*dpr;cv.style.width=W+"px";cv.style.height=H+"px";
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    build();
+  }
+  function step(){
+    var c=themeColors();
+    ctx.clearRect(0,0,W,H);
+    var i,j,a,b,dx,dy,dist,maxd=130;
+    for(i=0;i<nodes.length;i++){
+      a=nodes[i];
+      if(!reduce){a.x+=a.vx;a.y+=a.vy;if(a.x<0||a.x>W)a.vx*=-1;if(a.y<0||a.y>H)a.vy*=-1;}
+      for(j=i+1;j<nodes.length;j++){
+        b=nodes[j];dx=a.x-b.x;dy=a.y-b.y;dist=Math.sqrt(dx*dx+dy*dy);
+        if(dist<maxd){ctx.strokeStyle="rgba("+c+","+(0.16*(1-dist/maxd)).toFixed(3)+")";ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();}
+      }
+    }
+    for(i=0;i<nodes.length;i++){a=nodes[i];ctx.fillStyle="rgba("+c+",0.5)";ctx.beginPath();ctx.arc(a.x,a.y,a.r,0,Math.PI*2);ctx.fill();}
+    if(running&&!reduce)requestAnimationFrame(step);
+  }
+  window.addEventListener("resize",resize);
+  document.addEventListener("visibilitychange",function(){
+    if(document.hidden){running=false;}
+    else{running=true;if(!reduce)requestAnimationFrame(step);}
+  });
+  if(window.MutationObserver){
+    new MutationObserver(function(){if(reduce){ctx.clearRect(0,0,W,H);step();}})
+      .observe(document.documentElement,{attributes:true,attributeFilter:["data-theme"]});
+  }
+  resize();
+  if(reduce){step();}else{requestAnimationFrame(step);}
+})();
+
 /* ===== TEMA (luna en oscuro / sol en claro) ===== */
 function setTheme(t){
   html.setAttribute("data-theme",t);
@@ -99,6 +151,52 @@ function start(){reset();run=true;play.textContent="jugando…";cancelAnimationF
 function stopArcade(){if(!run)return;run=false;cancelAnimationFrame(raf);if(play)play.textContent="jugar ▶";}
 play.addEventListener("click",start);addEventListener("keydown",key);cv.addEventListener("touchstart",touch,{passive:false});cv.addEventListener("touchmove",touch,{passive:false});reset();
 
+/* ===== NOTICIAS IA+PROGRAMACIÓN (Hacker News / Algolia) ===== */
+(function(){
+  var grid=document.getElementById("newsGrid"),reload=document.getElementById("newsReload");
+  if(!grid)return;
+  var KEY="hp-news-cache",TTL=5*60*1000; // 5 min
+  function esc(s){return (s||"").replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c];});}
+  function hnUrl(id){return "https://news.ycombinator.com/item?id="+encodeURIComponent(id);}
+  function ago(ts){var s=Date.now()/1000-ts;if(s<0)s=0;var m=Math.floor(s/60);if(m<60)return "hace "+m+" min";var h=Math.floor(m/60);if(h<24)return "hace "+h+" h";var d=Math.floor(h/24);return "hace "+d+" d";}
+  function host(u){try{return new URL(u).hostname.replace(/^www\./,"");}catch(e){return "news.ycombinator.com";}}
+  function card(it){
+    var href=it.url||hnUrl(it.objectID);
+    var src=it.url?host(it.url):"news.ycombinator.com";
+    return "<a class='news-card' href='"+esc(href)+"' target='_blank' rel='noopener'>"+
+      "<span class='nt'>"+esc(it.title||"(sin título)")+"</span>"+
+      "<span class='nm'><span class='pts'>▲ "+(it.points||0)+"</span>"+
+      "<span class='src'>"+esc(src)+"</span>"+
+      "<span>💬 "+(it.num_comments||0)+"</span>"+
+      "<span>"+esc(ago(it.created_at_i||0))+"</span></span></a>";
+  }
+  function render(list){grid.innerHTML=list.map(card).join("")||"<div class='news-empty'>sin noticias ahora mismo</div>";}
+  function fetchNews(){
+    grid.innerHTML="<div class='news-empty'>cargando noticias…</div>";
+    var since=Math.floor(Date.now()/1000)-7*24*3600; // últimos 7 días
+    var base="https://hn.algolia.com/api/v1/search_by_date?tags=story&hitsPerPage=12&numericFilters=points%3E10,created_at_i%3E"+since;
+    var ai=fetch(base+"&query=AI").then(function(r){if(!r.ok)throw 0;return r.json();});
+    var pr=fetch(base+"&query=programming").then(function(r){if(!r.ok)throw 0;return r.json();});
+    Promise.allSettled([ai,pr]).then(function(res){
+      var a=res[0].status==="fulfilled"?(res[0].value.hits||[]):[];
+      var p=res[1].status==="fulfilled"?(res[1].value.hits||[]):[];
+      if(!a.length&&!p.length){grid.innerHTML="<div class='news-empty'>no pude conectar con Hacker News. <button class='btn g' id='newsRetry' type='button'>reintentar</button></div>";var b=document.getElementById("newsRetry");if(b)b.onclick=fetchNews;return;}
+      var seen={},out=[],max=Math.max(a.length,p.length);
+      for(var i=0;i<max;i++){
+        if(a[i]&&!seen[a[i].objectID]){seen[a[i].objectID]=1;out.push(a[i]);}
+        if(p[i]&&!seen[p[i].objectID]){seen[p[i].objectID]=1;out.push(p[i]);}
+      }
+      out.sort(function(x,y){return (y.created_at_i||0)-(x.created_at_i||0);}); // de más nueva a más antigua
+      var final=out.slice(0,6);
+      try{localStorage.setItem(KEY,JSON.stringify({t:Date.now(),d:final}));}catch(e){}
+      render(final);
+    });
+  }
+  var cached=null;try{cached=JSON.parse(localStorage.getItem(KEY));}catch(e){}
+  if(cached&&Date.now()-cached.t<TTL&&cached.d.length){render(cached.d);}else{fetchNews();}
+  if(reload)reload.addEventListener("click",fetchNews);
+})();
+
 /* ===== PANEL GITHUB (API pública, sin clave) ===== */
 (function(){
   var box=document.getElementById("ghRepos");if(!box)return;
@@ -137,6 +235,7 @@ play.addEventListener("click",start);addEventListener("keydown",key);cv.addEvent
     {id:"precio",k:["precio","tarifa","cuanto","cuesta","cobrar","gratis"],r:["Es un estudiante en formación, no tiene tarifas: busca aprender. Para colaborar, escríbele.","No cobra: está en fase de ganar experiencia. FCT y colaboración, por el formulario."]},
     {id:"contacto",k:["contacto","correo","email","escribir","hablar","telefono"],r:["Su correo es hecpiqbel@alu.edu.gva.es. También el formulario de Contacto y el mapa del IES Simarro.","Escríbele a hecpiqbel@alu.edu.gva.es o usa el formulario. Responde en cuanto puede."]},
     {id:"musica",k:["musica","cancion","song","deezer","reproduc"],r:["Arriba a la izquierda tienes el reproductor (♪): busca o toca un género y suena un preview. Sin cuentas.","El botón ♪ abre un mini-reproductor con previews para ambientar la visita."]},
+    {id:"noticias",k:["noticias","news","hacker","actualidad"],r:["Abajo en la home tienes las últimas noticias de IA y programación, sacadas en vivo de Hacker News.","Las noticias están en la portada, bajo el test: vía API pública de Hacker News."]},
     {id:"gracias",k:["gracias","thanks","genial","bien","vale"],r:["¡De nada! Prueba el test o el arcade.","A ti. Si te queda algo, el formulario está para eso."]},
     {id:"ayuda",k:["ayuda","que puedes","opciones","comandos","menu"],r:["Puedo contarte: quién es Héctor, qué sabe, las FCT, el test, el arcade, los proyectos o cómo contactar.","Prueba con 'qué sabe', 'fct', 'test' o 'contacto'."]},
     {id:"adios",k:["adios","chao","bye","hasta luego","nos vemos"],r:["¡Hasta luego! 👋 El arcade y el test siguen aquí.","Adiós. Si vuelves, el test te recuerda tu perfil."]}

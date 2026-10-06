@@ -13,7 +13,7 @@
 <meta property="og:type" content="website">
 <meta property="og:title" content="Héctor Piquer · Desarrollo en formación">
 <meta property="og:description" content="Vengo del hardware, me voy al código. Estudiante de 1º DAM.">
-<meta property="og:url" content="https://hectorpiquer.github.io/web_personal/banner.png">
+<meta property="og:url" content="https://github.com/hectorpiquer/web_personal">
 <!-- og:image usa la ruta cruda para que las redes puedan cargar el PNG.
      Si activas GitHub Pages, cámbiala por: https://hectorpiquer.github.io/web_personal/banner.png -->
 <meta property="og:image" content="https://raw.githubusercontent.com/hectorpiquer/web_personal/main/banner.png">
@@ -23,7 +23,8 @@
 <link rel="preconnect" href="https://itunes.apple.com" crossorigin>
 <link rel="preconnect" href="https://www.google.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="styles.css?v=4">
+<link rel="preconnect" href="https://hn.algolia.com" crossorigin>
+<link rel="stylesheet" href="styles.css?v=5">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -38,10 +39,11 @@
 </script>
 </head>
 <body>
+<canvas id="bgfx" aria-hidden="true"></canvas>
 <noscript>
   <style>.loader{display:none!important}.view{animation:none!important}</style>
   <p style="padding:1rem;background:#0a0f1c;color:#e6edf6;font-family:monospace;text-align:center">
-    Esta web necesita JavaScript para el test, el arcade, el chat y el reproductor.
+    Esta web necesita JavaScript para el test, el arcade, el chat, el reproductor y las noticias.
   </p>
 </noscript>
 <div class="loader" id="loader" aria-hidden="true"><span class="loader-text">&gt;_</span></div>
@@ -100,6 +102,16 @@
   </div>
   <div class="teaser" id="teaser" aria-live="polite"></div>
   <div class="qc-foot"><button class="btn p qc-btn" id="qcGo" type="button">empezar test completo ▶</button></div>
+</div>
+<br>
+<br>
+<div class="news-wrap" role="region" aria-labelledby="news-title">
+  <div class="news-head">
+    <h3 id="news-title">Últimas noticias · IA &amp; programación</h3>
+    <button class="btn g" id="newsReload" type="button" aria-label="Actualizar noticias">↻ actualizar</button>
+  </div>
+  <p class="news-sub">// vía API pública de Hacker News · en tiempo real</p>
+  <div class="news-grid" id="newsGrid"><div class="news-empty">cargando noticias…</div></div>
 </div>
 </section>
 
@@ -297,6 +309,6 @@
   </svg>
 </div>
 
-<script src="script.js?v=4"></script>
+<script src="script.js?v=5"></script>
 </body>
 </html>
