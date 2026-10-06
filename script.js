@@ -474,6 +474,46 @@ if(rm)rm.addEventListener("click",function(){
   rm.setAttribute("aria-label",t);
   rm.setAttribute("data-tip",t);
 });
+/* ===== INTRO: escritorio Ubuntu ===== */
+(function(){
+  var intro=document.getElementById("intro"); if(!intro) return;
+  if(location.search.indexOf("nointro")>-1){intro.remove();return;}
+  var clock=document.getElementById("introClock");
+  if(clock){var d=new Date();clock.textContent=("0"+d.getHours()).slice(-2)+":"+("0"+d.getMinutes()).slice(-2);}
+  var term=document.getElementById("introTerm"),cmd=document.getElementById("introCmd"),
+      out=document.getElementById("introOut"),cur=document.getElementById("introCur"),
+      skip=document.getElementById("introSkip");
+  var full="./accede",i=0,done=false,timers=[];
+  function kill(){if(done)return;done=true;timers.forEach(clearTimeout);
+    intro.classList.add("gone");setTimeout(function(){intro.remove();},400);}
+  if(reduce){ // accesibilidad: sin tecleo, aparece todo y se va rápido
+    cmd.textContent=full;out.classList.add("show");cur.style.display="none";
+    timers.push(setTimeout(kill,700));
+  }else{
+    function type(){if(done)return;i++;cmd.textContent=full.slice(0,i);
+      if(i<full.length){timers.push(setTimeout(type,45));}
+      else{cur.style.display="none";timers.push(setTimeout(function(){out.classList.add("show");},180));timers.push(setTimeout(kill,900));}}
+    timers.push(setTimeout(type,350));
+  }
+  intro.addEventListener("click",kill);
+  addEventListener("keydown",function(e){if(!done)kill();});
+  if(skip)skip.addEventListener("click",function(e){e.stopPropagation();kill();});
+})();
+
+/* ===== NEOFETCH: uptime + clima (Open-Meteo, sin key) ===== */
+(function(){
+  var up=document.getElementById("nfUp"),we=document.getElementById("nfWeather");
+  if(up){var start=Date.now();
+    setInterval(function(){var s=Math.floor((Date.now()-start)/1000);var h=Math.floor(s/3600),m=Math.floor(s%3600/60),ss=s%60;
+      up.textContent=(h?h+"h ":"")+(m?m+"m ":"")+ss+"s";},1000);}
+  function emoji(c){if(c===0)return"☀️";if(c<=2)return"🌤️";if(c===3)return"☁️";if(c===45||c===48)return"🌫️";
+    if(c>=51&&c<=57)return"🌦️";if(c>=61&&c<=67)return"🌧️";if(c>=71&&c<=77)return"❄️";if(c>=80&&c<=82)return"🌦️";
+    if(c>=95)return"⛈️";return"🌡️";}
+  if(we){fetch("https://api.open-meteo.com/v1/forecast?latitude=38.9924&longitude=-0.5204&current=temperature_2m,weather_code&timezone=auto")
+    .then(function(r){if(!r.ok)throw 0;return r.json();})
+    .then(function(d){var t=Math.round(d.current.temperature_2m);we.textContent=t+"° "+emoji(d.current.weather_code);})
+    .catch(function(){we.textContent="no disponible";});}
+})();
 
 show(location.hash.slice(1)||"inicio");onScroll();
 })();

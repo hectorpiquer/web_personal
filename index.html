@@ -47,6 +47,20 @@
   </p>
 </noscript>
 <div class="loader" id="loader" aria-hidden="true"><span class="loader-text">&gt;_</span></div>
+<div class="intro" id="intro" role="dialog" aria-label="Pantalla de carga">
+  <div class="intro-top"><span>Activities</span><span>Terminal</span><span id="introClock">--:--</span></div>
+  <div class="intro-desk">
+    <div class="intro-icon"><span>&gt;_</span><b>Terminal</b></div>
+    <div class="intro-win">
+      <div class="intro-bar"><i></i><i></i><i></i><b>hector@web_personal</b></div>
+      <div class="intro-term" id="introTerm">
+        <p><span class="pr">hector@web_personal:~$ </span><span class="cmd" id="introCmd"></span><span class="cur" id="introCur">▋</span></p>
+        <p class="out" id="introOut">Accediendo a la Web Personal de Héctor Piquer Belda</p>
+      </div>
+    </div>
+  </div>
+  <button class="intro-skip" id="introSkip" type="button" aria-label="Saltar intro">saltar intro ⏭</button>
+</div>
 <div class="prog" aria-hidden="true"><span id="bar"></span></div>
 <a class="skip-link" href="#contenido">Saltar al contenido</a>
 <header class="hdr"><div class="container">
@@ -194,8 +208,7 @@
 <h3 class="gh-title">mis repos, en vivo <span class="gh-note">// vía API pública de GitHub</span></h3>
 <div class="gh-grid" id="ghRepos"><div class="gh-empty">cargando repos…</div></div>
 </div>
-<div class="view-nav"><a class="btn g" href="#servicios">← anterior</a><a class="btn g" href="#gusta">siguiente →</a></div>
-</div></section>
+</section>
 
 <section id="gusta" class="view" hidden aria-labelledby="gusta-title"><div class="container">
 <h2 id="gusta-title">Me gusta</h2>
@@ -244,7 +257,20 @@
 </div></section>
 </main>
 
-<footer class="ft"><div class="container"><p>© <span id="y"></span> Héctor Piquer Belda · IES Simarro</p><p>hecho a mano · html · css · js</p></div></footer>
+<footer class="ft"><div class="container">
+  <div class="neofetch">
+    <div class="nf-logo"><span>&gt;_</span></div>
+    <div class="nf-info">
+      <p><span class="nf-k">OS</span><span class="nf-v">Ubuntu 24.04 · Web Personal</span></p>
+      <p><span class="nf-k">Host</span><span class="nf-v">hpb_web_personal</span></p>
+      <p><span class="nf-k">Shell</span><span class="nf-v">bash</span></p>
+      <p><span class="nf-k">Uptime</span><span class="nf-v" id="nfUp">calculando…</span></p>
+      <p><span class="nf-k">Local</span><span class="nf-v">Xàtiva, València</span></p>
+      <p><span class="nf-k">Clima</span><span class="nf-v" id="nfWeather">—</span></p>
+    </div>
+  </div>
+  <div class="ft-row"><p>© <span id="y"></span> Héctor Piquer Belda · IES Simarro</p><p>hecho a mano · html · css · js</p></div>
+</div></footer>
 
 <!-- ===== DOCK: mute logros + chat + subir (con anillo) ===== -->
 <div class="dock">
