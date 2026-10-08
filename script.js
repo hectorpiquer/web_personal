@@ -75,6 +75,33 @@ setTheme(saved||"dark");
 var th=document.querySelector(".th");if(th)th.addEventListener("click",function(){setTheme(html.getAttribute("data-theme")==="dark"?"light":"dark");});
 
 /* ===== VISTAS ===== */
+var META={
+  inicio:{t:"Héctor Piquer · Portafolio FCT (DAM)",d:"Web personal de Héctor Piquer, estudiante de 1º DAM en el IES Simarro. Busco FCT."},
+  sobre:{t:"Sobre mí · Héctor Piquer",d:"Estudiante de 1º DAM con base SMR. Vengo del hardware y me voy al código."},
+  formacion:{t:"Formación · Héctor Piquer",d:"DAM en IES Simarro y SMR. Java, SQL, HTML, CSS, JavaScript, Git y Linux."},
+  servicios:{t:"Servicios · Héctor Piquer",d:"Maquetación web, soporte, mantenimiento, automatización y manuales como estudiante en formación."},
+  proyectos:{t:"Proyectos · Héctor Piquer",d:"Proyectos reales: esta web personal, Java en BlueJ y repos en GitHub."},
+  gusta:{t:"Me gusta · Héctor Piquer",d:"Hobbies de Héctor Piquer: series, fútbol, videojuegos, moto y buena comida."},
+  arcade:{t:"Arcade · Héctor Piquer",d:"Mini-juego en canvas hecho a mano: esquiva errores y recoge tokens de código."},
+  contacto:{t:"Contacto · Héctor Piquer",d:"Contacta con Héctor Piquer para FCT, colaboración o consultas. Formulario real y correo."}
+};
+
+function setMeta(v){
+  var m=META[v]||META.inicio;
+  document.title=m.t;
+
+  var set=function(s,val){
+    var el=document.querySelector(s);
+    if(el)el.setAttribute("content",val);
+  };
+
+  set('meta[name="description"]',m.d);
+  set('meta[property="og:title"]',m.t);
+  set('meta[property="og:description"]',m.d);
+  set('meta[name="twitter:title"]',m.t);
+  set('meta[name="twitter:description"]',m.d);
+}
+
 var views=[].slice.call(document.querySelectorAll(".view"));
 var links=[].slice.call(document.querySelectorAll(".nav a"));
 var nav=document.getElementById("nav"),burger=document.querySelector(".burger"),ink=document.querySelector(".nav-ink");
@@ -84,6 +111,7 @@ function moveInk(a){if(!a||reduce||!ink)return;var r=a.getBoundingClientRect(),p
 function show(id){var t=document.getElementById(id);if(!t||!t.classList.contains("view"))t=views[0];
   if(t.id!=="arcade"&&typeof stopArcade==="function")stopArcade();
   views.forEach(function(v){v.hidden=(v!==t);});t.hidden=false;t.classList.remove("in");void t.offsetWidth;t.classList.add("in");
+  setMeta(t.id);
   links.forEach(function(a){var on=a.getAttribute("href")==="#"+t.id;a.classList.toggle("on",on);if(on)moveInk(a);});
   closeNav();scrollTo(0,0);
   [].forEach.call(t.querySelectorAll(".bar>i"),function(b){b.style.width="0";requestAnimationFrame(function(){requestAnimationFrame(function(){b.style.width=b.dataset.w+"%";});});});
@@ -119,15 +147,138 @@ if(topBtn)topBtn.addEventListener("click",function(){scrollTo({top:0,behavior:re
 var panel=document.querySelector(".hero .panel");
 if(!reduce&&panel){var pTick=false;addEventListener("scroll",function(){if(!pTick){requestAnimationFrame(function(){var y=html.scrollTop;if(panel&&y<600)panel.style.transform="translateY("+(y*-0.05)+"px)";pTick=false;});pTick=true;}},{passive:true});}
 
-/* ===== FORMULARIO (con confirmación) ===== */
+/* ===== FORMULARIO (Web3Forms) ===== */
 var f=document.getElementById("form");
 var formMsg=document.getElementById("formMsg");
-f.addEventListener("submit",function(e){e.preventDefault();function g(i){return document.getElementById(i).value.trim();}
-  var n=g("n"),em=g("e"),c=g("c"),t=g("t"),m=g("m");
-  var as=t+(em?" · "+em:"")+" — "+n;var b="Nombre: "+n+"\nEmpresa: "+(em||"—")+"\nConcepto: "+t+"\nCorreo: "+c+"\n\nMensaje:\n"+m;
-  location.href="mailto:hecpiqbel@alu.edu.gva.es?subject="+encodeURIComponent(as)+"&body="+encodeURIComponent(b);
-  if(formMsg)formMsg.textContent="Abriendo tu correo… si no se abre, escríbeme a hecpiqbel@alu.edu.gva.es";
-  f.reset();});
+if(f && formMsg){
+  f.addEventListener("submit",async function(e){
+    e.preventDefault();
+    if(!f.checkValidity()){
+      formMsg.textContent="Rellena nombre, correo y mensaje.";
+      formMsg.className="form-msg err";
+      return;
+    }
+
+    var data=Object.fromEntries(new FormData(f).entries());
+    formMsg.textContent="Enviando…";
+    formMsg.className="form-msg";
+
+    try{
+      var r=await fetch("https://api.web3forms.com/submit",{
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({
+          access_key:"6cdc7e70-cc5a-4d60-8da8-65140ec5b35b",
+          subject:"Contacto FCT: "+data.t,
+          name:data.n,
+          email:data.c,
+          company:data.e,
+          message:data.m
+        })
+      });
+      var j=await r.json();
+      if(j.success){
+        formMsg.textContent="Enviado ✔ te respondo pronto.";
+        formMsg.className="form-msg ok";
+        f.reset();
+      }else{
+        formMsg.textContent="No se pudo enviar.";
+        formMsg.className="form-msg err";
+      }
+    }catch(err){
+      formMsg.textContent="Sin conexión ahora mismo.";
+      formMsg.className="form-msg err";
+    }
+  });
+}
+
+/* ===== BOTÓN EMAIL (Gmail / Outlook / copiar) ===== */
+var MAIL_TO="hecpiqbel@alu.edu.gva.es";
+var mailBtn=document.getElementById("mailBtn"),mailMenu=document.getElementById("mailMenu");
+if(mailBtn&&mailMenu){
+  var closeMail=function(){mailMenu.hidden=true;mailBtn.setAttribute("aria-expanded","false");};
+  var openMail=function(){mailMenu.hidden=false;mailBtn.setAttribute("aria-expanded","true");};
+  mailBtn.addEventListener("click",function(e){e.stopPropagation();mailMenu.hidden?openMail():closeMail();});
+  mailMenu.addEventListener("click",function(e){
+    var b=e.target.closest("[data-mail]");if(!b)return;
+    var kind=b.getAttribute("data-mail");
+    var subject="Contacto FCT desde tu web";
+    var body="Hola Héctor, te escribo desde tu portafolio.";
+    if(kind==="gmail"){
+      window.open("https://mail.google.com/mail/?view=cm&fs=1&to="+encodeURIComponent(MAIL_TO)+"&su="+encodeURIComponent(subject)+"&body="+encodeURIComponent(body),"_blank","noopener");
+    }else if(kind==="outlook"){
+      window.open("https://outlook.live.com/mail/deeplink/compose?to="+encodeURIComponent(MAIL_TO)+"&subject="+encodeURIComponent(subject)+"&body="+encodeURIComponent(body),"_blank","noopener");
+    }else if(kind==="copy"){
+      var ok=function(){b.textContent="Copiado ✔";setTimeout(function(){b.textContent="Copiar correo";},1500);};
+      if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(MAIL_TO).then(ok).catch(function(){fb();ok();});}
+      else{fb();ok();}
+    }
+    closeMail();
+  });
+  function fb(){var ta=document.createElement("textarea");ta.value=MAIL_TO;ta.style.position="fixed";ta.style.opacity="0";document.body.appendChild(ta);ta.select();try{document.execCommand("copy");}catch(e){}document.body.removeChild(ta);}
+  document.addEventListener("click",function(e){if(!mailMenu.hidden&&!mailMenu.contains(e.target)&&e.target!==mailBtn)closeMail();});
+  document.addEventListener("keydown",function(e){if(e.key==="Escape"&&!mailMenu.hidden){closeMail();mailBtn.focus();}});
+}
+
+/* ===== FOCUS TRAP ===== */
+var _dlgFocus=new WeakMap();
+
+function _focusables(d){
+  return [].slice.call(d.querySelectorAll('button,input,textarea,select,a[href]'))
+    .filter(function(el){
+      return !el.disabled &&
+        el.getAttribute('aria-hidden')!=='true' &&
+        el.getClientRects().length>0;
+    });
+}
+
+function _trap(e){
+  var d=e.currentTarget;
+
+  if(e.key==='Escape'){
+    var b=d.querySelector('.chat-x,.pl-x,.quiz-close');
+    if(b){
+      e.preventDefault();
+      e.stopPropagation();
+      b.click();
+    }
+    return;
+  }
+
+  if(e.key!=='Tab')return;
+
+  var f=_focusables(d);
+  if(!f.length)return;
+
+  var first=f[0], last=f[f.length-1];
+
+  if(e.shiftKey && document.activeElement===first){
+    e.preventDefault();
+    last.focus();
+  }else if(!e.shiftKey && document.activeElement===last){
+    e.preventDefault();
+    first.focus();
+  }
+}
+
+function _beginTrap(d,preferred){
+  _dlgFocus.set(d,document.activeElement);
+  d.addEventListener('keydown',_trap);
+
+  var f=_focusables(d);
+  var el=preferred && f.indexOf(preferred)>-1 ? preferred : f[0];
+
+  if(el)setTimeout(function(){el.focus();},120);
+}
+
+function _endTrap(d){
+  d.removeEventListener('keydown',_trap);
+
+  var last=_dlgFocus.get(d);
+  if(last && last.focus)last.focus();
+
+  _dlgFocus.delete(d);
+}
 
 /* ===== ARCADE ===== */
 var cv=document.getElementById("game"),ctx=cv.getContext("2d"),play=document.getElementById("play"),scoreEl=document.getElementById("score");
@@ -251,8 +402,8 @@ play.addEventListener("click",start);addEventListener("keydown",key);cv.addEvent
     var arr=m.r;var pick=arr[(m._i||0)%arr.length];m._i=(m._i||0)+1;add(pick,"bot");last=m;chipsFor(m.id);}
   function sendMsg(){var v=inp.value.trim();if(!v)return;inp.value="";add(v,"user");var t=typing();setTimeout(function(){t.remove();reply(v);},420);}
   add("Hola 👋 Soy el asistente de la web. Pregúntame por Héctor, sus FCT, el test o el arcade. (Sin IA, hecho a mano.)","bot");chipsFor("hola");
-  fab.addEventListener("click",function(){var o=win.hidden;lastFocus=document.activeElement;win.hidden=false;requestAnimationFrame(function(){win.classList.add("open");});fab.setAttribute("aria-expanded",o?"true":"false");fab.classList.add("read");if(o)setTimeout(function(){inp.focus();},120);});
-  x.addEventListener("click",function(){win.classList.remove("open");win.hidden=true;fab.setAttribute("aria-expanded","false");if(lastFocus&&lastFocus.focus)lastFocus.focus();});
+  fab.addEventListener("click",function(){var o=win.hidden;lastFocus=document.activeElement;win.hidden=false;requestAnimationFrame(function(){win.classList.add("open");});fab.setAttribute("aria-expanded",o?"true":"false");fab.classList.add("read");if(o)_beginTrap(win,inp);});
+  x.addEventListener("click",function(){_endTrap(win);win.classList.remove("open");win.hidden=true;fab.setAttribute("aria-expanded","false");});
   send.addEventListener("click",sendMsg);inp.addEventListener("keydown",function(e){if(e.key==="Enter"){e.preventDefault();sendMsg();}});
 })();
 
@@ -295,8 +446,8 @@ play.addEventListener("click",start);addEventListener("keydown",key);cv.addEvent
   aud.addEventListener("ended",function(){if(tracks.length)playAt((idx+1)%tracks.length);});
   aud.addEventListener("timeupdate",function(){if(aud.duration)prog.style.width=(aud.currentTime/aud.duration*100)+"%";});
   q.addEventListener("keydown",function(e){if(e.key==="Enter")search(q.value.trim());});
-  fab.addEventListener("click",function(){var o=pl.hidden;pl.hidden=false;requestAnimationFrame(function(){pl.classList.add("open");});fab.setAttribute("aria-expanded",o?"true":"false");if(o)setTimeout(function(){q.focus();},120);});
-  x.addEventListener("click",function(){aud.pause();setPlaying(false);pl.classList.remove("open");pl.hidden=true;fab.setAttribute("aria-expanded","false");});
+  fab.addEventListener("click",function(){var o=pl.hidden;pl.hidden=false;requestAnimationFrame(function(){pl.classList.add("open");});fab.setAttribute("aria-expanded",o?"true":"false");if(o)_beginTrap(pl,q);});
+  x.addEventListener("click",function(){_endTrap(pl);aud.pause();setPlaying(false);pl.classList.remove("open");pl.hidden=true;fab.setAttribute("aria-expanded","false");});
   if("mediaSession" in navigator){
     try{
       navigator.mediaSession.setActionHandler("play",function(){togglePlay();});
@@ -351,9 +502,9 @@ function cierre(o){if(o==="hardware")return "Vienes de abrir máquinas y saber q
 
 var quiz=document.getElementById("quiz"),qBody=document.getElementById("quizBody"),qStep=document.getElementById("quizStep"),qProg=document.getElementById("quizProg");
 var quizOpen=false,order=[],qi=0,ans={},sum={},lastFocusQ=null;
-function initQuiz(){ans={};qi=0;quizOpen=true;order=[];sum={};AX.forEach(function(x){sum[x.k]=0;});lastFocusQ=document.activeElement;quiz.hidden=false;requestAnimationFrame(function(){quiz.classList.add("open");});buildOrder();renderQ(order[qi]);}
+function initQuiz(){ans={};qi=0;quizOpen=true;order=[];sum={};AX.forEach(function(x){sum[x.k]=0;});lastFocusQ=document.activeElement;quiz.hidden=false;_beginTrap(quiz);requestAnimationFrame(function(){quiz.classList.add("open");});buildOrder();renderQ(order[qi]);}
 function buildOrder(){order=Q.filter(function(q){return !q.when||q.when(ans);});}
-function closeQuiz(){quizOpen=false;quiz.classList.remove("open");setTimeout(function(){quiz.hidden=true;},350);if(lastFocusQ&&lastFocusQ.focus)lastFocusQ.focus();}
+function closeQuiz(){quizOpen=false;quiz.classList.remove("open");_endTrap(quiz);setTimeout(function(){quiz.hidden=true;},350);}
 function findQ(id){for(var i=0;i<Q.length;i++)if(Q[i].id===id)return Q[i];return null;}
 function renderQ(q){qStep.textContent=(qi+1);qProg.style.width=Math.round((qi/order.length)*100)+"%";
   var h="<h2 class='q-q'>"+q.t+"</h2>";if(q.h)h+="<p class='q-hint'>"+q.h+"</p>";
@@ -372,7 +523,7 @@ function finish(){Q.forEach(function(q){if(q.tipo==="esc"&&q.eje)sum[q.eje]=(sum
   order.forEach(function(q){if(q.tipo==="esc"&&q.eje){mx[q.eje]=Math.max(mx[q.eje]||0,5);return;}if(q.o)q.o.forEach(function(op){for(var k in op.d){var dv=Math.abs(op.d[k]);if(dv>(mx[k]||0))mx[k]=dv;}});});
   AX.forEach(function(x){var m=mx[x.k]||1,v=sum[x.k];if(v<0)v=0;var n=Math.round((v/m)*100);if(n>100)n=100;sum[x.k]=n;});
   renderResult();}
-function drawRadar(){var cv=document.getElementById("radar");if(!cv)return;var ctx=cv.getContext("2d");var W=cv.width,H=cv.height,cx=W/2,cy=H/2,R=Math.min(W,H)/2-34;ctx.clearRect(0,0,W,H);ctx.strokeStyle="#1e2d47";ctx.lineWidth=1;for(var ring=1;ring<=4;ring++){ctx.beginPath();for(var i=0;i<8;i++){var a=-Math.PI/2+i*Math.PI/4,r=R*ring/4,x=cx+Math.cos(a)*r,y=cy+Math.sin(a)*r;if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y);}ctx.closePath();ctx.stroke();}ctx.beginPath();for(var i=0;i<8;i++){var a=-Math.PI/2+i*Math.PI/4;ctx.moveTo(cx,cy);ctx.lineTo(cx+Math.cos(a)*R,cy+Math.sin(a)*R);}ctx.strokeStyle="#1e2d47";ctx.stroke();ctx.beginPath();for(var i=0;i<8;i++){var a=-Math.PI/2+i*Math.PI/4,v=(sum[AX[i].k]||0)/100,x=cx+Math.cos(a)*R*v,y=cy+Math.sin(a)*R*v;if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y);}ctx.closePath();ctx.fillStyle="rgba(52,211,153,.22)";ctx.fill();ctx.strokeStyle="#34d399";ctx.lineWidth=2;ctx.stroke();ctx.fillStyle="#8aa0bd";ctx.font="10px monospace";ctx.textAlign="center";ctx.textBaseline="middle";for(var i=0;i<8;i++){var a=-Math.PI/2+i*Math.PI/4,x=cx+Math.cos(a)*(R+18),y=cy+Math.sin(a)*(R+18);ctx.fillText(AX[i].n,x,y);}}
+function drawRadar(){var cv=document.getElementById("radar");if(!cv)return;var ctx=cv.getContext("2d");var W=cv.width,H=cv.height,cx=W/2,cy=H/2,R=Math.min(W,H)/2-34;ctx.clearRect(0,0,W,H);ctx.strokeStyle="#1e2d47";ctx.lineWidth=1;for(var ring=1;ring<=4;ring++){ctx.beginPath();for(var i=0;i<8;i++){var a=-Math.PI/2+i*Math.PI/4,r=R*ring/4,x=cx+Math.cos(a)*r,y=cy+Math.sin(a)*r;if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y);}ctx.closePath();ctx.stroke();}ctx.beginPath();for(var i=0;i<8;i++){var a=-Math.PI/2+i*Math.PI/4;ctx.moveTo(cx,cy);ctx.lineTo(cx+Math.cos(a)*R,cy+Math.sin(a)*R);}ctx.strokeStyle="#1e2d47";ctx.stroke();ctx.beginPath();for(var i=0;i<8;i++){var a=-Math.PI/2+i*Math.PI/4,v=(sum[AX[i].k]||0)/100,x=cx+Math.cos(a)*R*v,y=cy+Math.sin(a)*R*v;if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y);}ctx.closePath();ctx.fillStyle="rgba(52,211,153,.22)";ctx.fill();ctx.strokeStyle="#34d399";ctx.lineWidth=2;ctx.stroke();ctx.fillStyle="#9fb6d4";ctx.font="10px monospace";ctx.textAlign="center";ctx.textBaseline="middle";for(var i=0;i<8;i++){var a=-Math.PI/2+i*Math.PI/4,x=cx+Math.cos(a)*(R+18),y=cy+Math.sin(a)*(R+18);ctx.fillText(AX[i].n,x,y);}}
 function areaCard(a,surp){return "<div class='res-card "+(surp?"res-surprise":"")+"'><h4>"+a.n+(surp?"<span class='pill'>no lo veías venir</span>":"")+"</h4><p>"+a.q+"</p><div class='meta'><b>stack:</b> "+a.s+" · <b>mirar:</b> "+a.w+" · <b>aprox:</b> "+a.p+"</div></div>";}
 function renderResult(){var s=AX.slice().sort(function(a,b){return sum[b.k]-sum[a.k];});var t1=s[0].k,t2=s[1].k,t8=s[7].k;
   var ent=entorno(sum.independiente,sum.estabilidad);
@@ -457,7 +608,7 @@ document.addEventListener("keydown",function(e){if(!quizOpen)return;if(e.key==="
     if(ansT[0]===null||ansT[1]===null||ansT[2]===null){initQuiz();return;}
     ans={origen:ansT[0],placer:ansT[1],ab:ansT[2]};
     quizOpen=true;order=[];sum={};AX.forEach(function(x){sum[x.k]=0;});
-    quiz.hidden=false;requestAnimationFrame(function(){quiz.classList.add("open");});
+    quiz.hidden=false;_beginTrap(quiz);requestAnimationFrame(function(){quiz.classList.add("open");});
     buildOrder();
     qi=order.findIndex(function(q){return ans[q.id]===undefined;});if(qi<0)qi=0;
     renderQ(order[qi]);
