@@ -665,6 +665,22 @@ if(rm)rm.addEventListener("click",function(){
     .then(function(d){var t=Math.round(d.current.temperature_2m);we.textContent=t+"° "+emoji(d.current.weather_code);})
     .catch(function(){we.textContent="no disponible";});}
 })();
+/* ===== commits del caso estrella, en vivo vía API GitHub ===== */
+(function(){
+  var el=document.getElementById('caseCommits'); if(!el) return;
+  var KEY='hp-case-commits', TTL=5*60*1000; // 5 min, igual que noticias
+  function put(n){ el.textContent=n+' commits'; }
+  var c=null; try{ c=JSON.parse(localStorage.getItem(KEY)); }catch(e){}
+  if(c&&c.n&&Date.now()-c.t<TTL){ put(c.n); return; }
+  fetch('https://api.github.com/repos/hectorpiquer/web_personal/commits?per_page=1')
+    .then(function(r){
+      var link=r.headers.get('Link')||'';
+      var m=link.match(/[?&]page=(\d+)[^,]*rel="last"/);
+      var n=m?parseInt(m[1],10):0;
+      if(n>0){ put(n); try{localStorage.setItem(KEY,JSON.stringify({t:Date.now(),n:n}));}catch(e){} }
+    })
+    .catch(function(){}); // sin conexión o rate limit → deja el fallback del HTML
+})();
 
 show(location.hash.slice(1)||"inicio");onScroll();
 })();
