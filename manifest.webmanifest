@@ -1,0 +1,13 @@
+{
+  "name": "Héctor Piquer",
+  "short_name": "hpb",
+  "description": "Web personal de Héctor Piquer Belda. Estudiante de 1º DAM.",
+  "background_color": "#0a0f1c",
+  "theme_color": "#34d399",
+  "display": "standalone",
+  "start_url": "./",
+  "icons": [
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png" }
+  ]
+}
