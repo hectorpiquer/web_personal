@@ -1,0 +1,30 @@
+me parece que has entendido muy bien lo que te pedido y has hecho un gran trabajo. primero voy a decirte que me parece perfecto lo del manifest.webmanifest ya que ya tengo uno y seria modificarlo. el service worker si que no tengo ni idea de que es. respecto al juego me parece perfecto que tengas mas ideas para mejorarlo porque vas a hacerlo. todo lo que se te ocurra lo pones. por cierto, he notado que hay mas iconos dorados que verdes, yo creo que la gracia es que los dorados sean los mas dificiles de conseguir. ahora voy a comentarte fallos que tiene la web.
+
+1- el muñeco no esta.
+2- los botones de las noticias de: todo, ia, dev... no se pueden pulsar.
+3- el chatbot no se abre y me gustaria aprovechar para decirte que lo mejores ya que estas. ponle mas respuestas y mejores, que no te diga tan rapido que no te entiende... hazlo mas funcional. al igual que el formulario, mejoralo todo lo que puedas.
+4- la explicación de los botones de arriba nose ven ya que aparecen arriba y se salen de la pantalla. tienen que aparecer abajo.
+5- pon el botón del lenguaje y del tema a la derecha del menu. veo demasiadas cosas ahi.
+6- en sobre mi, lo de ahora mismo quitalo. nada de lo que pone es verdad. o si lo pones preguntame antes para poner cosas que sean verdad. y en el texto de arriba pone que soy de Xativa. yo soy de Vallada, pero estudio en Xativa.
+7- el github sigue sin funcionar. me dice que no se puede leer ahora, limite de api anonima.
+8- en me gusta, la mitad de cosa son mentira, pregunta antes de poner tonterias. y los botones de arriba de todo, pantalla, deporte... no se pueden presionar, no hace nada.
+9- a mi antes ya me funcionaba lo del form. ya puse la api. deberia de estar en el codigo. de todas formas te pongo la api aqui: 6cdc7e70-cc5a-4d60-8da8-65140ec5b35b
+10- no se ve el mapa enfocando el simarro. que por cierto, si se te ocurre alguna mejora en ese apartado adelante.
+11- pon el botón de silenciar la interfaz encima del reproductor. veo muchas cosas en ese lado.
+
+PREGUNTA CUALQUIER COSA. CUANDO ESTÉ TODO CLARO QUIERO QUE VUELVAS A PONER EL CODIGO ENTERO. SI HACE FALTA EN VARIOS MENSAJES PARA QUE ESTÉ ENTERO.
+
+te adjunto el contenido del manifest:
+{
+  "name": "Héctor Piquer",
+  "short_name": "hpb",
+  "description": "Web personal de Héctor Piquer Belda. Estudiante de 1º DAM.",
+  "background_color": "#0a0f1c",
+  "theme_color": "#34d399",
+  "display": "standalone",
+  "start_url": "./",
+  "icons": [
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png" }
+  ]
+}

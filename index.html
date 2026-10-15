@@ -1,187 +1,413 @@
 <!DOCTYPE html>
-<html lang="es" class="no-js" data-theme="dark">
+<html lang="es" class="no-js" data-theme="terminal">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Héctor Piquer · Desarrollo en formación</title>
-<meta name="description" content="Web personal de Héctor Piquer Belda. Estudiante de 1º DAM (IES Simarro, Xàtiva). Vengo del hardware, me voy al código. Busco FCT.">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Héctor Piquer · Hardware de origen, código por destino</title>
+<meta name="description" content="Portafolio de Héctor Piquer Belda. Estudiante de 1º DAM en el IES Simarro (Xàtiva). Vengo del hardware, me voy al código. Busco FCT.">
 <meta name="author" content="Héctor Piquer Belda">
 <meta name="theme-color" content="#0a0f1c">
+<meta name="color-scheme" content="dark light">
 <link rel="canonical" href="https://hectorpiquer.github.io/web_personal/">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230a0f1c'/%3E%3Crect x='4' y='4' width='56' height='56' rx='10' fill='none' stroke='%2334d399' stroke-width='2' opacity='0.45'/%3E%3Ctext x='30' y='41' font-family='monospace' font-size='20' font-weight='bold' fill='%2334d399' text-anchor='middle'%3Ehpb%3C/text%3E%3Crect x='47' y='28' width='3' height='13' fill='%23fbbf24'/%3E%3C/svg%3E">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23070c17'/%3E%3Cpath d='M18 22l8 10-8 10' stroke='%2334d399' stroke-width='5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Crect x='31' y='40' width='16' height='5' rx='2.5' fill='%23fbbf24'/%3E%3C/svg%3E">
 <link rel="manifest" href="manifest.webmanifest">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Héctor Piquer · Desarrollo en formación">
-<meta property="og:description" content="Vengo del hardware, me voy al código. Estudiante de 1º DAM.">
+<link rel="apple-touch-icon" href="banner.png">
+
+<meta property="og:type" content="profile">
+<meta property="og:title" content="Héctor Piquer · Hardware de origen, código por destino">
+<meta property="og:description" content="Estudiante de 1º DAM con base SMR. Busco FCT donde aprender de verdad.">
 <meta property="og:url" content="https://hectorpiquer.github.io/web_personal/">
 <meta property="og:image" content="https://hectorpiquer.github.io/web_personal/banner.png">
+<meta property="og:locale" content="es_ES">
+<meta property="og:locale:alternate" content="en_US">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Héctor Piquer · Desarrollo en formación">
-<meta name="twitter:description" content="Vengo del hardware, me voy al código. Estudiante de 1º DAM.">
+<meta name="twitter:description" content="Vengo del hardware, me voy al código. 1º DAM · IES Simarro.">
 <meta name="twitter:image" content="https://hectorpiquer.github.io/web_personal/banner.png">
+
 <link rel="preconnect" href="https://api.github.com" crossorigin>
 <link rel="preconnect" href="https://itunes.apple.com" crossorigin>
-<link rel="preconnect" href="https://www.google.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://hn.algolia.com" crossorigin>
 <link rel="preconnect" href="https://api.web3forms.com" crossorigin>
-<link rel="stylesheet" href="styles.css?v=6">
+<link rel="preconnect" href="https://api.open-meteo.com" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css?v=10">
+
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "Héctor Piquer Belda",
-  "jobTitle": "Estudiante de Desarrollo de Aplicaciones Multiplataforma",
-  "url": "https://hectorpiquer.github.io/web_personal/",
-  "sameAs": ["https://github.com/hectorpiquer"],
-  "email": "mailto:hecpiqbel@alu.edu.gva.es",
-  "knowsAbout": ["HTML","CSS","JavaScript","Java","SQL","Soporte informático","Redes","Linux"]
+  "@context":"https://schema.org",
+  "@type":"Person",
+  "name":"Héctor Piquer Belda",
+  "jobTitle":"Estudiante de Desarrollo de Aplicaciones Multiplataforma",
+  "url":"https://hectorpiquer.github.io/web_personal/",
+  "email":"mailto:hecpiqbel@alu.edu.gva.es",
+  "address":{"@type":"PostalAddress","addressLocality":"Xàtiva","addressRegion":"València","addressCountry":"ES"},
+  "alumniOf":{"@type":"School","name":"IES Simarro"},
+  "sameAs":["https://github.com/hectorpiquer"],
+  "knowsAbout":["HTML","CSS","JavaScript","Java","SQL","Soporte informático","Redes","Linux","Git"]
 }
 </script>
 </head>
+
 <body>
 <canvas id="bgfx" aria-hidden="true"></canvas>
+<div class="grain" aria-hidden="true"></div>
+
 <noscript>
-  <style>.loader{display:none!important}.view{animation:none!important}</style>
-  <p style="padding:1rem;background:#0a0f1c;color:#e6edf6;font-family:monospace;text-align:center">
-    Esta web necesita JavaScript para el test, el arcade, el chat, el reproductor y las noticias.
-  </p>
+  <style>.loader,.intro{display:none!important}.rv{opacity:1!important;transform:none!important}</style>
+  <p class="noscript-bar">Esta web usa JavaScript para el test, el arcade, el asistente, el reproductor y las noticias en vivo. El contenido principal es legible sin él.</p>
 </noscript>
-<div class="loader" id="loader" aria-hidden="true"><span class="loader-text">&gt;_</span></div>
-<div class="intro" id="intro" role="dialog" aria-label="Pantalla de carga">
-  <div class="intro-top"><span>Activities</span><span>Terminal</span><span id="introClock">--:--</span></div>
+
+<div class="loader" id="loader" aria-hidden="true">
+  <div class="ld-box">
+    <div class="ld-logo">&gt;_</div>
+    <div class="ld-bar"><i id="ldBar"></i></div>
+    <div class="ld-txt" id="ldTxt">booting…</div>
+  </div>
+</div>
+
+<div class="intro" id="intro" role="dialog" aria-label="Pantalla de arranque">
+  <div class="intro-top">
+    <span>Actividades</span><span>Terminal</span><span id="introClock">--:--</span>
+  </div>
   <div class="intro-desk">
     <div class="intro-icon"><span>&gt;_</span><b>Terminal</b></div>
     <div class="intro-win">
       <div class="intro-bar"><i></i><i></i><i></i><b>hector@web_personal</b></div>
-      <div class="intro-term" id="introTerm">
+      <div class="intro-term">
         <p><span class="pr">hector@web_personal:~$ </span><span class="cmd" id="introCmd"></span><span class="cur" id="introCur">▋</span></p>
-        <p class="out" id="introOut">Accediendo a la Web Personal de Héctor Piquer Belda</p>
+        <p class="out" id="introOut">Cargando portafolio de Héctor Piquer Belda…</p>
       </div>
     </div>
   </div>
-  <button class="intro-skip" id="introSkip" type="button" aria-label="Saltar intro">saltar intro ⏭</button>
+  <button class="intro-skip" id="introSkip" type="button" data-i18n="intro.skip">saltar intro ⏭</button>
 </div>
+
+<a class="skip-link" href="#contenido" data-i18n="a11y.skip">Saltar al contenido</a>
+
+<!-- ============ HEADER ============ -->
+<header class="hdr">
+  <div class="container hdr-in">
+    <a class="brand" href="#inicio" id="logo" aria-label="Héctor Piquer — ir al inicio">
+      <svg class="lg" viewBox="0 0 44 44" aria-hidden="true">
+        <defs>
+          <linearGradient id="lgGrad" x1="0" y1="0" x2="1" y2="1">
+            <stop class="g1" offset="0"/><stop class="g2" offset="1"/>
+          </linearGradient>
+          <clipPath id="lgClip"><rect x="2" y="2" width="40" height="40" rx="12"/></clipPath>
+        </defs>
+        <rect class="lg-bg" x="2" y="2" width="40" height="40" rx="12"/>
+        <g clip-path="url(#lgClip)">
+          <path class="lg-ch" d="M14 16l7 6-7 6" fill="none" stroke="url(#lgGrad)" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+          <rect class="lg-sl" x="24" y="26.5" width="10" height="3.4" rx="1.7" fill="url(#lgGrad)"/>
+          <circle class="lg-spark" cx="34" cy="14" r="2.2" fill="var(--acc2)"/>
+        </g>
+        <rect class="lg-ring" x="2.75" y="2.75" width="38.5" height="38.5" rx="11.25"/>
+      </svg>
+      <span class="lg-txt"><b>h</b><i class="lg-und">_</i>piquer<span class="lg-caret" aria-hidden="true">▋</span></span>
+    </a>
+
+    <div class="hdr-right">
+      <button class="icon-btn" id="cmdBtn" type="button" data-tip="Comandos (⌘K)" data-i18n-label="hdr.cmd">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18M3 15v4a2 2 0 0 0 2 2h4m10-10v4a2 2 0 0 1-2 2h-4"/></svg>
+      </button>
+
+      <div class="lang-wrap">
+        <button class="icon-btn lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false" data-tip="Idioma">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 3.8 5.8 3.8 9S14.5 18.3 12 21c-2.5-2.7-3.8-5.8-3.8-9S9.5 5.7 12 3z"/></svg>
+          <span class="lang-code" id="langCode">ES</span>
+        </button>
+        <div class="popover" id="langMenu" role="menu" hidden>
+          <button type="button" role="menuitem" data-lang="es">🇪🇸 Español</button>
+          <button type="button" role="menuitem" data-lang="en">🇬🇧 English</button>
+        </div>
+      </div>
+
+      <div class="theme-wrap">
+        <button class="icon-btn theme-btn" id="themeBtn" type="button" aria-haspopup="true" aria-expanded="false" data-tip="Tema" data-i18n-label="hdr.theme">
+          <span class="sw-dot" id="themeDot" aria-hidden="true"></span>
+          <span class="theme-name" id="themeName">Terminal</span>
+        </button>
+        <div class="popover theme-menu" id="themeMenu" role="menu" hidden></div>
+      </div>
+
+      <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="nav" data-i18n="hdr.menu">menú</button>
+
+      <nav class="nav" id="nav" aria-label="Navegación principal">
+        <ul>
+          <li><a href="#inicio" data-i18n="nav.inicio">inicio</a></li>
+          <li><a href="#sobre" data-i18n="nav.sobre">sobre</a></li>
+          <li><a href="#formacion" data-i18n="nav.formacion">formación</a></li>
+          <li><a href="#servicios" data-i18n="nav.servicios">servicios</a></li>
+          <li><a href="#proyectos" data-i18n="nav.proyectos">proyectos</a></li>
+          <li><a href="#gusta" data-i18n="nav.gusta">me gusta</a></li>
+          <li><a href="#arcade" data-i18n="nav.arcade">arcade</a></li>
+          <li><a href="#contacto" data-i18n="nav.contacto">contacto</a></li>
+        </ul>
+        <span class="nav-ink" aria-hidden="true"></span>
+      </nav>
+    </div>
+  </div>
+</header>
+
 <div class="prog" aria-hidden="true"><span id="bar"></span></div>
-<a class="skip-link" href="#contenido">Saltar al contenido</a>
-<header class="hdr"><div class="container">
-<a class="brand" href="#inicio">h<b>_</b>piquer</a>
-<div class="hdr-right">
-<button class="burger" type="button" aria-expanded="false" aria-controls="nav">menú</button>
-<nav class="nav" id="nav" aria-label="Navegación"><ul>
-<li><a href="#inicio">inicio</a></li><li><a href="#sobre">sobre</a></li><li><a href="#formacion">formación</a></li><li><a href="#servicios">servicios</a></li><li><a href="#proyectos">proyectos</a></li><li><a href="#gusta">me gusta</a></li><li><a href="#arcade">arcade</a></li><li><a href="#contacto">contacto</a></li>
-</ul><span class="nav-ink" aria-hidden="true"></span></nav>
-<button class="th" type="button" aria-label="Cambiar de tema" data-tip="Modo oscuro"><svg class="s" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><svg class="m" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
-</div></div></header>
 
 <main id="contenido">
-<section id="inicio" class="view" aria-labelledby="inicio-title"><div class="container hero">
-<div>
-<span class="badge"><i class="dot" aria-hidden="true"></i> buscando FCT · ciclo hasta jun 2028</span>
-<h1 id="inicio-title">Héctor Piquer</h1>
-<p class="type" id="type"></p>
-<p class="tag">Vengo del hardware. <em>Me voy al código.</em></p>
-<p class="desc">Estudio 1º de DAM en el IES Simarro (Xàtiva). Antes montaba y reparaba PCs en SMR; ahora quiero construir software. Busco un sitio donde aprender de verdad y aportar desde el primer día.</p>
-<div class="acts"><a class="btn p" href="#sobre">conóceme</a><a class="btn g" href="#proyectos">proyectos</a><a class="btn g" href="#contacto">escríbeme</a></div>
-</div>
-<div class="panel">
-<div class="pbar"><i></i><i></i><i></i><b>perfil.svg</b></div>
-<div class="avatar-wrap">
-<svg viewBox="0 0 200 240" width="200" height="240" role="img" aria-label="Avatar ilustrado de Héctor">
-<defs><linearGradient id="hair" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3d2817"/><stop offset="1" stop-color="#1a1008"/></linearGradient><linearGradient id="skin" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e7c4a3"/><stop offset="1" stop-color="#cfa27f"/></linearGradient></defs>
-<path d="M40 240c0-40 10-60 60-60s60 20 60 60z" fill="#2f7d5b"/>
-<path d="M40 240c0-40 10-60 60-60s60 20 60 60z" fill="none" stroke="#46a67d" stroke-width="1.5"/>
-<ellipse cx="100" cy="105" rx="46" ry="62" fill="url(#skin)"/>
-<path d="M55 102 C53 58 72 38 100 38 C128 38 147 58 145 102 C145 92 143 84 138 80 C120 74 95 76 78 84 C68 89 60 94 55 102 Z" fill="url(#hair)"/>
-<ellipse cx="82" cy="112" rx="9" ry="6" fill="#fff"/><ellipse cx="118" cy="112" rx="9" ry="6" fill="#fff"/>
-<circle cx="83" cy="112" r="4.2" fill="#1f3d2a"/><circle cx="117" cy="112" r="4.2" fill="#1f3d2a"/>
-<path d="M74 108q8-5 16 0M110 108q8-5 16 0" stroke="#2a1c12" stroke-width="2.4" fill="none" stroke-linecap="round"/>
-<path d="M100 116q-4 14-8 18 6 4 12 2" stroke="#b98a63" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M88 148q12 8 24 0" stroke="#8a5a44" stroke-width="2.6" fill="none" stroke-linecap="round"/>
-</svg>
-</div>
-<pre class="code"><span class="cmt">// quién soy, en una línea</span>
+
+<!-- ============ INICIO ============ -->
+<section id="inicio" class="view" aria-labelledby="inicio-title">
+  <div class="container hero">
+    <div class="hero-copy">
+      <span class="badge"><i class="dot" aria-hidden="true"></i><span data-i18n="hero.badge">buscando FCT · ciclo hasta jun 2028</span></span>
+      <h1 id="inicio-title" class="scramble" data-final="Héctor Piquer">Héctor Piquer</h1>
+      <p class="type" id="type" aria-live="off"></p>
+      <p class="tag" data-i18n="hero.tag">Vengo del hardware. <em>Me voy al código.</em></p>
+      <p class="desc" data-i18n="hero.desc">Estudio 1º de DAM en el IES Simarro (Xàtiva). Antes montaba y reparaba PCs en SMR; ahora quiero construir software. Busco un sitio donde aprender de verdad y aportar desde el primer día.</p>
+      <div class="acts">
+        <a class="btn p" href="#sobre" data-i18n="hero.cta1">conóceme</a>
+        <a class="btn g" href="#proyectos" data-i18n="hero.cta2">proyectos</a>
+        <a class="btn g" href="#contacto" data-i18n="hero.cta3">escríbeme</a>
+      </div>
+      <div class="ticker" id="ticker" aria-hidden="true"><div class="tk-track" id="tkTrack"></div></div>
+    </div>
+
+    <div class="panel" id="heroPanel">
+      <div class="pbar"><i></i><i></i><i></i><b>perfil.svg</b>
+        <span class="pbar-hint" data-i18n="hero.panelhint">autora: yo</span>
+      </div>
+      <div class="avatar-wrap">
+        <svg class="avatar" viewBox="0 0 240 270" role="img" aria-label="Avatar ilustrado de Héctor">
+          <defs>
+            <linearGradient id="aHair" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4a3120"/><stop offset="1" stop-color="#1d1208"/></linearGradient>
+            <linearGradient id="aSkin" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#eec9a7"/><stop offset="1" stop-color="#c9986f"/></linearGradient>
+            <linearGradient id="aJacket" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="var(--acc)"/><stop offset="1" stop-color="var(--acc-deep)"/></linearGradient>
+            <radialGradient id="aGlow" cx="50%" cy="42%" r="55%"><stop offset="0" stop-color="var(--acc)" stop-opacity=".22"/><stop offset="1" stop-color="var(--acc)" stop-opacity="0"/></radialGradient>
+            <linearGradient id="aLens" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9fe8ff" stop-opacity=".55"/><stop offset=".5" stop-color="#ffffff" stop-opacity=".08"/><stop offset="1" stop-color="#9fe8ff" stop-opacity=".35"/></linearGradient>
+          </defs>
+
+          <ellipse class="av-glow" cx="120" cy="120" rx="105" ry="105" fill="url(#aGlow)"/>
+          <circle class="av-ring" cx="120" cy="120" r="96" fill="none" stroke="var(--acc)" stroke-opacity=".18" stroke-width="1.5" stroke-dasharray="6 10"/>
+
+          <!-- hombros / chaqueta -->
+          <path d="M34 270c0-46 20-70 52-78l34-8 34 8c32 8 52 32 52 78z" fill="url(#aJacket)"/>
+          <path d="M34 270c0-46 20-70 52-78l34-8 34 8c32 8 52 32 52 78z" fill="none" stroke="var(--acc2)" stroke-opacity=".35" stroke-width="1.5"/>
+          <path d="M120 184v86" stroke="#0b1220" stroke-opacity=".55" stroke-width="3"/>
+          <path d="M120 184l-16 10 6 20 10-8 10 8 6-20z" fill="#0b1220" fill-opacity=".75"/>
+          <circle cx="120" cy="206" r="3" fill="var(--acc2)"/>
+          <!-- camiseta -->
+          <path d="M100 190q20 14 40 0l6 22q-26 14-52 0z" fill="#0e1728"/>
+
+          <!-- cuello -->
+          <path d="M104 168h32v22q-16 10-32 0z" fill="url(#aSkin)"/>
+          <path d="M104 176q16 10 32 0v6q-16 10-32 0z" fill="#a97b56" fill-opacity=".55"/>
+
+          <!-- orejas -->
+          <ellipse cx="72" cy="120" rx="8" ry="12" fill="url(#aSkin)"/>
+          <ellipse cx="168" cy="120" rx="8" ry="12" fill="url(#aSkin)"/>
+
+          <!-- cara -->
+          <ellipse cx="120" cy="112" rx="50" ry="64" fill="url(#aSkin)"/>
+          <path d="M78 96q4-40 42-40t42 40q-6-22-20-28-22 8-44 4-14 6-20 24z" fill="url(#aHair)"/>
+
+          <!-- mechón sobre la frente -->
+          <path class="av-lock" d="M92 62q22-10 44-2-16 6-26 16-12-4-18-14z" fill="url(#aHair)"/>
+          <path d="M136 60q18 4 26 20-14-6-26-8z" fill="url(#aHair)" fill-opacity=".85"/>
+
+          <!-- cejas -->
+          <path class="av-brow" d="M88 104q11-7 24-2" stroke="#2a1a10" stroke-width="4" fill="none" stroke-linecap="round"/>
+          <path class="av-brow" d="M128 102q13-5 24 2" stroke="#2a1a10" stroke-width="4" fill="none" stroke-linecap="round"/>
+
+          <!-- gafas -->
+          <g class="av-glasses">
+            <rect x="82" y="108" width="34" height="26" rx="9" fill="url(#aLens)" stroke="#0f1a2c" stroke-width="3"/>
+            <rect x="124" y="108" width="34" height="26" rx="9" fill="url(#aLens)" stroke="#0f1a2c" stroke-width="3"/>
+            <path d="M116 118h8" stroke="#0f1a2c" stroke-width="3"/>
+            <path d="M82 116l-12-4M158 116l12-4" stroke="#0f1a2c" stroke-width="3" stroke-linecap="round"/>
+            <path class="av-shine" d="M88 130l16-18" stroke="#fff" stroke-opacity=".7" stroke-width="4" stroke-linecap="round"/>
+          </g>
+
+          <!-- ojos (parpadeo) -->
+          <g class="av-eyes">
+            <ellipse cx="99" cy="121" rx="8" ry="7" fill="#fff"/><ellipse cx="141" cy="121" rx="8" ry="7" fill="#fff"/>
+            <circle class="av-pupil" cx="100" cy="122" r="4.4" fill="#1f3d2a"/><circle class="av-pupil" cx="142" cy="122" r="4.4" fill="#1f3d2a"/>
+            <circle cx="102" cy="119.5" r="1.5" fill="#fff"/><circle cx="144" cy="119.5" r="1.5" fill="#fff"/>
+          </g>
+
+          <!-- nariz y boca -->
+          <path d="M120 126q-4 14-8 18 6 5 13 2" stroke="#b98a63" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <path class="av-smile" d="M104 156q16 12 32 0" stroke="#8a5a44" stroke-width="3.2" fill="none" stroke-linecap="round"/>
+          <ellipse cx="90" cy="146" rx="7" ry="4" fill="#e08a6a" fill-opacity=".28"/>
+          <ellipse cx="150" cy="146" rx="7" ry="4" fill="#e08a6a" fill-opacity=".28"/>
+
+          <!-- auriculares al cuello -->
+          <path d="M78 178q42 26 84 0" stroke="#16233a" stroke-width="7" fill="none" stroke-linecap="round"/>
+          <rect x="68" y="172" width="16" height="14" rx="5" fill="#1e2d47" stroke="var(--acc)" stroke-opacity=".5"/>
+          <rect x="156" y="172" width="16" height="14" rx="5" fill="#1e2d47" stroke="var(--acc)" stroke-opacity=".5"/>
+
+          <!-- partículas de código -->
+          <g class="av-code" aria-hidden="true">
+            <text x="34" y="70" font-family="monospace" font-size="12" fill="var(--acc)" fill-opacity=".55">{</text>
+            <text x="196" y="96" font-family="monospace" font-size="12" fill="var(--acc2)" fill-opacity=".6">;}</text>
+            <text x="182" y="52" font-family="monospace" font-size="11" fill="var(--acc)" fill-opacity=".45">=&gt;</text>
+            <text x="42" y="150" font-family="monospace" font-size="11" fill="var(--acc2)" fill-opacity=".4">fn</text>
+          </g>
+        </svg>
+      </div>
+<pre class="code" id="heroCode"><span class="cmt">// quién soy, en una línea</span>
 <span class="k">const</span> <span class="v">hector</span> <span class="p2">=</span> {
-  <span class="v">rol</span><span class="p2">:</span>    <span class="s">"dev en formación"</span><span class="p2">,</span>
-  <span class="v">ciclo</span><span class="p2">:</span>  <span class="s">"1º DAM · IES Simarro"</span><span class="p2">,</span>
+  <span class="v">origen</span><span class="p2">:</span> <span class="s">"SMR · hardware · redes"</span><span class="p2">,</span>
+  <span class="v">ahora</span><span class="p2">:</span>  <span class="s">"1º DAM · IES Simarro"</span><span class="p2">,</span>
   <span class="v">stack</span><span class="p2">:</span>  <span class="s">"HTML · CSS · JS · Java · SQL"</span><span class="p2">,</span>
-  <span class="v">busco</span><span class="p2">:</span>  <span class="s">"FCT donde aprender"</span><span class="p2">,</span>
+  <span class="v">busco</span><span class="p2">:</span>  <span class="s">"FCT donde aprender de verdad"</span><span class="p2">,</span>
+  <span class="v">metodo</span><span class="p2">:</span> <span class="s">"entender el porqué, no memorizar"</span>
 }<span class="p2">;</span></pre>
-</div>
-</div>
-<div class="quiz-cta" role="region" aria-labelledby="quiz-cta-t">
-  <div class="qc-txt">
-    <p class="qc-kicker">// no sabes por dónde tirar</p>
-    <h3 id="quiz-cta-t">Encuentra tu informática perfecta</h3>
-    <p>Prueba con estas 3 preguntas y te digo si esto es lo tuyo. Si te pica, el test completo te da tu radar y por dónde empezar.</p>
+    </div>
   </div>
-  <div class="teaser" id="teaser" aria-live="polite"></div>
-  <div class="qc-foot"><button class="btn p qc-btn" id="qcGo" type="button">empezar test completo ▶</button></div>
-</div>
-<br>
-<br>
-<div class="news-wrap" role="region" aria-labelledby="news-title">
-  <div class="news-head">
-    <h3 id="news-title">Últimas noticias · IA &amp; programación</h3>
-    <button class="btn g" id="newsReload" type="button" aria-label="Actualizar noticias">↻ actualizar</button>
+
+  <!-- CTA TEST -->
+  <div class="container">
+    <div class="quiz-cta rv" role="region" aria-labelledby="quiz-cta-t">
+      <div class="qc-txt">
+        <p class="qc-kicker">// no sabes por dónde tirar</p>
+        <h3 id="quiz-cta-t" data-i18n="quiz.ctaTitle">Encuentra tu informática perfecta</h3>
+        <p data-i18n="quiz.ctaText">Responde estas tres y te digo si esto va contigo. Si te pica, el test completo te da tu radar, tu ruta y por dónde empezar hoy.</p>
+      </div>
+      <div class="teaser" id="teaser" aria-live="polite"></div>
+      <div class="qc-foot"><button class="btn p qc-btn" id="qcGo" type="button" data-i18n="quiz.ctaBtn">empezar test completo ▶</button></div>
+    </div>
   </div>
-  <p class="news-sub">// vía API pública de Hacker News · en tiempo real</p>
-  <div class="news-grid" id="newsGrid"><div class="news-empty">cargando noticias…</div></div>
-</div>
+
+  <!-- NOTICIAS -->
+  <div class="container">
+    <div class="news-wrap rv" role="region" aria-labelledby="news-title">
+      <div class="news-head">
+        <div>
+          <h3 id="news-title" data-i18n="news.title">Últimas noticias · IA &amp; programación</h3>
+          <p class="news-sub" data-i18n="news.sub">// vía API pública de Hacker News · en tiempo real</p>
+        </div>
+        <div class="news-tools">
+          <div class="seg" id="newsFilter" role="group" aria-label="Filtrar noticias">
+            <button type="button" class="on" data-q="" data-i18n="news.f.all">todo</button>
+            <button type="button" data-q="AI" data-i18n="news.f.ai">IA</button>
+            <button type="button" data-q="programming" data-i18n="news.f.dev">dev</button>
+            <button type="button" data-q="security" data-i18n="news.f.sec">seguridad</button>
+          </div>
+          <button class="btn g" id="newsReload" type="button" data-i18n="news.reload">↻ actualizar</button>
+        </div>
+      </div>
+      <div class="news-grid" id="newsGrid"><div class="news-empty" data-i18n="news.loading">cargando noticias…</div></div>
+    </div>
+  </div>
 </section>
 
-<section id="sobre" class="view" hidden aria-labelledby="sobre-title"><div class="container">
-<h2 id="sobre-title">Sobre mí</h2>
-<div class="split"><div>
-<p>Soy <strong>Héctor Piquer Belda</strong>, de Xàtiva, y estudio <strong>1º de DAM</strong> en el <strong>IES Simarro</strong>. Antes pasé por un Grado Medio de <strong>SMR</strong>, donde aprendí a montar, mantener y diagnosticar equipos.</p>
-<p>Lo del hardware me gustaba, pero lo que de verdad me enganchó fue entender cómo funciona todo por dentro. Por eso di el salto al desarrollo: quería dejar de solo arreglar máquinas y empezar a <strong>construir cosas</strong>.</p>
-<p>No voy de experto, no lo soy. Pero sí soy de los que se queda hasta que lo entiende, ordena el desastre y pregunta cuando hace falta. Prefiero algo sencillo bien hecho que algo prometedor a medias.</p>
-<blockquote>"Prefiero entender el porqué que memorizar el cómo."</blockquote>
-</div><aside class="facts"><h3>./ficha.sh</h3><ul><li><span>ciclo</span><b>1º DAM</b></li><li><span>centro</span><b>IES Simarro</b></li><li><span>base</span><b>SMR</b></li><li><span>fin ciclo</span><b>jun 2028</b></li><li><span>busco</span><b>FCT</b></li></ul></aside></div>
-<div class="view-nav"><a class="btn g" href="#inicio">← anterior</a><a class="btn g" href="#formacion">siguiente →</a></div>
-</div></section>
+<!-- ============ SOBRE ============ -->
+<section id="sobre" class="view" hidden aria-labelledby="sobre-title">
+  <div class="container">
+    <h2 id="sobre-title" data-i18n="sobre.h2">Sobre mí</h2>
+    <p class="lead" data-i18n="sobre.lead">Empecé abriendo máquinas. Ahora abro código.</p>
+    <div class="split">
+      <div class="rv">
+        <p data-i18n="sobre.p1">Soy <strong>Héctor Piquer Belda</strong>, de Xàtiva, y estudio <strong>1º de DAM</strong> en el <strong>IES Simarro</strong>. Vengo de un Grado Medio de <strong>SMR</strong>, donde aprendí a montar, mantener y diagnosticar equipos de verdad.</p>
+        <p data-i18n="sobre.p2">El hardware me gustaba, pero lo que me enganchó fue entender qué pasaba por dentro. Por eso di el salto al desarrollo: quería dejar de arreglar máquinas y empezar a <strong>construir cosas</strong>.</p>
+        <p data-i18n="sobre.p3">No voy de experto, no lo soy. Pero soy de los que se queda hasta que lo entiende, ordena el desastre y pregunta cuando hace falta. Prefiero algo sencillo bien hecho que algo prometedor a medias.</p>
+        <blockquote data-i18n="sobre.quote">"Prefiero entender el porqué que memorizar el cómo."</blockquote>
+        <div class="now-card rv">
+          <h3 data-i18n="sobre.now">Ahora mismo</h3>
+          <ul class="now-list">
+            <li><span data-i18n="sobre.now1">Aprendiendo</span><b>Orientación a objetos en Java</b></li>
+            <li><span data-i18n="sobre.now2">Leyendo</span><b>Clean Code (a mi ritmo)</b></li>
+            <li><span data-i18n="sobre.now3">Buscando</span><b>FCT · curso 2027-28</b></li>
+          </ul>
+        </div>
+      </div>
+      <aside class="facts rv">
+        <h3>./ficha.sh</h3>
+        <ul>
+          <li><span data-i18n="sobre.f1">ciclo</span><b>1º DAM</b></li>
+          <li><span data-i18n="sobre.f2">centro</span><b>IES Simarro</b></li>
+          <li><span data-i18n="sobre.f3">base</span><b>SMR</b></li>
+          <li><span data-i18n="sobre.f4">base</span><b>Xàtiva, València</b></li>
+          <li><span data-i18n="sobre.f5">fin ciclo</span><b>jun 2028</b></li>
+          <li><span data-i18n="sobre.f6">busco</span><b>FCT</b></li>
+        </ul>
+        <div class="facts-bar" aria-hidden="true"><span></span></div>
+      </aside>
+    </div>
+    <div class="view-nav"><a class="btn g" href="#inicio" data-i18n="nav.prev">← anterior</a><a class="btn g" href="#formacion" data-i18n="nav.next">siguiente →</a></div>
+  </div>
+</section>
 
-<section id="formacion" class="view" hidden aria-labelledby="formacion-title"><div class="container">
-<h2 id="formacion-title">Formación</h2>
-<p class="lead">De la máquina al código.</p>
-<ol class="tl">
-<li><span class="d"></span><p class="w">en curso</p><h3>Grado Superior · DAM</h3><p class="wh">IES Simarro · Desarrollo de Aplicaciones Multiplataforma</p><p>Programación orientada a objetos, bases de datos, entornos de desarrollo y buenas prácticas. El salto natural desde SMR.</p><ul class="chips"><li>Java</li><li>SQL</li><li>HTML</li><li>CSS</li><li>JavaScript</li><li>Git</li><li>Linux</li></ul></li>
-<li><span class="d"></span><p class="w">terminado</p><h3>Grado Medio · SMR</h3><p class="wh">Sistemas Microinformáticos y Redes</p><p>Ensamblaje, mantenimiento, instalación de sistemas y redes. La base técnica que me dio curiosidad por el software.</p><ul class="chips"><li>Montaje</li><li>Mantenimiento</li><li>Windows</li><li>Linux</li><li>Redes</li></ul></li>
-</ol>
-<h3 class="h3-like">Nivel (autoevaluación)</h3>
-<div class="skills">
-<div class="sk"><div class="sk-top"><span>HTML / CSS</span><b>Sólido</b></div><div class="bar"><i data-w="82"></i></div></div>
-<div class="sk"><div class="sk-top"><span>JavaScript</span><b>En marcha</b></div><div class="bar"><i data-w="55"></i></div></div>
-<div class="sk"><div class="sk-top"><span>Java</span><b>En marcha</b></div><div class="bar"><i data-w="48"></i></div></div>
-<div class="sk"><div class="sk-top"><span>SQL</span><b>En marcha</b></div><div class="bar"><i data-w="42"></i></div></div>
-<div class="sk"><div class="sk-top"><span>Frameworks</span><b>Por descubrir</b></div><div class="bar"><i data-w="22"></i></div></div>
-</div>
-<div class="callout"><b>Autodidacta.</b> Además de clase, practico por mi cuenta con proyectos pequeños (como esta web) para no quedarme solo en teoría.</div>
-<div class="view-nav"><a class="btn g" href="#sobre">← anterior</a><a class="btn g" href="#servicios">siguiente →</a></div>
-</div></section>
+<!-- ============ FORMACIÓN ============ -->
+<section id="formacion" class="view" hidden aria-labelledby="formacion-title">
+  <div class="container">
+    <h2 id="formacion-title" data-i18n="form.h2">Formación</h2>
+    <p class="lead" data-i18n="form.lead">De la máquina al código, en dos pasos.</p>
+    <ol class="tl">
+      <li class="rv"><span class="d"></span><p class="w" data-i18n="form.i1w">en curso</p><h3 data-i18n="form.i1t">Grado Superior · DAM</h3><p class="wh" data-i18n="form.i1s">IES Simarro · Desarrollo de Aplicaciones Multiplataforma</p><p data-i18n="form.i1p">Programación orientada a objetos, bases de datos, entornos de desarrollo y buenas prácticas. El salto natural desde SMR.</p><ul class="chips"><li>Java</li><li>SQL</li><li>HTML</li><li>CSS</li><li>JavaScript</li><li>Git</li><li>Linux</li></ul></li>
+      <li class="rv"><span class="d"></span><p class="w" data-i18n="form.i2w">terminado</p><h3 data-i18n="form.i2t">Grado Medio · SMR</h3><p class="wh" data-i18n="form.i2s">Sistemas Microinformáticos y Redes</p><p data-i18n="form.i2p">Ensamblaje, mantenimiento, instalación de sistemas y redes. La base técnica que me dio curiosidad por el software.</p><ul class="chips"><li data-i18n="form.c1">Montaje</li><li data-i18n="form.c2">Mantenimiento</li><li>Windows</li><li>Linux</li><li data-i18n="form.c3">Redes</li></ul></li>
+    </ol>
 
-<section id="servicios" class="view" hidden aria-labelledby="servicios-title"><div class="container">
-<h2 id="servicios-title">En qué puedo echarte una mano</h2>
-<p class="lead">Estoy empezando, así que no te prometo una solución integral. Esto es lo que sé hacer ya, y bien:</p>
-<div class="cards">
-<article class="card"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="2" y="4" width="20" height="14" rx="2"/><path d="M2 9h20M8 21h8"/></svg></div><h3>Maquetar una web</h3><p>Páginas en HTML y CSS, ordenadas y que se vean bien en el móvil.</p><ul class="chips"><li>HTML</li><li>CSS</li><li>Responsive</li></ul></article>
-<article class="card"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18v3h3l6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2-2z"/></svg></div><h3>Soporte y equipos</h3><p>Montaje, mantenimiento y configuración de PCs y redes pequeñas. Esto lo traigo de SMR.</p><ul class="chips"><li>Equipos</li><li>Instalación</li></ul></article>
-<article class="card"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></div><h3>Actualizar y cuidar</h3><p>Dejar programas al día y organizar copias de seguridad para no perder nada.</p><ul class="chips"><li>Backups</li><li>Configuración</li></ul></article>
-<article class="card"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"/></svg></div><h3>Automatizar lo pesado</h3><p>Guiones sencillos para que un trabajo repetitivo se haga solo.</p><ul class="chips"><li>Scripts</li><li>Tareas</li></ul></article>
-<article class="card"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8zM14 3v5h5M9 13h6M9 17h6"/></svg></div><h3>Contenidos y manuales</h3><p>Actualizar textos e imágenes y escribir guías claras.</p><ul class="chips"><li>Contenidos</li><li>Manuales</li></ul></article>
-<article class="card"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3l1.9 4.6L18.5 9l-4.6 1.9L12 15.5l-1.9-4.6L5.5 9l4.6-1.4zM19 15l.9 2.1L22 18l-2.1.9L19 21l-.9-2.1L16 18l2.1-.9z"/></svg></div><h3>Mejorar lo que ya tienes</h3><p>Revisar una web o un equipo y dejarlo más ordenado y cómodo.</p><ul class="chips"><li>Revisión</li><li>Optimizar</li></ul></article>
-</div>
-<div class="callout" style="margin-top:1rem"><b>Honestidad primero.</b> No prometo proyectos enormes: prometo que aprendo rápido, me organizo y me tomo en serio cada cosa, por pequeña que sea.</div>
-<div class="view-nav"><a class="btn g" href="#formacion">← anterior</a><a class="btn g" href="#proyectos">siguiente →</a></div>
-</div></section>
+    <h3 class="h3-like" data-i18n="form.skills">Nivel (autoevaluación)</h3>
+    <div class="skills">
+      <div class="sk rv"><div class="sk-top"><span>HTML / CSS</span><b data-i18n="sk.solid">Sólido</b></div><div class="bar"><i data-w="82"></i></div></div>
+      <div class="sk rv"><div class="sk-top"><span>JavaScript</span><b data-i18n="sk.run">En marcha</b></div><div class="bar"><i data-w="58"></i></div></div>
+      <div class="sk rv"><div class="sk-top"><span>Java</span><b data-i18n="sk.run">En marcha</b></div><div class="bar"><i data-w="50"></i></div></div>
+      <div class="sk rv"><div class="sk-top"><span>SQL</span><b data-i18n="sk.run">En marcha</b></div><div class="bar"><i data-w="45"></i></div></div>
+      <div class="sk rv"><div class="sk-top"><span data-i18n="sk.sys">Sistemas / Redes</span><b data-i18n="sk.solid">Sólido</b></div><div class="bar"><i data-w="74"></i></div></div>
+      <div class="sk rv"><div class="sk-top"><span data-i18n="sk.fw">Frameworks</span><b data-i18n="sk.new">Por descubrir</b></div><div class="bar"><i data-w="24"></i></div></div>
+    </div>
+    <div class="callout rv"><b data-i18n="form.callT">Autodidacta.</b> <span data-i18n="form.callP">Además de clase, practico por mi cuenta con proyectos pequeños —como esta web— para no quedarme solo en teoría.</span></div>
+    <div class="view-nav"><a class="btn g" href="#sobre" data-i18n="nav.prev">← anterior</a><a class="btn g" href="#servicios" data-i18n="nav.next">siguiente →</a></div>
+  </div>
+</section>
 
-<section id="proyectos" class="view" hidden aria-labelledby="proyectos-title"><div class="container">
-<h2 id="proyectos-title">Proyectos</h2>
-<p class="lead">Lo que he tocado de verdad. De momento poco, pero real.</p>
-<div class="cards">
-<article class="proj"><div class="hd"><h3>Esta web personal</h3><span class="tag2 ok">terminada</span></div><p>HTML, CSS y JS puros, sin librerías. Tema terminal, modo claro (editor), accesible, responsive, con mini-juego en canvas.</p><ul class="chips"><li>HTML</li><li>CSS</li><li>JavaScript</li></ul><a class="btn g" style="margin-top:.8rem" href="https://github.com/hectorpiquer/web_personal" target="_blank" rel="noopener">ver código →</a></article>
-<article class="proj"><div class="hd"><h3>Ejercicio de Java (BlueJ)</h3><span class="tag2 ok">terminado</span></div><p>Práctica de clase: relleno un array de 100 enteros y calculo su suma y su media con métodos propios. Me sirvió para afianzar arrays, bucles y métodos estáticos.</p><ul class="chips"><li>Java</li><li>BlueJ</li><li>arrays</li></ul>
-<details class="codebox"><summary>ver código</summary>
+<!-- ============ SERVICIOS ============ -->
+<section id="servicios" class="view" hidden aria-labelledby="servicios-title">
+  <div class="container">
+    <h2 id="servicios-title" data-i18n="serv.h2">En qué puedo echarte una mano</h2>
+    <p class="lead" data-i18n="serv.lead">Estoy empezando, así que no te prometo una solución integral. Esto es lo que sé hacer ya, y bien:</p>
+    <div class="cards">
+      <article class="card rv"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="2" y="4" width="20" height="14" rx="2"/><path d="M2 9h20M8 21h8"/></svg></div><h3 data-i18n="serv.1t">Maquetar una web</h3><p data-i18n="serv.1p">Páginas en HTML y CSS, ordenadas, rápidas y que se vean bien en el móvil.</p><ul class="chips"><li>HTML</li><li>CSS</li><li>Responsive</li></ul></article>
+      <article class="card rv"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18v3h3l6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2-2z"/></svg></div><h3 data-i18n="serv.2t">Soporte y equipos</h3><p data-i18n="serv.2p">Montaje, mantenimiento y configuración de PCs y redes pequeñas. Esto lo traigo de SMR.</p><ul class="chips"><li data-i18n="serv.2c1">Equipos</li><li data-i18n="serv.2c2">Instalación</li></ul></article>
+      <article class="card rv"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></div><h3 data-i18n="serv.3t">Actualizar y cuidar</h3><p data-i18n="serv.3p">Dejar programas al día y organizar copias de seguridad para no perder nada.</p><ul class="chips"><li>Backups</li><li data-i18n="serv.3c2">Configuración</li></ul></article>
+      <article class="card rv"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"/></svg></div><h3 data-i18n="serv.4t">Automatizar lo pesado</h3><p data-i18n="serv.4p">Guiones sencillos para que un trabajo repetitivo se haga solo.</p><ul class="chips"><li>Scripts</li><li data-i18n="serv.4c2">Tareas</li></ul></article>
+      <article class="card rv"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8zM14 3v5h5M9 13h6M9 17h6"/></svg></div><h3 data-i18n="serv.5t">Contenidos y manuales</h3><p data-i18n="serv.5p">Actualizar textos e imágenes y escribir guías claras para quien no sabe de esto.</p><ul class="chips"><li data-i18n="serv.5c1">Contenidos</li><li data-i18n="serv.5c2">Manuales</li></ul></article>
+      <article class="card rv"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3l1.9 4.6L18.5 9l-4.6 1.9L12 15.5l-1.9-4.6L5.5 9l4.6-1.4zM19 15l.9 2.1L22 18l-2.1.9L19 21l-.9-2.1L16 18l2.1-.9z"/></svg></div><h3 data-i18n="serv.6t">Mejorar lo que ya tienes</h3><p data-i18n="serv.6p">Revisar una web o un equipo y dejarlo más ordenado, rápido y cómodo.</p><ul class="chips"><li data-i18n="serv.6c1">Revisión</li><li data-i18n="serv.6c2">Optimizar</li></ul></article>
+    </div>
+    <div class="callout rv" style="margin-top:1.2rem"><b data-i18n="serv.callT">Honestidad primero.</b> <span data-i18n="serv.callP">No prometo proyectos enormes: prometo que aprendo rápido, me organizo y me tomo en serio cada cosa, por pequeña que sea.</span></div>
+    <div class="view-nav"><a class="btn g" href="#formacion" data-i18n="nav.prev">← anterior</a><a class="btn g" href="#proyectos" data-i18n="nav.next">siguiente →</a></div>
+  </div>
+</section>
+
+<!-- ============ PROYECTOS ============ -->
+<section id="proyectos" class="view" hidden aria-labelledby="proyectos-title">
+  <div class="container">
+    <h2 id="proyectos-title" data-i18n="proj.h2">Proyectos</h2>
+    <p class="lead" data-i18n="proj.lead">Lo que he tocado de verdad. De momento poco, pero real y mío.</p>
+
+    <div class="seg seg-mb" id="projFilter" role="group" aria-label="Filtrar proyectos">
+      <button type="button" class="on" data-f="all" data-i18n="proj.f.all">todos</button>
+      <button type="button" data-f="web" data-i18n="proj.f.web">web</button>
+      <button type="button" data-f="java" data-i18n="proj.f.java">java</button>
+      <button type="button" data-f="pend" data-i18n="proj.f.pend">pendientes</button>
+    </div>
+
+    <div class="cards" id="projGrid">
+      <article class="proj rv" data-tags="web">
+        <div class="hd"><h3 data-i18n="proj.1t">Esta web personal</h3><span class="tag2 ok" data-i18n="proj.done">terminada</span></div>
+        <p data-i18n="proj.1p">HTML, CSS y JS puros, sin frameworks. Tema de terminal, cinco paletas, bilingüe, accesible, responsive y con un arcade escrito a mano.</p>
+        <ul class="chips"><li>HTML</li><li>CSS</li><li>JavaScript</li><li>A11y</li><li>PWA</li></ul>
+        <a class="btn g" style="margin-top:.8rem" href="https://github.com/hectorpiquer/web_personal" target="_blank" rel="noopener" data-i18n="proj.code">ver código →</a>
+      </article>
+
+      <article class="proj rv" data-tags="java">
+        <div class="hd"><h3 data-i18n="proj.2t">Ejercicio de Java (BlueJ)</h3><span class="tag2 ok" data-i18n="proj.done2">terminado</span></div>
+        <p data-i18n="proj.2p">Práctica de clase: relleno un array de 100 enteros y calculo suma y media con métodos propios. Me sirvió para afianzar arrays, bucles y métodos estáticos.</p>
+        <ul class="chips"><li>Java</li><li>BlueJ</li><li data-i18n="proj.2c">arrays</li></ul>
+        <details class="codebox"><summary data-i18n="proj.showcode">ver código</summary>
 <pre class="code">public class Exer10 {
   public static void main(String[] args) {
     int[] valores = new int[100];
@@ -201,146 +427,218 @@
     return s / 100;
   }
 }</pre>
-</details>
-</article>
-<article class="proj"><div class="hd"><h3>Prácticas FCT</h3><span class="tag2 todo">pendiente</span></div><p>El proyecto de prácticas del ciclo. En cuanto empiece, aquí irá con su resumen y su código.</p><ul class="chips"><li>por definir</li></ul></article>
-</div>
+        </details>
+      </article>
 
-<article class="case" aria-labelledby="case-title">
-  <h3 id="case-title">Caso estrella: esta web como proyecto FCT</h3>
-  <div class="case-stack">
-    <section>
-      <h4>Problema</h4>
-      <p>Quería mostrar mi perfil técnico (base SMR, DAM en curso) sin parecer plantilla vacía ni cajón de cosas sin hilo. Quería una sola voz: la de terminal/redes de mi base de sistemas.</p>
-    </section>
-    <section>
-      <h4>Solución</h4>
-      <p>Mono-página con secciones por hash (comparte tema/reproductor sin recargar), fondo de nodos en canvas que habla de redes sin ser decorativo, intro de terminal que explica quién soy en 2s, 4 APIs de datos sin clave (Hacker News, Open-Meteo, GitHub, iTunes) y formulario real vía Web3Forms. Todo con prefers-reduced-motion y semántica accesible.</p>
-    </section>
-    <section>
-      <h4>Resultado</h4>
-      <ul class="metrics">
-        <li><span class="case-tag">commits</span><b id="caseCommits">19 commits</b></li>
-        <li><span class="case-tag">lógica</span><b>519 líneas en script.js</b></li>
-        <li><span class="case-tag">peso</span><b>128 KiB de código</b></li>
-        <li><span class="case-tag">Lighthouse</span><b>94 accesibilidad / 100 SEO / 94 prácticas</b></li>
-        <li><span class="case-tag">pendientes</span><b>3 abiertos y documentados (CV, focus trap, contacto)</b></li>
-      </ul>
-    </section>
+      <article class="proj rv" data-tags="pend">
+        <div class="hd"><h3 data-i18n="proj.3t">Prácticas FCT</h3><span class="tag2 todo" data-i18n="proj.todo">pendiente</span></div>
+        <p data-i18n="proj.3p">El proyecto de prácticas del ciclo. En cuanto empiece, irá aquí con su resumen, sus decisiones y su código.</p>
+        <ul class="chips"><li data-i18n="proj.3c">por definir</li></ul>
+      </article>
+    </div>
+
+    <article class="case rv" aria-labelledby="case-title">
+      <h3 id="case-title" data-i18n="case.title">Caso estrella: esta web como proyecto</h3>
+      <div class="case-stack">
+        <section><h4 data-i18n="case.p">Problema</h4><p data-i18n="case.pt">Quería mostrar un perfil técnico —base SMR, DAM en curso— sin parecer plantilla vacía ni cajón de cosas sin hilo. Hacía falta una sola voz, y la mía venía de sistemas.</p></section>
+        <section><h4 data-i18n="case.s">Solución</h4><p data-i18n="case.st">Mono-página con secciones por hash, fondo de nodos en canvas que habla de redes sin ser decorativo, intro de terminal que explica quién soy en dos segundos, cuatro APIs públicas sin clave (Hacker News, Open-Meteo, GitHub, iTunes), test de orientación con radar, arcade propio y formulario real. Todo con <em>prefers-reduced-motion</em>, foco atrapado en diálogos y semántica accesible.</p></section>
+        <section><h4 data-i18n="case.r">Resultado</h4>
+          <ul class="metrics">
+            <li><span class="case-tag" data-i18n="case.m1">commits</span><b id="caseCommits">—</b></li>
+            <li><span class="case-tag" data-i18n="case.m2">lenguajes</span><b id="caseLangs">—</b></li>
+            <li><span class="case-tag" data-i18n="case.m3">estrellas</span><b id="caseStars">—</b></li>
+            <li><span class="case-tag" data-i18n="case.m4">último push</span><b id="caseUpdated">—</b></li>
+            <li><span class="case-tag" data-i18n="case.m5">Lighthouse</span><b>94 · 100 · 95</b></li>
+          </ul>
+        </section>
+      </div>
+    </article>
+
+    <div class="gh-wrap rv">
+      <h3 class="gh-title" data-i18n="gh.title">mis repos, en vivo <span class="gh-note">// API pública de GitHub · sin clave</span></h3>
+      <div class="gh-grid" id="ghRepos"><div class="gh-empty" data-i18n="gh.loading">cargando repos…</div></div>
+      <p class="gh-note2" id="ghNote" hidden></p>
+    </div>
+    <div class="view-nav"><a class="btn g" href="#servicios" data-i18n="nav.prev">← anterior</a><a class="btn g" href="#gusta" data-i18n="nav.next">siguiente →</a></div>
   </div>
-</article>
-
-<div class="gh-wrap">
-<h3 class="gh-title">mis repos, en vivo <span class="gh-note">// vía API pública de GitHub</span></h3>
-<div class="gh-grid" id="ghRepos"><div class="gh-empty">cargando repos…</div></div>
-</div>
 </section>
 
-<section id="gusta" class="view" hidden aria-labelledby="gusta-title"><div class="container">
-<h2 id="gusta-title">Me gusta</h2>
-<p class="lead">Lo que hago cuando cierro el editor.</p>
-<ul class="likes">
-<li><span class="e" aria-hidden="true">📺</span><div><h3>Breaking Bad</h3><p>La vi entera, dos veces. Guion, tensión y personajes redondos.</p></div></li>
-<li><span class="e" aria-hidden="true">⚽</span><div><h3>Fútbol</h3><p>He jugado y ahora lo veo. Táctica, debate y un poco de sufrimiento.</p></div></li>
-<li><span class="e" aria-hidden="true">🎮</span><div><h3>FIFA</h3><p>Ligas con colegas donde se pierde la dignidad y el orgullo.</p></div></li>
-<li><span class="e" aria-hidden="true">🏎️</span><div><h3>Juegos de coches</h3><p>Velocidad y precisión. La misma manía que en la moto, pero sentado.</p></div></li>
-<li><span class="e" aria-hidden="true">🏍️</span><div><h3>Ir en moto</h3><p>Ruta, concentración y desconexión.</p></div></li>
-<li><span class="e" aria-hidden="true">🍽️</span><div><h3>Comer bien</h3><p>Buscar un buen sitio sin mirar tanto el precio.</p></div></li>
-</ul>
-<div class="view-nav"><a class="btn g" href="#proyectos">← anterior</a><a class="btn g" href="#arcade">siguiente →</a></div>
-</div></section>
+<!-- ============ ME GUSTA ============ -->
+<section id="gusta" class="view" hidden aria-labelledby="gusta-title">
+  <div class="container">
+    <h2 id="gusta-title" data-i18n="likes.h2">Me gusta</h2>
+    <p class="lead" data-i18n="likes.lead">Lo que hago cuando cierro el editor. Sin postureo: esto es lo que de verdad me llena el fin de semana.</p>
+    <div class="seg seg-mb" id="likeFilter" role="group" aria-label="Filtrar aficiones">
+      <button type="button" class="on" data-c="all" data-i18n="likes.f.all">todo</button>
+      <button type="button" data-c="pantalla" data-i18n="likes.f.screen">pantalla</button>
+      <button type="button" data-c="deporte" data-i18n="likes.f.sport">deporte</button>
+      <button type="button" data-c="calle" data-i18n="likes.f.street">calle</button>
+      <button type="button" data-c="mesa" data-i18n="likes.f.table">mesa</button>
+    </div>
+    <div class="likes" id="likesGrid"></div>
+    <p class="likes-note" data-i18n="likes.note">// pulsa el corazón para guardarlo: se queda en tu navegador, no en ningún servidor</p>
+    <div class="view-nav"><a class="btn g" href="#proyectos" data-i18n="nav.prev">← anterior</a><a class="btn g" href="#arcade" data-i18n="nav.next">siguiente →</a></div>
+  </div>
+</section>
 
-<section id="arcade" class="view" hidden aria-labelledby="arcade-title"><div class="container">
-<h2 id="arcade-title">Arcade</h2>
-<p class="lead">Un extra hecho a mano: esquiva los <b>tokens de error</b> (rojos) y coge los <b>tokens de código</b> (verdes). Puro canvas, sin librerías.</p>
-<div class="panel">
-<div class="pbar"><i></i><i></i><i></i><b>arcade.sh</b></div>
-<div class="arc">
-<canvas id="game" width="300" height="420" aria-label="Mini-juego: esquiva los tokens de error"></canvas>
-<div class="info"><h3>esquiva.js</h3><p>Mueve el prompt con las flechas (o A/D, o toca izquierda/derecha). Los rojos te quitan, los verdes suman.</p><button class="btn p" id="play" type="button">jugar ▶</button><div class="score" id="score">0</div></div>
-</div>
-</div>
-<div class="view-nav"><a class="btn g" href="#gusta">← anterior</a><a class="btn g" href="#contacto">siguiente →</a></div>
-</div></section>
+<!-- ============ ARCADE ============ -->
+<section id="arcade" class="view" hidden aria-labelledby="arcade-title">
+  <div class="container">
+    <h2 id="arcade-title" data-i18n="arc.h2">Arcade</h2>
+    <p class="lead" data-i18n="arc.lead">Un extra hecho a mano: esquiva los <b class="red">tokens de error</b> y coge los <b class="green">tokens de código</b>. Puro canvas, sin librerías, sin imágenes.</p>
+    <div class="panel">
+      <div class="pbar"><i></i><i></i><i></i><b>esquiva.js</b>
+        <span class="pbar-hint" id="arcMode" data-i18n="arc.normal">modo normal</span>
+      </div>
+      <div class="arc">
+        <div class="arc-stage">
+          <canvas id="game" width="360" height="520" role="img" aria-label="Mini-juego: esquiva los tokens de error"></canvas>
+          <div class="arc-hud" aria-hidden="true">
+            <div class="hud-item"><span data-i18n="arc.hud.score">score</span><b id="arcScore">0</b></div>
+            <div class="hud-item"><span data-i18n="arc.hud.level">nivel</span><b id="arcLevel">1</b></div>
+            <div class="hud-item"><span data-i18n="arc.hud.combo">combo</span><b id="arcCombo">×1</b></div>
+            <div class="hud-item"><span data-i18n="arc.hud.best">récord</span><b id="arcBest">0</b></div>
+          </div>
+          <div class="arc-powers" id="arcPowers" aria-live="polite"></div>
+        </div>
+        <div class="info">
+          <h3>esquiva.js</h3>
+          <p data-i18n="arc.help">Muévete con ← → (o A/D). En móvil, arrastra el dedo sobre el tablero. <kbd>P</kbd> pausa, <kbd>M</kbd> silencio.</p>
+          <ul class="legend">
+            <li><i class="lg-good"></i><span data-i18n="arc.lg1">token de código · +puntos y combo</span></li>
+            <li><i class="lg-bad"></i><span data-i18n="arc.lg2">token de error · fin de partida</span></li>
+            <li><i class="lg-pow"></i><span data-i18n="arc.lg3">power-up · escudo, imán, slow-mo, ×2</span></li>
+          </ul>
+          <div class="arc-btns">
+            <button class="btn p" id="play" type="button" data-i18n="arc.play">jugar ▶</button>
+            <button class="btn g" id="arcPause" type="button" data-i18n="arc.pause" disabled>pausa ⏸</button>
+            <button class="btn g" id="arcSound" type="button" aria-pressed="false" data-i18n="arc.sound">sonido off</button>
+          </div>
+          <div class="arc-best"><span data-i18n="arc.top">top 5 local</span><ol id="arcTop"></ol></div>
+        </div>
+      </div>
+    </div>
+    <div class="view-nav"><a class="btn g" href="#gusta" data-i18n="nav.prev">← anterior</a><a class="btn g" href="#contacto" data-i18n="nav.next">siguiente →</a></div>
+  </div>
+</section>
 
-<section id="contacto" class="view" hidden aria-labelledby="contacto-title"><div class="container">
-<h2 id="contacto-title">Contacto</h2>
-<div class="contact">
-<p>¿Prácticas, una idea o solo saludar? Escríbeme y te contesto en cuanto pueda.</p>
-<address><a class="mail" href="mailto:hecpiqbel@alu.edu.gva.es"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>hecpiqbel@alu.edu.gva.es</a></address>
-<div class="social"><a class="btn g" href="https://github.com/hectorpiquer" target="_blank" rel="noopener">github</a><div class="mail-wrap"><button class="btn g mail-btn" id="mailBtn" type="button" aria-haspopup="true" aria-expanded="false">email ▾</button><div class="mail-menu" id="mailMenu" role="menu" hidden><button class="btn g" type="button" role="menuitem" data-mail="gmail">Gmail</button><button class="btn g" type="button" role="menuitem" data-mail="outlook">Outlook</button><button class="btn g" type="button" role="menuitem" data-mail="copy">Copiar correo</button></div></div><a class="btn g" href="cv-hector-piquer.pdf" download>CV ↓</a></div>
-</div>
-<form class="form" id="form"><fieldset><legend>enviar_mensaje.py</legend><div class="grid">
-<div class="fld"><label for="n">nombre <span class="req">*</span></label><input id="n" name="n" required autocomplete="name"></div>
-<div class="fld"><label for="e">empresa (opcional)</label><input id="e" name="e" autocomplete="organization"></div>
-<div class="fld"><label for="c">tu correo <span class="req">*</span></label><input id="c" name="c" type="email" required autocomplete="email"></div>
-<div class="fld"><label for="t">concepto <span class="req">*</span></label><select id="t" name="t" required><option value="" disabled selected>elige</option><option>Prácticas / FCT</option><option>Colaboración</option><option>Consulta</option><option>Otro</option></select></div>
-<div class="fld full"><label for="m">mensaje <span class="req">*</span></label><textarea id="m" name="m" rows="4" required></textarea></div>
-<div class="fld full"><button class="btn p" type="submit">enviar ▶</button><p id="formMsg" class="form-msg" role="status" aria-live="polite"></p></div>
-</div></fieldset>
-</form>
-<h3 class="h3-like">Dónde encontrarme</h3>
-<p class="map-sub">// Estudio en el IES Simarro (Xàtiva). Si te encaja mi perfil, aquí me tienes:</p>
-<iframe class="map" src="https://www.google.com/maps?q=IES%20Simarro%2C%20X%C3%A0tiva%2C%20Val%C3%A8ncia&output=embed" title="Mapa IES Simarro" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
-<div class="view-nav"><a class="btn g" href="#arcade">← anterior</a></div>
-</div></section>
+<!-- ============ CONTACTO ============ -->
+<section id="contacto" class="view" hidden aria-labelledby="contacto-title">
+  <div class="container">
+    <h2 id="contacto-title" data-i18n="cont.h2">Contacto</h2>
+    <div class="contact rv">
+      <p data-i18n="cont.p">¿Prácticas, una idea o solo saludar? Escríbeme y te contesto en cuanto pueda.</p>
+      <address><a class="mail" href="mailto:hecpiqbel@alu.edu.gva.es"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>hecpiqbel@alu.edu.gva.es</a></address>
+      <div class="social">
+        <a class="btn g" href="https://github.com/hectorpiquer" target="_blank" rel="noopener" data-i18n="cont.github">github</a>
+        <div class="mail-wrap">
+          <button class="btn g mail-btn" id="mailBtn" type="button" aria-haspopup="true" aria-expanded="false" data-i18n="cont.email">email ▾</button>
+          <div class="mail-menu" id="mailMenu" role="menu" hidden>
+            <button class="btn g" type="button" role="menuitem" data-mail="gmail">Gmail</button>
+            <button class="btn g" type="button" role="menuitem" data-mail="outlook">Outlook</button>
+            <button class="btn g" type="button" role="menuitem" data-mail="copy" data-i18n="cont.copy">Copiar correo</button>
+          </div>
+        </div>
+        <a class="btn g" href="cv-hector-piquer.pdf" download data-i18n="cont.cv">CV ↓</a>
+      </div>
+    </div>
+
+    <form class="form rv" id="form" novalidate>
+      <fieldset>
+        <legend data-i18n="cont.legend">enviar_mensaje.py</legend>
+        <div class="grid">
+          <div class="fld"><label for="n"><span data-i18n="cont.name">nombre</span> <span class="req">*</span></label><input id="n" name="n" required autocomplete="name"></div>
+          <div class="fld"><label for="e" data-i18n="cont.company">empresa (opcional)</label><input id="e" name="e" autocomplete="organization"></div>
+          <div class="fld"><label for="c"><span data-i18n="cont.mail">tu correo</span> <span class="req">*</span></label><input id="c" name="c" type="email" required autocomplete="email"></div>
+          <div class="fld"><label for="t"><span data-i18n="cont.subject">concepto</span> <span class="req">*</span></label>
+            <select id="t" name="t" required>
+              <option value="" disabled selected data-i18n="cont.choose">elige</option>
+              <option data-i18n="cont.o1">Prácticas / FCT</option>
+              <option data-i18n="cont.o2">Colaboración</option>
+              <option data-i18n="cont.o3">Consulta</option>
+              <option data-i18n="cont.o4">Otro</option>
+            </select>
+          </div>
+          <div class="fld full"><label for="m"><span data-i18n="cont.msg">mensaje</span> <span class="req">*</span></label><textarea id="m" name="m" rows="5" required></textarea></div>
+          <div class="fld full hc-fld" aria-hidden="true"><label for="web">no rellenar</label><input id="web" name="web" tabindex="-1" autocomplete="off"></div>
+          <div class="fld full"><button class="btn p" type="submit" data-i18n="cont.send">enviar ▶</button><p id="formMsg" class="form-msg" role="status" aria-live="polite"></p></div>
+        </div>
+      </fieldset>
+    </form>
+    <p class="privacy" data-i18n="cont.privacy">// Solo uso tus datos para responderte. Nada de listas de correo ni terceros.</p>
+
+    <h3 class="h3-like" data-i18n="cont.where">Dónde encontrarme</h3>
+    <p class="map-sub" data-i18n="cont.maps">// Estudio en el IES Simarro (Xàtiva). Si te encaja mi perfil, aquí me tienes:</p>
+    <iframe class="map" src="https://www.google.com/maps?q=IES%20Simarro%2C%20X%C3%A0tiva%2C%20Val%C3%A8ncia&output=embed" title="Mapa del IES Simarro" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+    <div class="view-nav"><a class="btn g" href="#arcade" data-i18n="nav.prev">← anterior</a></div>
+  </div>
+</section>
+
 </main>
 
-<footer class="ft"><div class="container">
-  <div class="neofetch">
-    <div class="nf-logo"><span>&gt;_</span></div>
-    <div class="nf-info">
-      <p><span class="nf-k">OS</span><span class="nf-v">Ubuntu 24.04 · Web Personal</span></p>
-      <p><span class="nf-k">Host</span><span class="nf-v">hpb_web_personal</span></p>
-      <p><span class="nf-k">Shell</span><span class="nf-v">bash</span></p>
-      <p><span class="nf-k">Uptime</span><span class="nf-v" id="nfUp">calculando…</span></p>
-      <p><span class="nf-k">Local</span><span class="nf-v">Xàtiva, València</span></p>
-      <p><span class="nf-k">Clima</span><span class="nf-v" id="nfWeather">—</span></p>
+<!-- ============ FOOTER ============ -->
+<footer class="ft">
+  <div class="container">
+    <div class="neofetch">
+      <div class="nf-logo" aria-hidden="true"><span>&gt;_</span></div>
+      <div class="nf-info">
+        <p><span class="nf-k">OS</span><span class="nf-v">Web Personal · v2.0</span></p>
+        <p><span class="nf-k">Host</span><span class="nf-v">hpiquer.github.io</span></p>
+        <p><span class="nf-k">Shell</span><span class="nf-v">bash</span></p>
+        <p><span class="nf-k">Uptime</span><span class="nf-v" id="nfUp">calculando…</span></p>
+        <p><span class="nf-k">Local</span><span class="nf-v">Xàtiva, València · <span id="nfTime">--:--</span></span></p>
+        <p><span class="nf-k">Clima</span><span class="nf-v" id="nfWeather">—</span></p>
+        <p><span class="nf-k">Tema</span><span class="nf-v" id="nfTheme">terminal</span></p>
+      </div>
+    </div>
+    <div class="ft-row">
+      <p>© <span id="y"></span> Héctor Piquer Belda · IES Simarro</p>
+      <p class="ft-made"><span data-i18n="ft.made">hecho a mano</span> · <span data-i18n="ft.tech">html · css · js, sin frameworks</span></p>
     </div>
   </div>
-  <div class="ft-row"><p>© <span id="y"></span> Héctor Piquer Belda · IES Simarro</p><p>hecho a mano · html · css · js</p></div>
-</div></footer>
+</footer>
 
-<!-- ===== DOCK: mute logros + chat + subir (con anillo) ===== -->
+<!-- ============ DOCK ============ -->
 <div class="dock">
   <button class="dock-btn" id="robotMute" type="button" aria-label="Silenciar al robot guía" aria-pressed="false" data-tip="Silenciar al robot guía">🔔</button>
-  <button class="chat-fab" id="chatFab" type="button" aria-label="Abrir asistente" aria-expanded="false" data-tip="Asistente"><span class="cf-face">>_</span><span class="cf-badge" aria-hidden="true">1</span></button>
+  <button class="dock-btn" id="soundBtn" type="button" aria-label="Activar sonido de la interfaz" aria-pressed="false" data-tip="Sonido de interfaz">🔇</button>
+  <button class="chat-fab" id="chatFab" type="button" aria-label="Abrir asistente" aria-expanded="false" data-tip="Asistente"><span class="cf-face">&gt;_</span><span class="cf-badge" aria-hidden="true">1</span></button>
   <button class="top" id="topBtn" type="button" aria-label="Volver arriba" data-tip="Volver arriba">
     <svg class="ring" viewBox="0 0 48 48" aria-hidden="true"><circle class="ring-bg" cx="24" cy="24" r="20"/><circle class="ring-fg" id="ringFg" cx="24" cy="24" r="20"/></svg>
-    <svg class="arr" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+    <svg class="arr" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
   </button>
 </div>
 
-<!--  REPRODUCTOR (iTunes previews)  -->
-<button class="pl-fab" id="plFab" type="button" aria-label="Abrir reproductor" aria-expanded="false" data-tip="Reproductor"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></button>
+<!-- ============ REPRODUCTOR ============ -->
+<button class="pl-fab" id="plFab" type="button" aria-label="Abrir reproductor" aria-expanded="false" data-tip="Reproductor"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></button>
 <div class="pl" id="pl" role="dialog" aria-label="Reproductor" hidden>
-  <div class="pbar"><i></i><i></i><i></i><b>reproductor.sh</b><button class="pl-x" id="plX" type="button" aria-label="Cerrar">✕</button></div>
+  <div class="pbar"><i></i><i></i><i></i><b>reproductor.sh</b><button class="pl-x" id="plX" type="button" aria-label="Cerrar reproductor">✕</button></div>
   <div class="pl-in">
-    <input id="plQ" type="text" placeholder="busca canción o artista…" aria-label="Buscar" maxlength="60">
+    <input id="plQ" type="text" placeholder="busca canción o artista…" aria-label="Buscar canción" maxlength="60">
     <div class="pl-gen" id="plGen"></div>
     <ul class="pl-list" id="plList"></ul>
     <div class="pl-bar">
-  <button id="plPrev" type="button" aria-label="Anterior">⏮</button>
-  <button id="plPlay" type="button" aria-label="Play/Pausa">▶</button>
-  <button id="plNext" type="button" aria-label="Siguiente">⏭</button>
-  <div class="pl-prog"><i id="plProg"></i></div>
-  <button id="plMute" class="pl-mute" type="button" aria-label="Silenciar">🔊</button>
-  <input id="plVol" class="pl-vol" type="range" min="0" max="100" value="70" aria-label="Volumen">
-  <span class="pl-now" id="plNow">—</span>
-</div>
+      <button id="plPrev" type="button" aria-label="Anterior">⏮</button>
+      <button id="plPlay" type="button" aria-label="Play o pausa">▶</button>
+      <button id="plNext" type="button" aria-label="Siguiente">⏭</button>
+      <div class="pl-prog"><i id="plProg"></i></div>
+      <button id="plMute" class="pl-mute" type="button" aria-label="Silenciar audio">🔊</button>
+      <input id="plVol" class="pl-vol" type="range" min="0" max="100" value="70" aria-label="Volumen">
+      <span class="pl-now" id="plNow">—</span>
+    </div>
   </div>
   <audio id="aud" preload="none"></audio>
 </div>
 
-<!--  CHATBOT (sin IA)  -->
-<div class="chat-win" id="chatWin" role="dialog" aria-label="Asistente" hidden>
-  <div class="pbar"><i></i><i></i><i></i><b>asistente.sh</b><button class="chat-x" id="chatX" type="button" aria-label="Cerrar">✕</button></div>
+<!-- ============ CHATBOT ============ -->
+<div class="chat-win" id="chatWin" role="dialog" aria-label="Asistente de la web" hidden>
+  <div class="pbar"><i></i><i></i><i></i><b>asistente.sh</b><button class="chat-x" id="chatX" type="button" aria-label="Cerrar asistente">✕</button></div>
   <div class="chat-log" id="chatLog" aria-live="polite"></div>
   <div class="chat-chips" id="chatChips"></div>
-  <div class="chat-bar"><input id="chatIn" type="text" placeholder="escríbeme…" aria-label="Tu mensaje" maxlength="200"><button class="btn p" id="chatSend" type="button">▶</button></div>
+  <div class="chat-bar"><input id="chatIn" type="text" placeholder="escríbeme…" aria-label="Tu mensaje" maxlength="200"><button class="btn p" id="chatSend" type="button" aria-label="Enviar">▶</button></div>
 </div>
 
-<!-- TEST / BRÚJULA (overlay) -->
+<!-- ============ TEST ============ -->
 <div class="quiz" id="quiz" role="dialog" aria-modal="true" aria-labelledby="quiz-title" hidden>
   <div class="quiz-shell">
     <div class="pbar"><i></i><i></i><i></i><b id="quiz-title">brujula.sh</b><button class="quiz-close" id="quizClose" type="button" aria-label="Cerrar test">✕</button></div>
@@ -348,22 +646,35 @@
     <div class="quiz-body" id="quizBody"></div>
   </div>
 </div>
+
+<!-- ============ PALETA DE COMANDOS ============ -->
+<div class="palette" id="palette" role="dialog" aria-modal="true" aria-label="Paleta de comandos" hidden>
+  <div class="pal-box">
+    <div class="pal-in"><span class="pal-pr">&gt;</span><input id="palInput" type="text" placeholder="escribe un comando o una sección…" aria-label="Buscar comando" autocomplete="off"></div>
+    <ul class="pal-list" id="palList" role="listbox"></ul>
+    <div class="pal-foot"><span><kbd>↑↓</kbd> mover</span><span><kbd>↵</kbd> ejecutar</span><span><kbd>esc</kbd> cerrar</span></div>
+  </div>
+</div>
+
 <div id="toast" class="sr-only" role="status" aria-live="polite"></div>
+
+<!-- ============ ROBOT GUÍA ============ -->
 <div class="robot" id="robot" aria-hidden="true">
   <div class="robot-bubble" id="robotBubble"></div>
   <svg class="robot-svg" viewBox="0 0 64 64" width="58" height="58">
-    <line x1="32" y1="6" x2="32" y2="14" stroke="#34d399" stroke-width="2"/>
-    <circle class="ant" cx="32" cy="6" r="3" fill="#fbbf24"/>
-    <rect x="12" y="14" width="40" height="34" rx="9" fill="#111c30" stroke="#34d399" stroke-width="2"/>
-    <rect x="18" y="22" width="28" height="16" rx="5" fill="#060b14"/>
-    <circle class="eye" cx="26" cy="30" r="3" fill="#34d399"/>
-    <circle class="eye" cx="38" cy="30" r="3" fill="#34d399"/>
-    <path d="M26 35q6 4 12 0" stroke="#34d399" stroke-width="2" fill="none" stroke-linecap="round"/>
-    <rect x="22" y="48" width="6" height="8" rx="2" fill="#1e2d47"/>
-    <rect x="36" y="48" width="6" height="8" rx="2" fill="#1e2d47"/>
+    <line x1="32" y1="6" x2="32" y2="14" stroke="var(--acc)" stroke-width="2"/>
+    <circle class="ant" cx="32" cy="6" r="3" fill="var(--acc2)"/>
+    <rect x="12" y="14" width="40" height="34" rx="9" fill="var(--panel)" stroke="var(--acc)" stroke-width="2"/>
+    <rect x="18" y="22" width="28" height="16" rx="5" fill="var(--bg)"/>
+    <circle class="eye" cx="26" cy="30" r="3" fill="var(--acc)"/>
+    <circle class="eye" cx="38" cy="30" r="3" fill="var(--acc)"/>
+    <path d="M26 35q6 4 12 0" stroke="var(--acc)" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <rect x="22" y="48" width="6" height="8" rx="2" fill="var(--line)"/>
+    <rect x="36" y="48" width="6" height="8" rx="2" fill="var(--line)"/>
   </svg>
 </div>
 
-<script src="script.js?v=7"></script>
+<script src="i18n.js?v=10"></script>
+<script src="script.js?v=10"></script>
 </body>
 </html>
