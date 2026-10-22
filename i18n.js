@@ -271,7 +271,7 @@ window.HP_I18N = {
   "chat":{
     "greet":["¡Hola! Soy el asistente de la web de Héctor. Pregúntame lo que quieras 👇","Hi! I'm the site's assistant. Ask me anything 👇"],
     "fallback":["No tengo esa respuesta en mi base. Prueba con: <b>Quién eres</b>, <b>Qué sabes</b>, <b>Formación</b>, <b>Proyectos</b>, <b>Me gusta</b>, <b>Contacto</b> o <b>Arcade</b>.","I don't have that answer yet. Try: <b>Who are you</b>, <b>What do you know</b>, <b>Education</b>, <b>Projects</b>, <b>Likes</b>, <b>Contact</b> or <b>Arcade</b>."],
-    "chips":{"es":["Quién eres","Qué sabes","Formación","Proyectos","Me gusta","Contacto"],"en":["Who are you","What do you know","Education","Projects","Likes","Contact"]},
+	"chips":{"es":["Qué sabes","Proyectos","Contacto"],"en":["What do you know","Projects","Contact"]},
     "rules":[
       {re:/(hola|hey|hi|buenas|saludos|hello)/i,
         r:["¡Hola! Encantado de que estés aquí. ¿Qué quieres saber?","¡Hey! Great to have you. What do you want to know?"]},

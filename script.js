@@ -2,6 +2,8 @@
    HÉCTOR PIQUER · script.js
    Todo vanilla, sin dependencias. Respeta prefers-reduced-motion.
    ========================================================================== */
+   console.log("¡SCRIPT NUEVO CARGADO!");
+   
 (function () {
   "use strict";
   const D = document;
@@ -285,15 +287,11 @@
     history.replaceState(null, "", "#" + id);
     if (id === "gusta") renderLikes();
     if (id === "arcade") arcade && arcade.recolor();
-    if (id === "contacto") lazyMap();
   }
   function moveInk(link) {
     const ink = $(".nav-ink"); if (!ink || !link || innerWidth < 820) return;
     const nav = $("#nav"); const r = link.getBoundingClientRect(), nr = nav.getBoundingClientRect();
     ink.style.width = r.width + "px"; ink.style.transform = `translateX(${r.left - nr.left}px)`;
-  }
-  function lazyMap() {
-    const m = $(".map"); if (m && !m.dataset.src) { m.src = m.dataset.src; m.dataset.src = "1"; }
   }
   function router() {
     addEventListener("hashchange", () => showView(location.hash.replace("#", "") || "inicio"));
@@ -319,19 +317,18 @@
     top && top.addEventListener("click", () => { sfx.click(); scrollTo({ top: 0, behavior: REDUCE ? "auto" : "smooth" }); });
   }
 
-  /* ---------- me gusta (nuevo) ---------- */
-  let FAVS = store.get("favs", []);
+  /* ---------- me gusta (Modificado: sin filtros ni favoritos) ---------- */
   function renderLikes() {
     const grid = $("#likesGrid"); if (!grid) return;
     const data = I18N.likes_data || [];
-    const active = $("#likeFilter .on") ? $("#likeFilter .on").dataset.c : "all";
     grid.innerHTML = "";
-    data.filter((d) => active === "all" || d.cat === active).forEach((d, idx) => {
+    
+    data.forEach((d, idx) => {
       const txt = d[LANG] || d.es;
       const li = D.createElement("article");
       li.className = "like rv in"; li.dataset.cat = d.cat; li.style.setProperty("--lc", d.color);
       li.style.transitionDelay = (idx * 40) + "ms";
-      const fav = FAVS.includes(d.id);
+      
       li.innerHTML =
         `<div class="lk-top">
            <span class="lk-emoji">${d.emoji}</span>
@@ -342,25 +339,11 @@
          <div class="lk-meta">
            <span>${LANG === "en" ? "level" : "nivel"} ${d.int}/5</span>
            <span class="lk-bar"><i data-w="${d.int * 20}"></i></span>
-           <button class="lk-fav" type="button" data-id="${d.id}" aria-pressed="${fav}" aria-label="${fav ? t("likes.saved") : t("likes.save")}">
-             ${fav ? "♥" : "♡"} ${fav ? t("likes.saved") : t("likes.save")}
-           </button>
          </div>`;
       grid.appendChild(li);
       requestAnimationFrame(() => { const bar = li.querySelector(".lk-bar i"); if (bar) bar.style.width = bar.dataset.w + "%"; });
     });
-    $$(".lk-fav", grid).forEach((b) => {
-      b.addEventListener("click", () => {
-        const id = b.dataset.id;
-        if (FAVS.includes(id)) FAVS = FAVS.filter((x) => x !== id); else { FAVS.push(id); sfx.good(); }
-        store.set("favs", FAVS);
-        const on = FAVS.includes(id);
-        b.setAttribute("aria-pressed", on); b.innerHTML = `${on ? "♥" : "♡"} ${on ? t("likes.saved") : t("likes.save")}`;
-        if (!on) sfx.click();
-        b.animate([{ transform: "scale(1)" }, { transform: "scale(1.25)" }, { transform: "scale(1)" }], { duration: 300, easing: "cubic-bezier(.2,.8,.2,1)" });
-      });
-    });
-    // tilt 3D
+
     if (!REDUCE && matchMedia("(pointer:fine)").matches) {
       $$(".like", grid).forEach((card) => {
         card.addEventListener("mousemove", (e) => {
@@ -381,8 +364,7 @@
       $$("button", grp).forEach((x) => x.classList.toggle("on", x === b));
       sfx.click();
       const val = b.dataset[attr];
-      if (sel === "#likesFilter") renderLikes();
-      else if (sel === "#projFilter") filterProjects(val);
+      if (sel === "#projFilter") filterProjects(val);
       else if (sel === "#newsFilter") loadNews(val);
     });
   }
@@ -445,15 +427,12 @@
     function loop() {
       if (!running) return;
       frame++;
-      // movimiento
       if (keys.l) P.target -= P.speed; if (keys.r) P.target += P.speed;
       P.target = Math.max(P.w / 2, Math.min(W - P.w / 2, P.target));
       P.x += (P.target - P.x) * 0.3;
-      // spawn
       spawn -= (pw.slow > 0 ? 0.5 : 1);
       if (spawn <= 0) { spawnToken(); spawn = Math.max(22, 55 - level * 3); }
       const speedMul = pw.slow > 0 ? 0.5 : 1;
-      // tokens
       for (let i = tokens.length - 1; i >= 0; i--) {
         const tk = tokens[i]; tk.y += tk.v * speedMul;
         if (pw.magnet > 0 && tk.type === "good") tk.x += (P.x - tk.x) * 0.06;
@@ -475,10 +454,8 @@
     let rafId;
     function draw() {
       ctx.clearRect(0, 0, W, H);
-      // rejilla fondo
       ctx.strokeStyle = "rgba(255,255,255,.05)"; ctx.lineWidth = 1;
       for (let x = 0; x < W; x += 30) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke(); }
-      // naves tokens
       tokens.forEach((tk) => {
         ctx.save(); ctx.translate(tk.x, tk.y);
         if (tk.type === "good") { ctx.fillStyle = COL.acc; ctx.shadowColor = COL.acc; ctx.shadowBlur = 12; ctx.beginPath(); ctx.arc(0, 0, tk.r, 0, 7); ctx.fill(); ctx.fillStyle = "#04120c"; ctx.font = "bold 12px monospace"; ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.fillText("✓", 0, 1); }
@@ -486,16 +463,12 @@
         else { ctx.fillStyle = COL.acc2; ctx.shadowColor = COL.acc2; ctx.shadowBlur = 16; ctx.beginPath(); ctx.arc(0, 0, tk.r, 0, 7); ctx.fill(); ctx.fillStyle = "#1a1200"; ctx.font = "14px monospace"; ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.fillText(PW[tk.pw][0], 0, 1); }
         ctx.restore();
       });
-      // partículas
       for (let i = parts.length - 1; i >= 0; i--) { const p = parts[i]; p.x += p.vx; p.y += p.vy; p.vy += 0.1; p.life--; ctx.globalAlpha = Math.max(0, p.life / 30); ctx.fillStyle = p.c; ctx.fillRect(p.x, p.y, 3, 3); ctx.globalAlpha = 1; if (p.life <= 0) parts.splice(i, 1); }
-      // escudo
       if (pw.shield > 0) { ctx.strokeStyle = COL.acc2; ctx.globalAlpha = 0.5 + Math.sin(frame / 6) * 0.3; ctx.lineWidth = 2; ctx.beginPath(); ctx.arc(P.x, P.y, P.w, 0, 7); ctx.stroke(); ctx.globalAlpha = 1; }
-      // jugador
       ctx.save(); ctx.translate(P.x, P.y);
       ctx.fillStyle = COL.acc; ctx.shadowColor = COL.acc; ctx.shadowBlur = 14;
       ctx.beginPath(); ctx.moveTo(0, -P.h / 2 - 4); ctx.lineTo(P.w / 2, P.h / 2); ctx.lineTo(0, P.h / 2 - 4); ctx.lineTo(-P.w / 2, P.h / 2); ctx.closePath(); ctx.fill();
       ctx.restore();
-      // overlay game over
       if (over) {
         ctx.fillStyle = "rgba(3,6,12,.7)"; ctx.fillRect(0, 0, W, H);
         ctx.fillStyle = COL.err; ctx.font = "bold 30px monospace"; ctx.textAlign = "center"; ctx.fillText(t("arc.gameover"), W / 2, H / 2 - 10);
@@ -504,7 +477,6 @@
         ctx.fillStyle = COL.txt; ctx.font = "13px monospace"; ctx.textAlign = "center"; ctx.globalAlpha = 0.6 + Math.sin(frame / 20) * 0.4; ctx.fillText(t("arc.press"), W / 2, H / 2); ctx.globalAlpha = 1;
       }
     }
-    // controles
     addEventListener("keydown", (e) => {
       if (e.key === "ArrowLeft" || e.key === "a" || e.key === "A") keys.l = true;
       if (e.key === "ArrowRight" || e.key === "d" || e.key === "D") keys.r = true;
@@ -604,26 +576,93 @@
   }
   let quiz = null;
 
-  /* ---------- CHATBOT ---------- */
+  /* ---------- CHATBOT (Conectado a IA vía Cloudflare) ---------- */
   function Chatbot() {
     const win = $("#chatWin"), log = $("#chatLog"), chips = $("#chatChips"), fab = $("#chatFab");
     if (!win) return;
     const C = I18N.chat || {}; let open = false, greeted = false;
-    function add(text, who) { const m = D.createElement("div"); m.className = "msg " + who; m.innerHTML = text; log.appendChild(m); log.scrollTop = log.scrollHeight; }
-    function typeBot(html) { const m = D.createElement("div"); m.className = "msg bot typing"; m.innerHTML = "<i></i><i></i><i></i>"; log.appendChild(m); log.scrollTop = log.scrollHeight; setTimeout(() => { m.classList.remove("typing"); m.innerHTML = html; }, 480); }
-    function reply(text) {
-      const rules = C.rules || [];
-      const hit = rules.find((r) => r.re.test(text));
-      const ans = hit ? hit.r[LANG === "en" ? 1 : 0] : (C.fallback[LANG === "en" ? 1 : 0]);
-      typeBot(ans);
+
+    function add(text, who) { 
+      const m = D.createElement("div"); 
+      m.className = "msg " + who; 
+      m.innerHTML = text; 
+      log.appendChild(m); 
+      log.scrollTop = log.scrollHeight; 
     }
-    function buildChips() { chips.innerHTML = ""; ((C.chips && C.chips[LANG]) || []).forEach((c) => { const b = D.createElement("button"); b.type = "button"; b.textContent = c; b.addEventListener("click", () => { send(c); }); chips.appendChild(b); }); }
-    function send(text) { text = (text || "").trim(); if (!text) return; add(text, "user"); const inp = $("#chatIn"); if (inp) inp.value = ""; reply(text); }
-    function toggle() { open = !open; if (open) { win.hidden = false; requestAnimationFrame(() => win.classList.add("open")); fab.setAttribute("aria-expanded", "true"); fab.classList.add("read"); if (!greeted) { add(C.greet[LANG === "en" ? 1 : 0], "bot"); buildChips(); greeted = true; } setTimeout(() => $("#chatIn").focus(), 200); } else { win.classList.remove("open"); fab.setAttribute("aria-expanded", "false"); setTimeout(() => { if (!open) win.hidden = true; }, 300); } }
+
+    async function reply(text) {
+      const m = D.createElement("div"); 
+      m.className = "msg bot typing"; 
+      m.innerHTML = '<span style="font-size:0.8rem; color:var(--mut);">escribiendo...</span>'; 
+      log.appendChild(m); 
+      log.scrollTop = log.scrollHeight;
+
+      try {
+        const workerUrl = "https://hpb-chat.hectorpiquer2611.workers.dev/"; 
+        
+        const res = await fetch(workerUrl, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ message: text })
+        });
+        
+        const data = await res.json();
+        
+        m.classList.remove("typing");
+        m.innerHTML = data.reply || "Lo siento, no he podido responder.";
+        
+      } catch (e) {
+        m.classList.remove("typing");
+        m.innerHTML = "Ups, parece que mi cerebro artificial está desconectado. Prueba a preguntarme otra cosa o usa el formulario de contacto.";
+      }
+      log.scrollTop = log.scrollHeight;
+    }
+
+    function buildChips() { 
+      chips.innerHTML = ""; 
+      ((C.chips && C.chips[LANG]) || []).forEach((c) => { 
+        const b = D.createElement("button"); 
+        b.type = "button"; 
+        b.textContent = c; 
+        b.addEventListener("click", () => { send(c); }); 
+        chips.appendChild(b); 
+      }); 
+    }
+
+    function send(text) { 
+      text = (text || "").trim(); 
+      if (!text) return; 
+      add(text, "user"); 
+      const inp = $("#chatIn"); 
+      if (inp) inp.value = ""; 
+      reply(text); 
+    }
+
+    function toggle() { 
+      open = !open; 
+      if (open) { 
+        win.hidden = false; 
+        requestAnimationFrame(() => win.classList.add("open")); 
+        fab.setAttribute("aria-expanded", "true"); 
+        fab.classList.add("read"); 
+        if (!greeted) { 
+          add(C.greet[LANG === "en" ? 1 : 0], "bot"); 
+          buildChips(); 
+          greeted = true; 
+        } 
+        setTimeout(() => $("#chatIn").focus(), 200); 
+      } else { 
+        win.classList.remove("open"); 
+        fab.setAttribute("aria-expanded", "false"); 
+        setTimeout(() => { if (!open) win.hidden = true; }, 300); 
+      } 
+    }
+
     fab.addEventListener("click", () => { sfx.click(); toggle(); });
     $("#chatX").addEventListener("click", toggle);
     $("#chatSend").addEventListener("click", () => send($("#chatIn").value));
     $("#chatIn").addEventListener("keydown", (e) => { if (e.key === "Enter") send(e.target.value); });
+    
     return { toggle };
   }
 
@@ -648,7 +687,14 @@
           const art = (t.artworkUrl100 || "").replace("100x100", "60x60");
           li.innerHTML = `<img loading="lazy" src="${art}" alt=""><div style="min-width:0;flex:1"><div class="ti">${escapeHtml(t.trackName)}</div><div class="ar">${escapeHtml(t.artistName)}</div></div><span class="go">▶</span>`;
           li.addEventListener("click", () => play(i)); list.appendChild(li); });
-      } catch (e) { list.innerHTML = `<li class="pl-empty">${LANG === "en" ? "Couldn't reach iTunes. Check your connection or ad-blocker." : "No pude conectar con iTunes. Revisa tu conexión o el bloqueador de anuncios."}</li>`; }
+      } catch (e) { 
+        list.innerHTML = '<li class="pl-empty" style="padding:2rem 1rem; line-height:1.6; text-align:center;">' +
+          '<div style="font-size:2rem; margin-bottom:0.5rem;">🚫</div>' +
+          '<b style="color:var(--acc);">' + (LANG === "en" ? "Connection blocked" : "Conexión bloqueada") + '</b><br>' +
+          '<span style="font-size:0.8rem;">' + (LANG === "en" ? "Your network or ad-blocker is blocking the iTunes API." : "Tu red o el bloqueador de anuncios está bloqueando la API de iTunes.") + '</span><br>' +
+          '<button onclick="this.parentElement.innerHTML=\'…\'; document.getElementById(\'plQ\').dispatchEvent(new KeyboardEvent(\'keydown\', {key: \'Enter\'}));" style="margin-top:1rem; background:var(--acc); color:#000; border:none; padding:0.4rem 1rem; border-radius:6px; cursor:pointer; font-family:var(--mono); font-weight:bold;">' + (LANG === "en" ? "Retry" : "Reintentar") + '</button>' +
+        '</li>'; 
+      }
     }
     function play(i) {
       cur = i; const t = tracks[i]; aud.src = t.previewUrl; aud.volume = ($("#plVol").value / 100) * (mute ? 0 : 1); aud.play().catch(() => {});
@@ -703,38 +749,37 @@
   }
   const escapeHtml = (s) => (s || "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 
-  /* ---------- GITHUB (API robusta: arregla el bug del header Link) ---------- */
+  /* ---------- GITHUB (Modificado: con caché y fallback) ---------- */
   const GH_USER = "hectorpiquer";
+  
   async function ghFetch(url) {
     const res = await fetch(url, { headers: { Accept: "application/vnd.github+json", "X-GitHub-Api-Version": "2022-11-28" } });
     if (!res.ok) { const err = new Error("gh " + res.status); err.status = res.status; throw err; }
     return res.json();
   }
+  
   async function ghWithRetry(url, tries = 3) {
     for (let i = 0; i < tries; i++) {
       try { return await ghFetch(url); }
       catch (e) { if (e.status === 404) throw e; if (i < tries - 1) await new Promise((r) => setTimeout(r, 700 * (i + 1))); else throw e; }
     }
   }
-  // Paganación por ?page=N (NO por header Link, que GitHub no expone vía CORS)
-  async function ghCountCommits(repo) {
-    let total = 0, page = 1, cap = 5;
-    while (page <= cap) {
-      const data = await ghWithRetry(`https://api.github.com/repos/${GH_USER}/${repo}/commits?per_page=100&page=${page}`);
-      if (!Array.isArray(data)) break;
-      total += data.length;
-      if (data.length < 100) break;
-      page++;
-    }
-    return page > cap && total >= cap * 100 ? "500+" : total;
-  }
+
   async function loadGitHub() {
     const grid = $("#ghRepos"), note = $("#ghNote");
-    try {
-      const repos = await ghWithRetry(`https://api.github.com/users/${GH_USER}/repos?per_page=100&sort=updated`);
-      const list = (Array.isArray(repos) ? repos : []).filter((r) => !r.fork).sort((a, b) => (b.stargazers_count - a.stargazers_count) || (new Date(b.pushed_at) - new Date(a.pushed_at)));
-      if (note) { note.hidden = false; note.textContent = LANG === "en" ? "// public GitHub API · no key" : "// API pública de GitHub · sin clave"; }
-      if (!list.length) { grid.innerHTML = `<div class="gh-empty">${t("gh.empty")}</div>`; return; }
+    
+    const fallbackRepos = [{
+      name: "web_personal",
+      description: "Esta misma web. HTML, CSS y JS puros sin frameworks.",
+      html_url: "https://github.com/hectorpiquer/web_personal",
+      language: "JavaScript",
+      stargazers_count: 0,
+      forks_count: 0,
+      pushed_at: new Date().toISOString()
+    }];
+    
+    const renderRepos = (list) => {
+      if (!list || !list.length) { grid.innerHTML = `<div class="gh-empty">${t("gh.empty")}</div>`; return; }
       grid.innerHTML = "";
       list.slice(0, 6).forEach((r) => {
         const a = D.createElement("a"); a.className = "gh-card"; a.href = r.html_url; a.target = "_blank"; a.rel = "noopener";
@@ -745,21 +790,64 @@
           <div class="m">${lang}<span class="star">★ ${r.stargazers_count}</span><span>⑂ ${r.forks_count}</span><span class="up">${up}</span></div>`;
         grid.appendChild(a);
       });
-      // métricas del caso estrella
+    };
+
+    const updateMetrics = (commits, langs, stars, updated) => {
+      setText("#caseCommits", commits);
+      setText("#caseLangs", langs);
+      setText("#caseStars", stars);
+      setText("#caseUpdated", updated);
+    };
+
+    try {
+      const repos = await ghWithRetry(`https://api.github.com/users/${GH_USER}/repos?per_page=100&sort=updated`);
+      const list = (Array.isArray(repos) ? repos : []).filter((r) => !r.fork).sort((a, b) => (b.stargazers_count - a.stargazers_count) || (new Date(b.pushed_at) - new Date(a.pushed_at)));
+      
+      if (note) { note.hidden = false; note.textContent = LANG === "en" ? "// public GitHub API · no key" : "// API pública de GitHub · sin clave"; }
+      
+      renderRepos(list);
+      store.set("gh_cache_repos", list);
+
       try {
         const wp = await ghWithRetry(`https://api.github.com/repos/${GH_USER}/web_personal`);
         if (wp) {
           const langs = await ghWithRetry(`https://api.github.com/repos/${GH_USER}/web_personal/languages`).catch(() => ({}));
           const top = Object.keys(langs || {}).sort((a, b) => langs[b] - langs[a])[0] || "—";
-          setText("#caseCommits", await ghCountCommits("web_personal"));
-          setText("#caseLangs", top);
-          setText("#caseStars", wp.stargazers_count);
-          setText("#caseUpdated", wp.pushed_at ? timeAgo(wp.pushed_at) : "—");
+          
+          let totalCommits = 0, page = 1;
+          while (page <= 5) {
+            const data = await ghWithRetry(`https://api.github.com/repos/${GH_USER}/web_personal/commits?per_page=100&page=${page}`);
+            if (!Array.isArray(data)) break;
+            totalCommits += data.length;
+            if (data.length < 100) break;
+            page++;
+          }
+          
+          updateMetrics(totalCommits >= 500 ? "500+" : totalCommits, top, wp.stargazers_count, wp.pushed_at ? timeAgo(wp.pushed_at) : "—");
+          store.set("gh_cache_metrics", { commits: totalCommits, langs: top, stars: wp.stargazers_count, updated: wp.pushed_at });
         }
-      } catch (e) {}
+      } catch (e) {
+        const cacheM = store.get("gh_cache_metrics", null);
+        if (cacheM) updateMetrics(cacheM.commits, cacheM.langs, cacheM.stars, cacheM.updated ? timeAgo(cacheM.updated) : "—");
+      }
+
     } catch (e) {
-      grid.innerHTML = `<div class="gh-empty">${t("gh.error")}</div>`;
-      if (note) { note.hidden = false; note.textContent = t("gh.rate"); }
+      const cacheR = store.get("gh_cache_repos", null);
+      const cacheM = store.get("gh_cache_metrics", null);
+      
+      if (cacheR && cacheR.length > 0) {
+        renderRepos(cacheR);
+        if (note) { note.hidden = false; note.textContent = "// Datos guardados (límite de API)"; }
+      } else {
+        renderRepos(fallbackRepos);
+        if (note) { note.hidden = false; note.textContent = "// API bloqueada por la red. Mostrando datos básicos."; }
+      }
+      
+      if (cacheM) {
+        updateMetrics(cacheM.commits, cacheM.langs, cacheM.stars, cacheM.updated ? timeAgo(cacheM.updated) : "—");
+      } else {
+        updateMetrics("> 100", "JavaScript", "0", "reciente");
+      }
     }
   }
   function setText(sel, v) { const el = $(sel); if (el) el.textContent = v; }
@@ -830,7 +918,7 @@
       const n = $("#n"), c = $("#c"), m = $("#m"), tSel = $("#t");
       let ok = true;
       [[n, n.value.trim().length > 1], [c, /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(c.value)], [tSel, !!tSel.value], [m, m.value.trim().length > 4]].forEach(([el, good]) => { el.closest(".fld").classList.toggle("bad", !good); if (!good) ok = false; });
-      if ($("#web").value) { $("#formMsg").textContent = "🚫"; return; } // honeypot
+      if ($("#web").value) { $("#formMsg").textContent = "🚫"; return; }
       const msg = $("#formMsg");
       if (!ok) { msg.textContent = t("cont.formErr"); msg.className = "form-msg err"; return; }
       msg.textContent = t("cont.sending"); msg.className = "form-msg";
@@ -896,29 +984,26 @@
   /* ---------- sonido toggle ---------- */
   function toggleSound() { SOUND_ON = !SOUND_ON; store.set("sound", SOUND_ON); const b = $("#soundBtn"); if (b) { b.textContent = SOUND_ON ? "🔊" : "🔇"; b.setAttribute("aria-pressed", SOUND_ON); } const ac = $("#arcSound"); if (ac) ac.textContent = SOUND_ON ? t("arc.soundOn") : t("arc.sound"); if (SOUND_ON) sfx.click(); }
 
-  /* ---------- robot guía ---------- */
+  /* ---------- robot guía (Modificado: sin botón de mute) ---------- */
   function robotGuide() {
-    const rb = $("#robot"), bub = $("#robotBubble"), mute = $("#robotMute"); if (!rb) return;
-    let muted = store.get("robotMuted", false), shown = false;
-    if (mute) { mute.textContent = muted ? "🔕" : "🔔"; mute.setAttribute("aria-pressed", muted); }
+    const rb = $("#robot"), bub = $("#robotBubble"); if (!rb) return;
     const msgs = {
       inicio: LANG === "en" ? "Hi! Try the <b>orientation test</b> below." : "¡Hola! Prueba el <b>test de orientación</b> de abajo.",
       sobre: LANG === "en" ? "This is me: from hardware to code." : "Aquí estoy: del hardware al código.",
       formacion: LANG === "en" ? "SMR first, DAM now. Natural step." : "Primero SMR, ahora DAM. Paso natural.",
       servicios: LANG === "en" ? "What I can do for you today." : "Lo que puedo hacer por ti hoy.",
       proyectos: LANG === "en" ? "Real stuff, including this site." : "Cosas reales, incluida esta web.",
-      gusta: LANG === "en" ? "Tap the hearts to save your faves." : "Pulsa los corazones para guardar favoritos.",
+      gusta: LANG === "en" ? "Things I love doing off-screen." : "Cosas que me encantan fuera de la pantalla.",
       arcade: LANG === "en" ? "Dodge errors, grab code. Go!" : "Esquiva errores, coge código. ¡Vamos!",
       contacto: LANG === "en" ? "Copy my email or use the form." : "Copia mi email o usa el formulario."
     };
-    function show(view) { if (muted || REDUCE) return; bub.innerHTML = msgs[view] || msgs.inicio; rb.classList.add("show"); }
+    function show(view) { if (REDUCE) return; bub.innerHTML = msgs[view] || msgs.inicio; rb.classList.add("show"); }
     function hide() { rb.classList.remove("show"); }
-    // aparece al entrar a una vista, se esconde al hacer scroll
-    addEventListener("hashchange", () => { const v = location.hash.replace("#", "") || "inicio"; shown = true; show(v); });
+    
+    addEventListener("hashchange", () => { const v = location.hash.replace("#", "") || "inicio"; show(v); });
     let tHide;
     addEventListener("scroll", () => { clearTimeout(tHide); tHide = setTimeout(hide, 1400); }, { passive: true });
     setTimeout(() => show(location.hash.replace("#", "") || "inicio"), 4200);
-    if (mute) mute.addEventListener("click", () => { muted = !muted; store.set("robotMuted", muted); mute.textContent = muted ? "🔕" : "🔔"; mute.setAttribute("aria-pressed", muted); if (muted) hide(); else show(location.hash.replace("#", "") || "inicio"); });
   }
 
   /* ---------- avatar: pupilas siguen el ratón ---------- */
@@ -952,7 +1037,6 @@
     Chatbot();
     buildPalette();
     filterGroup("#projFilter", null, "f");
-    filterGroup("#likesFilter", null, "c");
     filterGroup("#newsFilter", null, "q");
     loadNews("");
     loadGitHub();

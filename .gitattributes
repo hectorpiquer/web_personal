@@ -1,0 +1,11 @@
+# Normalización de fin de línea: el repo guarda LF, los editores locales usan CRLF.
+# Con esto los diffs siguen siendo legibles (commits atómicos) en cualquier SO.
+* text=auto eol=lf
+
+# Binarios: nunca se tocan
+*.png binary
+*.jpg binary
+*.webp binary
+*.pdf binary
+*.woff binary
+*.woff2 binary

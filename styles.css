@@ -48,7 +48,6 @@ body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
   background:radial-gradient(60% 50% at 80% 0%,rgba(var(--node),.09),transparent 60%),
              radial-gradient(50% 40% at 0% 100%,rgba(var(--node),.06),transparent 60%);
   transition:background .4s}
-/* líneas de escaneo CRT para matrix/crt */
 .grain{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:0;transition:opacity .4s;
   background:repeating-linear-gradient(to bottom,rgba(0,0,0,.35) 0 1px,transparent 1px 3px)}
 :root[data-theme="matrix"] .grain,:root[data-theme="crt"] .grain{opacity:.22}
@@ -417,7 +416,7 @@ blockquote{margin:1.2rem 0 0;padding:.9rem 1.1rem;border-left:3px solid var(--ac
 .gh-card .star{color:var(--acc2)}
 .gh-card .up{margin-left:auto}
 
-/* ---------- 13. ME GUSTA (nuevo) ---------- */
+/* ---------- 13. ME GUSTA ---------- */
 .likes{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.1rem;list-style:none;margin:0;padding:0}
 .like{position:relative;background:var(--bg2);border:1px solid var(--line);border-radius:16px;padding:1.3rem;
   transform-style:preserve-3d;transition:transform .35s cubic-bezier(.2,.7,.2,1),border-color .3s,box-shadow .3s;
@@ -440,13 +439,7 @@ blockquote{margin:1.2rem 0 0;padding:.9rem 1.1rem;border-left:3px solid var(--ac
 .like .lk-meta{margin-top:.9rem;display:flex;align-items:center;gap:.6rem;flex-wrap:wrap;font-family:var(--mono);font-size:.72rem;color:var(--mut)}
 .like .lk-bar{flex:1;min-width:80px;height:4px;border-radius:99px;background:var(--panel);overflow:hidden}
 .like .lk-bar i{display:block;height:100%;width:0;background:var(--lc,var(--acc));transition:width 1s cubic-bezier(.2,.7,.2,1)}
-.like .lk-fav{margin-left:auto;background:var(--bg);border:1px solid var(--line);border-radius:99px;min-height:34px;
-  padding:0 .7rem;display:inline-flex;align-items:center;gap:.35rem;cursor:pointer;font-family:var(--mono);
-  font-size:.74rem;color:var(--mut);transition:.2s}
-.like .lk-fav:hover{border-color:var(--acc);color:var(--acc);transform:translateY(-2px)}
-.like .lk-fav[aria-pressed="true"]{color:#fff;background:#e0245e;border-color:#e0245e}
 .like[hidden]{display:none!important}
-.likes-note{font-family:var(--mono);font-size:.76rem;color:var(--mut);margin-top:1rem}
 @media (max-width:560px){
   .likes{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:.9rem;padding-bottom:.6rem}
   .like{flex:0 0 84%;scroll-snap-align:center}
@@ -506,6 +499,8 @@ address{font-style:normal}
 .form-msg{font-family:var(--mono);font-size:.82rem;color:var(--acc);margin:.6rem 0 0;min-height:1.3em}
 .form-msg.ok{color:var(--acc)}.form-msg.err{color:var(--err)}
 .privacy{font-family:var(--mono);font-size:.74rem;color:var(--mut);margin:.7rem 0 0;max-width:660px}
+
+/* MAPA */
 .map{width:100%;aspect-ratio:16/9;min-height:300px;border:1px solid var(--line);border-radius:var(--r);margin-top:1.2rem;
   filter:invert(.92) hue-rotate(180deg) saturate(.8) contrast(.9)}
 :root[data-theme="editor"] .map{filter:none}

@@ -35,7 +35,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=10">
+<link rel="stylesheet" href="styles.css?v=12">
 
 <script type="application/ld+json">
 {
@@ -180,30 +180,34 @@
         <span class="pbar-hint" data-i18n="hero.panelhint">autora: yo</span>
       </div>
       <div class="avatar-wrap">
-        <svg class="avatar" viewBox="0 0 240 270" role="img" aria-label="Avatar ilustrado de Héctor">
+        <!-- AVATAR SVG SIN GAFAS CON XMLNS -->
+        <svg class="avatar" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 270" role="img" aria-label="Avatar ilustrado de Héctor">
           <defs>
-            <linearGradient id="aHair" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4a3120"/><stop offset="1" stop-color="#1d1208"/></linearGradient>
-            <linearGradient id="aSkin" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#eec9a7"/><stop offset="1" stop-color="#c9986f"/></linearGradient>
-            <linearGradient id="aJacket" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="var(--acc)"/><stop offset="1" stop-color="var(--acc-deep)"/></linearGradient>
+            <linearGradient id="aHair" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3a2b23"/><stop offset="1" stop-color="#1a110c"/></linearGradient>
+            <linearGradient id="aSkin" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f0cfb4"/><stop offset="1" stop-color="#d1a181"/></linearGradient>
+            <linearGradient id="aJacket" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#d1d5db"/><stop offset="1" stop-color="#9ca3af"/></linearGradient>
             <radialGradient id="aGlow" cx="50%" cy="42%" r="55%"><stop offset="0" stop-color="var(--acc)" stop-opacity=".22"/><stop offset="1" stop-color="var(--acc)" stop-opacity="0"/></radialGradient>
-            <linearGradient id="aLens" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9fe8ff" stop-opacity=".55"/><stop offset=".5" stop-color="#ffffff" stop-opacity=".08"/><stop offset="1" stop-color="#9fe8ff" stop-opacity=".35"/></linearGradient>
           </defs>
 
           <ellipse class="av-glow" cx="120" cy="120" rx="105" ry="105" fill="url(#aGlow)"/>
           <circle class="av-ring" cx="120" cy="120" r="96" fill="none" stroke="var(--acc)" stroke-opacity=".18" stroke-width="1.5" stroke-dasharray="6 10"/>
 
-          <!-- hombros / chaqueta -->
+          <!-- Capucha negra interior -->
+          <path d="M60 160 Q120 190 180 160 L190 200 Q120 230 50 200 Z" fill="#1f2937"/>
+
+          <!-- Sudadera gris con cremallera -->
           <path d="M34 270c0-46 20-70 52-78l34-8 34 8c32 8 52 32 52 78z" fill="url(#aJacket)"/>
-          <path d="M34 270c0-46 20-70 52-78l34-8 34 8c32 8 52 32 52 78z" fill="none" stroke="var(--acc2)" stroke-opacity=".35" stroke-width="1.5"/>
-          <path d="M120 184v86" stroke="#0b1220" stroke-opacity=".55" stroke-width="3"/>
-          <path d="M120 184l-16 10 6 20 10-8 10 8 6-20z" fill="#0b1220" fill-opacity=".75"/>
-          <circle cx="120" cy="206" r="3" fill="var(--acc2)"/>
-          <!-- camiseta -->
-          <path d="M100 190q20 14 40 0l6 22q-26 14-52 0z" fill="#0e1728"/>
+          <path d="M34 270c0-46 20-70 52-78l34-8 34 8c32 8 52 32 52 78z" fill="none" stroke="#6b7280" stroke-opacity=".5" stroke-width="1.5"/>
+          <!-- Cremallera -->
+          <path d="M120 184v86" stroke="#4b5563" stroke-width="3"/>
+          <path d="M120 184l-4 8 4 8 4-8z" fill="#9ca3af"/>
+          <!-- Cordones de la capucha -->
+          <path d="M100 180 q-10 20 -5 40" stroke="#4b5563" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <path d="M140 180 q10 20 5 40" stroke="#4b5563" stroke-width="2" fill="none" stroke-linecap="round"/>
 
           <!-- cuello -->
           <path d="M104 168h32v22q-16 10-32 0z" fill="url(#aSkin)"/>
-          <path d="M104 176q16 10 32 0v6q-16 10-32 0z" fill="#a97b56" fill-opacity=".55"/>
+          <path d="M104 176q16 10 32 0v6q-16 10-32 0z" fill="#b98a63" fill-opacity=".55"/>
 
           <!-- orejas -->
           <ellipse cx="72" cy="120" rx="8" ry="12" fill="url(#aSkin)"/>
@@ -211,24 +215,14 @@
 
           <!-- cara -->
           <ellipse cx="120" cy="112" rx="50" ry="64" fill="url(#aSkin)"/>
-          <path d="M78 96q4-40 42-40t42 40q-6-22-20-28-22 8-44 4-14 6-20 24z" fill="url(#aHair)"/>
 
-          <!-- mechón sobre la frente -->
-          <path class="av-lock" d="M92 62q22-10 44-2-16 6-26 16-12-4-18-14z" fill="url(#aHair)"/>
-          <path d="M136 60q18 4 26 20-14-6-26-8z" fill="url(#aHair)" fill-opacity=".85"/>
+          <!-- Pelo (corte recto con flequillo) -->
+          <path d="M72 96 Q72 40 120 40 Q168 40 168 96 L168 80 Q150 70 120 70 Q90 70 72 80 Z" fill="url(#aHair)"/>
+          <path d="M72 96 Q80 85 100 85 L140 85 Q160 85 168 96 L168 75 Q140 60 120 60 Q100 60 72 75 Z" fill="url(#aHair)"/>
 
           <!-- cejas -->
           <path class="av-brow" d="M88 104q11-7 24-2" stroke="#2a1a10" stroke-width="4" fill="none" stroke-linecap="round"/>
           <path class="av-brow" d="M128 102q13-5 24 2" stroke="#2a1a10" stroke-width="4" fill="none" stroke-linecap="round"/>
-
-          <!-- gafas -->
-          <g class="av-glasses">
-            <rect x="82" y="108" width="34" height="26" rx="9" fill="url(#aLens)" stroke="#0f1a2c" stroke-width="3"/>
-            <rect x="124" y="108" width="34" height="26" rx="9" fill="url(#aLens)" stroke="#0f1a2c" stroke-width="3"/>
-            <path d="M116 118h8" stroke="#0f1a2c" stroke-width="3"/>
-            <path d="M82 116l-12-4M158 116l12-4" stroke="#0f1a2c" stroke-width="3" stroke-linecap="round"/>
-            <path class="av-shine" d="M88 130l16-18" stroke="#fff" stroke-opacity=".7" stroke-width="4" stroke-linecap="round"/>
-          </g>
 
           <!-- ojos (parpadeo) -->
           <g class="av-eyes">
@@ -242,19 +236,6 @@
           <path class="av-smile" d="M104 156q16 12 32 0" stroke="#8a5a44" stroke-width="3.2" fill="none" stroke-linecap="round"/>
           <ellipse cx="90" cy="146" rx="7" ry="4" fill="#e08a6a" fill-opacity=".28"/>
           <ellipse cx="150" cy="146" rx="7" ry="4" fill="#e08a6a" fill-opacity=".28"/>
-
-          <!-- auriculares al cuello -->
-          <path d="M78 178q42 26 84 0" stroke="#16233a" stroke-width="7" fill="none" stroke-linecap="round"/>
-          <rect x="68" y="172" width="16" height="14" rx="5" fill="#1e2d47" stroke="var(--acc)" stroke-opacity=".5"/>
-          <rect x="156" y="172" width="16" height="14" rx="5" fill="#1e2d47" stroke="var(--acc)" stroke-opacity=".5"/>
-
-          <!-- partículas de código -->
-          <g class="av-code" aria-hidden="true">
-            <text x="34" y="70" font-family="monospace" font-size="12" fill="var(--acc)" fill-opacity=".55">{</text>
-            <text x="196" y="96" font-family="monospace" font-size="12" fill="var(--acc2)" fill-opacity=".6">;}</text>
-            <text x="182" y="52" font-family="monospace" font-size="11" fill="var(--acc)" fill-opacity=".45">=&gt;</text>
-            <text x="42" y="150" font-family="monospace" font-size="11" fill="var(--acc2)" fill-opacity=".4">fn</text>
-          </g>
         </svg>
       </div>
 <pre class="code" id="heroCode"><span class="cmt">// quién soy, en una línea</span>
@@ -469,15 +450,7 @@
   <div class="container">
     <h2 id="gusta-title" data-i18n="likes.h2">Me gusta</h2>
     <p class="lead" data-i18n="likes.lead">Lo que hago cuando cierro el editor. Sin postureo: esto es lo que de verdad me llena el fin de semana.</p>
-    <div class="seg seg-mb" id="likeFilter" role="group" aria-label="Filtrar aficiones">
-      <button type="button" class="on" data-c="all" data-i18n="likes.f.all">todo</button>
-      <button type="button" data-c="pantalla" data-i18n="likes.f.screen">pantalla</button>
-      <button type="button" data-c="deporte" data-i18n="likes.f.sport">deporte</button>
-      <button type="button" data-c="calle" data-i18n="likes.f.street">calle</button>
-      <button type="button" data-c="mesa" data-i18n="likes.f.table">mesa</button>
-    </div>
     <div class="likes" id="likesGrid"></div>
-    <p class="likes-note" data-i18n="likes.note">// pulsa el corazón para guardarlo: se queda en tu navegador, no en ningún servidor</p>
     <div class="view-nav"><a class="btn g" href="#proyectos" data-i18n="nav.prev">← anterior</a><a class="btn g" href="#arcade" data-i18n="nav.next">siguiente →</a></div>
   </div>
 </section>
@@ -541,7 +514,7 @@
             <button class="btn g" type="button" role="menuitem" data-mail="copy" data-i18n="cont.copy">Copiar correo</button>
           </div>
         </div>
-        <a class="btn g" href="cv-hector-piquer.pdf" download data-i18n="cont.cv">CV ↓</a>
+        <a class="btn g" href="cv-hector-piquer.pdf" target="_blank" rel="noopener" data-i18n="cont.cv">CV ↓</a>
       </div>
     </div>
 
@@ -571,8 +544,11 @@
 
     <h3 class="h3-like" data-i18n="cont.where">Dónde encontrarme</h3>
     <p class="map-sub" data-i18n="cont.maps">// Estudio en el IES Simarro (Xàtiva). Si te encaja mi perfil, aquí me tienes:</p>
-    <iframe class="map" src="https://www.openstreetmap.org/export/embed.html?bbox=-0.54394%2C38.98081%2C-0.52794%2C38.99181&layer=mapnik&marker=38.98631%2C-0.53594" title="Mapa del IES Dr. Lluís Simarro (Xàtiva)" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+
+    <!-- MAPA CON IFRAME ESTÁNDAR (Funciona siempre) -->
+    <iframe class="map" src="https://www.openstreetmap.org/export/embed.html?bbox=-0.54394%2C38.98081%2C-0.52794%2C38.99181&layer=mapnik&marker=38.98631%2C-0.53594" title="Mapa del IES Dr. Lluís Simarro (Xàtiva)" referrerpolicy="no-referrer-when-downgrade" allowfullscreen loading="lazy"></iframe>
     <p class="map-sub"><a href="https://www.openstreetmap.org/?mlat=38.9863058&mlon=-0.5359354#map=16/38.98631/-0.53594" target="_blank" rel="noopener">// ¿no se ve el mapa? ábrelo en OpenStreetMap →</a></p>
+
     <div class="view-nav"><a class="btn g" href="#arcade" data-i18n="nav.prev">← anterior</a></div>
   </div>
 </section>
@@ -604,7 +580,6 @@
 
 <!-- ============ DOCK ============ -->
 <div class="dock">
-  <button class="dock-btn" id="robotMute" type="button" aria-label="Silenciar al robot guía" aria-pressed="false" data-tip="Silenciar al robot guía">🔔</button>
   <button class="dock-btn" id="soundBtn" type="button" aria-label="Activar sonido de la interfaz" aria-pressed="false" data-tip="Sonido de interfaz">🔇</button>
   <button class="chat-fab" id="chatFab" type="button" aria-label="Abrir asistente" aria-expanded="false" data-tip="Asistente"><span class="cf-face">&gt;_</span><span class="cf-badge" aria-hidden="true">1</span></button>
   <button class="top" id="topBtn" type="button" aria-label="Volver arriba" data-tip="Volver arriba">
@@ -678,7 +653,7 @@
   </svg>
 </div>
 
-<script src="i18n.js?v=10"></script>
-<script src="script.js?v=10"></script>
+<script src="i18n.js?v=13"></script>
+<script src="script.js?v=13"></script>
 </body>
 </html>
