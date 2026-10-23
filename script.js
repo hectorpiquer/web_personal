@@ -2,7 +2,6 @@
    HÉCTOR PIQUER · script.js
    Todo vanilla, sin dependencias. Respeta prefers-reduced-motion.
    ========================================================================== */
-   console.log("¡SCRIPT NUEVO CARGADO!");
    
 (function () {
   "use strict";
