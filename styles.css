@@ -231,7 +231,7 @@ h2::before{content:"## ";color:var(--acc)}
 .pbar b{margin-left:auto;color:var(--acc);font-weight:400}
 .pbar-hint{margin-left:.6rem;color:var(--mut);font-size:.7rem;opacity:.8}
 .avatar-wrap{display:flex;justify-content:center;padding:1.2rem 1rem .4rem;position:relative}
-.avatar{width:min(240px,70%);height:auto}
+.avatar{width:min(240px,70%);height:auto;aspect-ratio:240/270;display:block}
 .av-eyes{transform-origin:120px 121px;animation:avBlink 5.2s infinite}
 @keyframes avBlink{0%,93%,100%{transform:scaleY(1)}96%{transform:scaleY(.08)}}
 .av-glasses .av-shine{animation:avShine 6s ease-in-out infinite}
