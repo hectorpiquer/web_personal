@@ -767,7 +767,7 @@
   async function ghWithRetry(url, tries = 3) {
     for (let i = 0; i < tries; i++) {
       try { return await ghFetch(url); }
-      catch (e) { if (e.status === 404) throw e; if (i < tries - 1) await new Promise((r) => setTimeout(r, 700 * (i + 1))); else throw e; }
+      catch (e) { if (e.status >= 400 && e.status < 500) throw e; if (i < tries - 1) await new Promise((r) => setTimeout(r, 700 * (i + 1))); else throw e; }
     }
   }
 
@@ -804,6 +804,17 @@
       setText("#caseStars", stars);
       setText("#caseUpdated", updated);
     };
+
+    // Cache-first: si ya hay datos guardados, muéstralos sin llamar a la API
+    // (evita los errores 403 del límite de peticiones anónimas de GitHub).
+    const cacheR = store.get("gh_cache_repos", null);
+    const cacheM = store.get("gh_cache_metrics", null);
+    if (cacheR && cacheR.length > 0) {
+      renderRepos(cacheR);
+      if (note) { note.hidden = false; note.textContent = LANG === "en" ? "// Saved data in your browser" : "// Datos guardados en tu navegador"; }
+      if (cacheM) updateMetrics(cacheM.commits, cacheM.langs, cacheM.stars, cacheM.updated ? timeAgo(cacheM.updated) : "—");
+      return;
+    }
 
     try {
       const repos = await ghWithRetry(`https://api.github.com/users/${GH_USER}/repos?per_page=100&sort=updated`);
