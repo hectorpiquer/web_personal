@@ -1,6 +1,6 @@
 # 🖥️ Portafolio Personal · Héctor Piquer
 
-Bienvenido al código fuente de mi página web personal. Soy Héctor Piquer Belda, estudiante de 1º de Desarrollo de Aplicaciones Multiplataforma (DAM) en el IES Simarro (Xàtiva). 
+Bienvenido al código fuente de mi página web personal. Soy Héctor Piquer Belda, de Vallada, estudiante de 1º de Desarrollo de Aplicaciones Multiplataforma (DAM) en el IES Dr. Lluis Simarro (Xàtiva).
 
 Este proyecto nace con la idea de mostrar mi perfil técnico (viniendo de un Grado Medio de SMR) sin usar plantillas genéricas, demostrando que sé construir desde cero.
 

@@ -854,7 +854,7 @@
   /* ---------- UBICACIÓN (IP del usuario) + CLIMA (Open-Meteo) ---------- */
   async function loadUserLocation() {
     const locEl = $("#nfLoc");
-    let lat = 38.9916, lon = -0.5233, place = "Xàtiva, València";
+    let lat = 38.8935, lon = -0.691, place = "Vallada, València";
     try {
       const r = await fetch("https://ipwho.is/");
       const j = await r.json();

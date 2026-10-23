@@ -21,7 +21,7 @@ window.HP_I18N = {
   /* ---------- hero ---------- */
   "hero.badge":["buscando FCT · ciclo hasta jun 2028","looking for internship · cycle ends Jun 2028"],
   "hero.tag":["Vengo del hardware. <em>Me voy al código.</em>","I come from hardware. <em>I'm going to code.</em>"],
-  "hero.desc":["Estudio 1º de DAM en el IES Simarro (Xàtiva). Antes montaba y reparaba PCs en SMR; ahora quiero construir software. Busco un sitio donde aprender de verdad y aportar desde el primer día.","I'm in my first year of Multiplatform Application Development at IES Simarro (Xàtiva). I used to build and repair PCs in SMR; now I want to build software. I'm looking for a place to genuinely learn and to contribute from day one."],
+  "hero.desc":["Estudio 1º de DAM en el IES Dr. Lluis Simarro (Xàtiva). Antes montaba y reparaba PCs en SMR; ahora quiero construir software. Busco un sitio donde aprender de verdad y aportar desde el primer día.","I'm in my first year of Multiplatform Application Development at IES Dr. Lluis Simarro (Xàtiva). I used to build and repair PCs in SMR; now I want to build software. I'm looking for a place to genuinely learn and to contribute from day one."],
   "hero.cta1":["conóceme","meet me"],"hero.cta2":["proyectos","projects"],"hero.cta3":["escríbeme","write me"],
   "hero.panelhint":["autora: yo","built by me"],
 
@@ -42,7 +42,7 @@ window.HP_I18N = {
   /* ---------- sobre ---------- */
   "sobre.h2":["Sobre mí","About me"],
   "sobre.lead":["Empecé abriendo máquinas. Ahora abro código.","I started opening machines. Now I open code."],
-  "sobre.p1":["Soy <strong>Héctor Piquer Belda</strong>, de Xàtiva, y estudio <strong>1º de DAM</strong> en el <strong>IES Simarro</strong>. Vengo de un Grado Medio de <strong>SMR</strong>, donde aprendí a montar, mantener y diagnosticar equipos de verdad.","I'm <strong>Héctor Piquer Belda</strong>, from Xàtiva, studying <strong>year 1 of DAM</strong> at <strong>IES Simarro</strong>. I come from a mid-level degree in <strong>SMR</strong>, where I learned to build, maintain and diagnose real hardware."],
+  "sobre.p1":["Soy <strong>Héctor Piquer Belda</strong>, de Vallada, y estudio <strong>1º de DAM</strong> en el <strong>IES Dr. Lluis Simarro</strong>. Vengo de un Grado Medio de <strong>SMR</strong> que hice en el IES Sivera Font de Canals, donde aprendí a montar, mantener y diagnosticar equipos de verdad.","I'm <strong>Héctor Piquer Belda</strong>, from Vallada, studying <strong>year 1 of DAM</strong> at <strong>IES Dr. Lluis Simarro</strong>. I come from a mid-level degree in <strong>SMR</strong>, which I did at IES Sivera Font in Canals, where I learned to build, maintain and diagnose real hardware."],
   "sobre.p2":["El hardware me gustaba, pero lo que me enganchó fue entender qué pasaba por dentro. Por eso di el salto al desarrollo: quería dejar de arreglar máquinas y empezar a <strong>construir cosas</strong>.","I liked hardware, but what hooked me was understanding what happened inside. That's why I moved into development: I wanted to stop fixing machines and start <strong>building things</strong>."],
   "sobre.p3":["No voy de experto, no lo soy. Pero soy de los que se queda hasta que lo entiende, ordena el desastre y pregunta cuando hace falta. Prefiero algo sencillo bien hecho que algo prometedor a medias.","I don't claim to be an expert — I'm not. But I'm the kind who stays until it makes sense, tidies the mess and asks when needed. I'd rather ship something simple and well-made than something ambitious and half-done."],
   "sobre.quote":["\"Prefiero entender el porqué que memorizar el cómo.\"","\"I'd rather understand the why than memorize the how.\""],
@@ -55,10 +55,10 @@ window.HP_I18N = {
   "form.h2":["Formación","Education"],
   "form.lead":["De la máquina al código, en dos pasos.","From machines to code, in two steps."],
   "form.i1w":["en curso","in progress"],"form.i1t":["Grado Superior · DAM","Higher Vocational · DAM"],
-  "form.i1s":["IES Simarro · Desarrollo de Aplicaciones Multiplataforma","IES Simarro · Multiplatform Application Development"],
+  "form.i1s":["IES Dr. Lluis Simarro · Desarrollo de Aplicaciones Multiplataforma","IES Dr. Lluis Simarro · Multiplatform Application Development"],
   "form.i1p":["Programación orientada a objetos, bases de datos, entornos de desarrollo y buenas prácticas. El salto natural desde SMR.","Object-oriented programming, databases, development environments and best practices. The natural step up from SMR."],
   "form.i2w":["terminado","completed"],"form.i2t":["Grado Medio · SMR","Mid-level Degree · SMR"],
-  "form.i2s":["Sistemas Microinformáticos y Redes","Microcomputer Systems and Networks"],
+  "form.i2s":["IES Sivera Font · Sistemas Microinformáticos y Redes","IES Sivera Font · Microcomputer Systems and Networks"],
   "form.i2p":["Ensamblaje, mantenimiento, instalación de sistemas y redes. La base técnica que me dio curiosidad por el software.","Assembly, maintenance, OS and network installation. The technical base that sparked my curiosity for software."],
   "form.c1":["Montaje","Assembly"],"form.c2":["Mantenimiento","Maintenance"],"form.c3":["Redes","Networks"],
   "form.skills":["Nivel (autoevaluación)","Level (self-assessment)"],
@@ -153,7 +153,7 @@ window.HP_I18N = {
   "cont.o3":["Consulta","Query"],"cont.o4":["Otro","Other"],"cont.msg":["mensaje","message"],"cont.send":["enviar ▶","send ▶"],
   "cont.privacy":["// Solo uso tus datos para responderte. Nada de listas de correo ni terceros.","// I only use your data to reply. No mailing lists, no third parties."],
   "cont.where":["Dónde encontrarme","Where to find me"],
-  "cont.maps":["// Estudio en el IES Simarro (Xàtiva). Si te encaja mi perfil, aquí me tienes:","// I study at IES Simarro (Xàtiva). If my profile fits, here I am:"],
+  "cont.maps":["// Estudio en el IES Dr. Lluis Simarro (Xàtiva). Si te encaja mi perfil, aquí me tienes:","// I study at IES Dr. Lluis Simarro (Xàtiva). If my profile fits, here I am:"],
   "cont.copied":["Correo copiado al portapapeles","Email copied to clipboard"],
   "cont.formOk":["¡Mensaje enviado! Te respondo pronto.","Message sent! I'll reply soon."],
   "cont.formErr":["Revisa los campos marcados.","Please check the marked fields."],
@@ -176,8 +176,8 @@ window.HP_I18N = {
 
   /* ---------- frases del typewriter (arrays) ---------- */
   "phrases":{
-    "es":["Estudiante de 1º de DAM · IES Simarro","Vengo de SMR: hardware, redes y soporte","Front-end en HTML/CSS/JS · back en Java/SQL","Buscando FCT para el curso 2027-28","Prefiero entender el porqué al memorizar"],
-    "en":["Year 1 of Multiplatform App Dev · IES Simarro","From SMR: hardware, networks & support","Front-end in HTML/CSS/JS · back in Java/SQL","Looking for an internship for 2027-28","I'd rather understand the why than memorize"]
+    "es":["Estudiante de 1º de DAM · IES Dr. Lluis Simarro","Vengo de SMR: hardware, redes y soporte","Front-end en HTML/CSS/JS · back en Java/SQL","Buscando FCT para el curso 2027-28","Prefiero entender el porqué al memorizar"],
+    "en":["Year 1 of Multiplatform App Dev · IES Dr. Lluis Simarro","From SMR: hardware, networks & support","Front-end in HTML/CSS/JS · back in Java/SQL","Looking for an internship for 2027-28","I'd rather understand the why than memorize"]
   },
 
   /* ---------- ticker (arrays) ---------- */
@@ -276,11 +276,11 @@ window.HP_I18N = {
       {re:/(hola|hey|hi|buenas|saludos|hello)/i,
         r:["¡Hola! Encantado de que estés aquí. ¿Qué quieres saber?","¡Hey! Great to have you. What do you want to know?"]},
       {re:/(qu[ée]n eres|who are you|tu eres|t[ú] eres|hector|héctor)/i,
-        r:["Soy <b>Héctor Piquer Belda</b>, de Xàtiva. Estudiante de <b>1º de DAM</b> con base de <b>SMR</b>. Vengo del hardware y me voy al código.","I'm <b>Héctor Piquer Belda</b>, from Xàtiva. <b>Year-1 DAM</b> student with a <b>SMR</b> background. From hardware, heading to code."]},
+        r:["Soy <b>Héctor Piquer Belda</b>, de Vallada. Estudiante de <b>1º de DAM</b> con base de <b>SMR</b>. Vengo del hardware y me voy al código.","I'm <b>Héctor Piquer Belda</b>, from Vallada. <b>Year-1 DAM</b> student with a <b>SMR</b> background. From hardware, heading to code."]},
       {re:/(qu[ée] sabes|skills|habilidades|tecnolog[íi]as|stack|what do you know)/i,
         r:["Ahora mismo: <b>HTML, CSS, JavaScript</b> (front), <b>Java</b> y <b>SQL</b> (back), más <b>Git, Linux, redes y soporte</b> de mi etapa SMR. Estoy por descubrir frameworks.","Right now: <b>HTML, CSS, JavaScript</b> (front), <b>Java</b> and <b>SQL</b> (back), plus <b>Git, Linux, networks and support</b> from my SMR days. Frameworks are next."]},
       {re:/(formaci[óo]n|estudio|dónde estudias|dam|smr|school|education|study)/i,
-        r:["Estudio <b>1º de DAM</b> en el <b>IES Simarro</b>. Antes hice <b>SMR</b> (Sistemas Microinformáticos y Redes). El ciclo acaba en <b>jun 2028</b>.","I'm in <b>year 1 of DAM</b> at <b>IES Simarro</b>. Before that, <b>SMR</b> (Microcomputer Systems & Networks). The cycle ends <b>Jun 2028</b>."]},
+        r:["Estudio <b>1º de DAM</b> en el <b>IES Dr. Lluis Simarro</b>. Antes hice <b>SMR</b> (Sistemas Microinformáticos y Redes) en el IES Sivera Font. El ciclo acaba en <b>jun 2028</b>.","I'm in <b>year 1 of DAM</b> at <b>IES Dr. Lluis Simarro</b>. Before that, <b>SMR</b> (Microcomputer Systems & Networks) at IES Sivera Font. The cycle ends <b>Jun 2028</b>."]},
       {re:/(proyecto|projects|web|github|portafolio|portfolio)/i,
         r:["Lo más real: <b>esta web</b> (HTML/CSS/JS puro, con arcade propio) y prácticas de <b>Java</b> en BlueJ. En <b>Proyectos</b> tienes el detalle y mis repos en vivo.","The most real: <b>this site</b> (pure HTML/CSS/JS, with my own arcade) and <b>Java</b> exercises in BlueJ. Go to <b>Projects</b> for details and live repos."]},
       {re:/(me gusta|afici|likes|hobby|gimnasio|moto|f[úu]tbol|videojuegos)/i,
