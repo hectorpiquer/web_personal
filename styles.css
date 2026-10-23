@@ -197,7 +197,7 @@ h2::before{content:"## ";color:var(--acc)}
 @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(var(--node),.6)}70%{box-shadow:0 0 0 8px rgba(var(--node),0)}100%{box-shadow:0 0 0 0 rgba(var(--node),0)}}
 
 /* ---------- 7. HERO ---------- */
-.hero{display:grid;grid-template-columns:1.08fr .92fr;gap:2.6rem;align-items:center;padding-top:1rem}
+.hero{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);gap:2.6rem;align-items:center;padding-top:1rem}
 .type{font-family:var(--mono);color:var(--acc2);font-size:clamp(1rem,2.5vw,1.28rem);min-height:1.7em}
 .type::after{content:"▋";color:var(--acc);margin-left:2px;animation:blink 1s steps(1) infinite}
 .tag{font-family:var(--mono);font-size:clamp(1.2rem,3vw,1.7rem);margin:.3rem 0 .8rem;color:var(--txt)}
