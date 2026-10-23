@@ -49,7 +49,7 @@ window.HP_I18N = {
   "sobre.now":["Ahora mismo","Right now"],
   "sobre.now1":["Aprendiendo","Learning"],"sobre.now2":["Leyendo","Reading"],"sobre.now3":["Buscando","Looking for"],
   "sobre.f1":["ciclo","program"],"sobre.f2":["centro","school"],"sobre.f3":["base","background"],
-  "sobre.f4":["base","based in"],"sobre.f5":["fin ciclo","ends"],"sobre.f6":["busco","seeking"],
+  "sobre.f4":["municipio","municipality"],"sobre.f5":["fin ciclo","ends"],"sobre.f6":["busco","seeking"],
 
   /* ---------- formación ---------- */
   "form.h2":["Formación","Education"],
@@ -160,7 +160,7 @@ window.HP_I18N = {
   "cont.sending":["enviando…","sending…"],
 
   /* ---------- footer ---------- */
-  "ft.made":["hecho a mano","hand-made"],"ft.tech":["html · css · js, sin frameworks","html · css · js, no frameworks"],
+  "ft.made":["hecho a mano","hand-made"],"ft.tech":["html · css · js","html · css · js"],
 
   /* ---------- temas ---------- */
   "theme.terminal":["Terminal","Terminal"],"theme.editor":["Editor","Editor"],

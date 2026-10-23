@@ -54,7 +54,7 @@
   }
 
   /* ---------- motor de sonido (WebAudio sintetizado) ---------- */
-  let SOUND_ON = store.get("sound", false);
+  let SOUND_ON = store.get("sound", true);
   let AC = null;
   function audio() {
     if (!SOUND_ON) return null;
@@ -77,6 +77,13 @@
     bad:   () => blip(120, 0.25, "sawtooth", 0.07),
     pow:   () => { blip(523, 0.06, "square", 0.05); setTimeout(() => blip(784, 0.06, "square", 0.05), 55); setTimeout(() => blip(1046, 0.09, "square", 0.05), 110); }
   };
+
+  // Desbloquea el audio en la primera interacción (política de autoplay del navegador)
+  if (SOUND_ON) {
+    const unlock = () => audio();
+    D.addEventListener("pointerdown", unlock, { once: true });
+    D.addEventListener("keydown", unlock, { once: true });
+  }
 
   /* ---------- temas ---------- */
   const THEMES = ["terminal", "editor", "matrix", "crt", "synth"];
@@ -906,8 +913,10 @@
       mailMenu.addEventListener("click", async (e) => {
         const b = e.target.closest("button[data-mail]"); if (!b) return;
         const addr = "hecpiqbel@alu.edu.gva.es";
+        const subj = encodeURIComponent(LANG === "en" ? "From the web" : "Desde la web");
         if (b.dataset.mail === "copy") { try { await navigator.clipboard.writeText(addr); } catch (e) { const ta = D.createElement("textarea"); ta.value = addr; D.body.appendChild(ta); ta.select(); try { D.execCommand("copy"); } catch (x) {} ta.remove(); } toast(t("cont.copied")); sfx.good(); closeMenus(); }
-        else { window.open(`mailto:${addr}?subject=${encodeURIComponent(LANG === "en" ? "From the web" : "Desde la web")}`, "_blank"); closeMenus(); }
+        else if (b.dataset.mail === "gmail") { window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=${addr}&su=${subj}`, "_blank"); closeMenus(); }
+        else if (b.dataset.mail === "outlook") { window.open(`https://outlook.live.com/mail/0/deeplink/compose?to=${addr}&subject=${subj}`, "_blank"); closeMenus(); }
       });
     }
     const form = $("#form");
@@ -1022,6 +1031,7 @@
   function init() {
     setTheme(THEME);
     applyI18n();
+    const sb = $("#soundBtn"); if (sb) { sb.textContent = SOUND_ON ? "🔊" : "🔇"; sb.setAttribute("aria-pressed", SOUND_ON); }
     runLoader();
     runIntro();
     scramble($("#inicio-title"));
